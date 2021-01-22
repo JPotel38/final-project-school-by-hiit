@@ -12,7 +12,7 @@ import fr.schoolbyhiit.portailsuiviformation.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-  @Query("select name from User where id = :id")
+  @Query("select name from users where id = :id")
   Optional<String> findNameById(long id);
 
   List<User> findByName(String name);
