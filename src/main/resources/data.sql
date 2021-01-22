@@ -1,0 +1,1 @@
+INSERT INTO user(id, name) VALUES (42, 'Chuck Norris');
