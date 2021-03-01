@@ -20,27 +20,28 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
     private long id;
 
-    @Column
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column
+    @Column(name = "creation_date")
     private LocalDate creationDate;
 
-    @Column
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column
+    @Column(name = "mail")
     private String mail;
 
-    @Column
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
 
