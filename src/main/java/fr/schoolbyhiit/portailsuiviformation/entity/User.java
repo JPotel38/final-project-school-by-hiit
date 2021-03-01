@@ -1,34 +1,47 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
-import java.util.Objects;
+import fr.schoolbyhiit.portailsuiviformation.entity.model.Status;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.time.LocalDate;
 
-@Entity(name="users")
+import javax.persistence.*;
+
+@Entity
+@Table(name="users")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
-    private String name;
+    private String firstName;
 
-    public long getId() {
-        return id;
-    }
+    @Column
+    private String lastName;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    @Column
+    private LocalDate creationDate;
 
-    public String getName() {
-        return name;
-    }
+    @Column
+    private LocalDate birthDate;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Column
+    private String mail;
+
+    @Column
+    private String phoneNumber;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
 }
