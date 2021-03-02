@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `portail-suivi-formation`.`users` (
     `birth_date` DATE NOT NULL,
     `mail` VARCHAR(100) ,
     `phone_number` VARCHAR(20),
-    `status` VARCHAR(10),
+    `role` VARCHAR(10),
     PRIMARY KEY (`id_user`)
 )
 ENGINE = InnoDB;

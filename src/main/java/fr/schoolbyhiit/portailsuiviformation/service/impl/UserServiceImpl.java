@@ -5,6 +5,7 @@ import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
 import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,13 +14,11 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
+    @Autowired
+    private UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
-    }
+    @Autowired
+    private UserMapper userMapper;
 
 
     @Override
@@ -48,7 +47,7 @@ public class UserServiceImpl implements UserService {
         user.setBirthDate(userDto.getBirthDate());
         user.setMail(userDto.getMail());
         user.setPhoneNumber(userDto.getPhoneNumber());
-        user.setStatus(userDto.getStatus());
+        user.setRole(userDto.getRole());
 
         return userMapper.toUserDto(userRepository.save(user));
     }

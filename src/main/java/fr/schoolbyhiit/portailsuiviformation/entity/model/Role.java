@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 @Getter
-public enum Status {
+public enum Role {
 
-    STUDENT("etudiant"),
-    TEACHER("prof"),
+    STUDENT("Etudiant"),
+    TEACHER("Professeur"),
     TUTOR("Tuteur");
 
     @JsonValue
     private final String value;
 
-    Status(String value) {
+    Role(String value) {
         this.value = value;
     }
 

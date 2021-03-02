@@ -1,6 +1,6 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
-import fr.schoolbyhiit.portailsuiviformation.entity.model.Status;
+import fr.schoolbyhiit.portailsuiviformation.entity.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,8 +41,8 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "status")
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Role role;
 
 }

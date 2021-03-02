@@ -1,6 +1,6 @@
 package fr.schoolbyhiit.portailsuiviformation.dto;
 
-import fr.schoolbyhiit.portailsuiviformation.entity.model.Status;
+import fr.schoolbyhiit.portailsuiviformation.entity.model.Role;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -26,6 +26,6 @@ public class UserDto {
 
     private String phoneNumber;
 
-    private Status status;
+    private Role role;
 
 }
