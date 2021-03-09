@@ -1,36 +1,39 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
+import fr.schoolbyhiit.portailsuiviformation.controller.exception.UserNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.dao.UserRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
 import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    @Autowired
-    private UserMapper userMapper;
 
 
     @Override
     public UserDto create(UserDto userDto) {
         userDto.setCreationDate(LocalDate.now());
+        // TODO control inputs
         User user = userMapper.toUser(userDto);
         return userMapper.toUserDto(userRepository.save(user));
     }
 
     @Override
-    public UserDto findById(long id) {
-        return userMapper.toUserDto(userRepository.findById(id));
+    public UserDto findById(Long id) {
+        UserDto userDto = userMapper.toUserDto(userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.INSTANCE));
+        return userDto;
     }
 
     @Override
@@ -39,21 +42,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto update(UserDto userDto){
-        User user = userRepository.findById(userDto.getId());
+    public UserDto update(Long id, UserDto userDto){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.INSTANCE);
 
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setBirthDate(userDto.getBirthDate());
         user.setMail(userDto.getMail());
         user.setPhoneNumber(userDto.getPhoneNumber());
-        user.setRole(userDto.getRole());
-
+        user.setRoles(userDto.getRoles());
         return userMapper.toUserDto(userRepository.save(user));
     }
 
     @Override
     public void delete(Long id) {
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> UserNotFoundException.INSTANCE);
+        userRepository.delete(user);
     }
 }

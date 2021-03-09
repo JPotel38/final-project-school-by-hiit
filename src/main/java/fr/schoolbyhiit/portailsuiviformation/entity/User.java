@@ -1,14 +1,18 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
-import fr.schoolbyhiit.portailsuiviformation.entity.model.Role;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name="users")
@@ -16,12 +20,13 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
-    private long id;
+    @Column(name = "user_id", nullable = false, updatable = false)
+    private Long id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -35,14 +40,19 @@ public class User {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "mail")
+    @Column(name = "mail", unique = true, nullable = false)
+    @Email
     private String mail;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
 }

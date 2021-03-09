@@ -1,9 +1,12 @@
 package fr.schoolbyhiit.portailsuiviformation.dto;
 
-import fr.schoolbyhiit.portailsuiviformation.entity.model.Role;
+import fr.schoolbyhiit.portailsuiviformation.entity.Role;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -12,20 +15,24 @@ import java.time.LocalDate;
 @Builder
 public class UserDto {
 
-    private long id;
+    private Long id;
 
+    @NotBlank
     private String firstName;
 
+    @NotBlank
     private String lastName;
 
     private LocalDate creationDate;
 
     private LocalDate birthDate;
 
+    @NotBlank
     private String mail;
 
     private String phoneNumber;
 
-    private Role role;
+    @NotEmpty
+    private Set<Role> roles;
 
 }
