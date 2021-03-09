@@ -1,5 +1,6 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
+import fr.schoolbyhiit.portailsuiviformation.controller.exception.EmailExistsException;
 import fr.schoolbyhiit.portailsuiviformation.controller.exception.UserNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.dao.UserRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
@@ -23,7 +24,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(UserDto userDto) {
+        if(emailExists(userDto)){
+            throw new EmailExistsException(
+                    "There is an account with that email adress:" + userDto.getMail());
+        }
         userDto.setCreationDate(LocalDate.now());
+
         // TODO control inputs
         User user = userMapper.toUser(userDto);
         return userMapper.toUserDto(userRepository.save(user));
@@ -60,5 +66,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> UserNotFoundException.INSTANCE);
         userRepository.delete(user);
+    }
+
+    private Boolean emailExists(UserDto userDto){
+        User user = userRepository.getUserByMail(userDto.getMail());
+        return user != null;
     }
 }
