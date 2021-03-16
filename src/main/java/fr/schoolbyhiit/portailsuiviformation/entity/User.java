@@ -1,34 +1,67 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
-import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
-@Entity(name="users")
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+@Entity
+@Table(name="users")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class User {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false, updatable = false)
+    private Long id;
 
-    @Column
-    private String name;
+    @Column(name = "first_name")
+    @NotBlank
+    private String firstName;
 
-    public long getId() {
-        return id;
-    }
+    @Column(name = "last_name")
+    @NotBlank
+    private String lastName;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    @Column(name = "creation_date")
+    @NotNull
+    private LocalDate creationDate;
 
-    public String getName() {
-        return name;
-    }
+    @Column(name = "birth_date")
+    @NotNull
+    @Past
+    private LocalDate birthDate;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Column(name = "mail", unique = true, nullable = false)
+    @NotBlank
+    @Email
+    private String mail;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
 }
