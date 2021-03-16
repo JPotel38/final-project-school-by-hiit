@@ -12,7 +12,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // disable all security : permitAll to /
-        httpSecurity.authorizeRequests().antMatchers("/").permitAll();
+        httpSecurity
+                .csrf().disable()
+                .authorizeRequests()
+                    .antMatchers("/").permitAll();
     }
 
 }

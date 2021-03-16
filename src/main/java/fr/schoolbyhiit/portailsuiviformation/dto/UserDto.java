@@ -32,6 +32,9 @@ public class UserDto {
 
     private String phoneNumber;
 
+    @NotBlank
+    private String password;
+
     @NotEmpty
     private Set<Role> roles;
 
