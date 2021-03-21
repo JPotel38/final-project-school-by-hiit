@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "T_Report")
-public class Report implements Serializable {
+public class ReportDAO implements Serializable {
 
     @Id
     @Column(name = "report_id")

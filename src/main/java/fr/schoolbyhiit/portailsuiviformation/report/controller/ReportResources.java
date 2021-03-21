@@ -1,11 +1,10 @@
 package fr.schoolbyhiit.portailsuiviformation.report.controller;
 
-import fr.schoolbyhiit.portailsuiviformation.report.entities.Report;
-import fr.schoolbyhiit.portailsuiviformation.report.services.ReportDAO;
+import fr.schoolbyhiit.portailsuiviformation.report.entities.ReportDAO;
+import fr.schoolbyhiit.portailsuiviformation.report.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -13,36 +12,36 @@ import java.util.List;
 public class ReportResources {
 
     @Autowired
-    private ReportDAO reportDAO;
+    private IService service;
 
     @GetMapping
-    List<Report> all() {
-        return reportDAO.findAll();
+    List<ReportDAO> all() {
+        return service.findAll();
     }
 
     @PostMapping
-    Report newReport(@RequestBody Report newReport) throws ReportNotFoundException {
-        return reportDAO.create(newReport);
+    ReportDAO newReport(@RequestBody ReportDAO newReportDAO) throws ReportNotFoundException {
+        return service.create(newReportDAO);
     }
 
     @GetMapping(value = "/{id}")
-    Report one(@PathVariable("id") Long id) throws ReportNotFoundException {
-        return (Report) reportDAO.find(id);
+    ReportDAO one(@PathVariable("id") Long id) throws ReportNotFoundException {
+        return (ReportDAO) service.find(id);
     }
 
     @PutMapping(value = "/{id}")
-    Report updateReport(@RequestBody Report newReport, @PathVariable Long id) throws ReportNotFoundException {
-      Report updatedReport = reportDAO.find(id);
-        updatedReport.setAuthor(newReport.getAuthor());
-        updatedReport.setAppointment(newReport.getAppointment());
-        updatedReport.setReportText(newReport.getReportText());
-        updatedReport.setValidated(newReport.isValidated());
-        return updatedReport;
+    ReportDAO updateReport(@RequestBody ReportDAO newReportDAO, @PathVariable Long id) throws ReportNotFoundException {
+      ReportDAO updatedReportDAO = service.find(id);
+        updatedReportDAO.setAuthor(newReportDAO.getAuthor());
+        updatedReportDAO.setAppointment(newReportDAO.getAppointment());
+        updatedReportDAO.setReportText(newReportDAO.getReportText());
+        updatedReportDAO.setValidated(newReportDAO.isValidated());
+        return updatedReportDAO;
     }
 
     @DeleteMapping("/employees/{id}")
     void deleteEmployee(@PathVariable Long id) {
-        reportDAO.delete(id);
+        service.delete(id);
     }
 
 }
