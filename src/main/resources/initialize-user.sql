@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `portail-suivi-formation`.`roles_privileges`(
     KEY `role_fk_idx` (`role_id`),
     KEY `privilege_fk_idx` (`privilege_id`),
     CONSTRAINT `privilege_fk` FOREIGN KEY (`privilege_id`) REFERENCES `privileges` (`privilege_id`),
-    CONSTRAINT `role_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`)
+    CONSTRAINT `role_privilege_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`)
 );
 
 -- initialisation des privilèges

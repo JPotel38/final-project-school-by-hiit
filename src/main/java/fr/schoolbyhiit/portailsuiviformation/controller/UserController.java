@@ -1,9 +1,14 @@
 package fr.schoolbyhiit.portailsuiviformation.controller;
 
+import fr.schoolbyhiit.portailsuiviformation.controller.exception.EmailExistsException;
+import fr.schoolbyhiit.portailsuiviformation.controller.exception.UserNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
 import fr.schoolbyhiit.portailsuiviformation.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,18 +30,20 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PostMapping
-    public UserDto create(@RequestBody @Valid UserDto userDto){
+    @PostMapping(value = "/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserDto create(@RequestBody @Valid UserDto userDto) {
         return userService.create(userDto);
     }
 
     @PutMapping("/{id}")
-    public UserDto update(@PathVariable Long id, @RequestBody @Valid UserDto userDto){
+    public UserDto update(@PathVariable Long id, @RequestBody @Valid UserDto userDto) throws UserNotFoundException {
         return userService.update(id, userDto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) throws UserNotFoundException {
         userService.delete(id);
     }
 
