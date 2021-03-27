@@ -5,7 +5,7 @@ import fr.schoolbyhiit.portailsuiviformation.entity.Report;
 
 import java.util.List;
 
-public interface IService {
+public interface ReportService {
 
     List<Report> findAll();
 

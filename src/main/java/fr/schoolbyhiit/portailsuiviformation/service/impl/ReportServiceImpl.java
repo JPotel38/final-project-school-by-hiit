@@ -2,13 +2,13 @@ package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
 import fr.schoolbyhiit.portailsuiviformation.controller.exception.ReportNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.entity.Report;
-import fr.schoolbyhiit.portailsuiviformation.service.IService;
+import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ServiceImpl implements IService {
+public class ReportServiceImpl implements ReportService {
     @Override
     public List<Report> findAll() {
         return null;
@@ -30,7 +30,11 @@ public class ServiceImpl implements IService {
     }
 
     @Override
-    public Report update(Long id, Report updatedReport) throws ReportNotFoundException {
-        return null;
+    public Report update(Long id, Report updateReport) throws ReportNotFoundException {
+        updateReport.setAuthor(updateReport.getAuthor());
+        updateReport.setAppointment(updateReport.getAppointment());
+        updateReport.setReportText(updateReport.getReportText());
+        updateReport.setValidated(updateReport.isValidated());
+        return updateReport;
     }
 }

@@ -2,42 +2,38 @@ package fr.schoolbyhiit.portailsuiviformation.controller;
 
 import fr.schoolbyhiit.portailsuiviformation.controller.exception.ReportNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.entity.Report;
-import fr.schoolbyhiit.portailsuiviformation.service.IService;
+import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/report")
 public class ReportController {
 
     @Autowired
-    private IService service;
+    private ReportService service;
 
     @GetMapping
-    List<Report> all() {
+    public @ResponseBody List<Report> all() {
         return service.findAll();
     }
 
-    @PostMapping
-    Report newReport(@RequestBody Report newReport) throws ReportNotFoundException {
+    @PostMapping("/new")
+    public @ResponseBody Report newReport(@RequestBody Report newReport) throws ReportNotFoundException {
         return service.create(newReport);
     }
 
     @GetMapping(value = "/{id}")
-    Report one(@PathVariable("id") Long id) throws ReportNotFoundException {
-        return (Report) service.find(id);
+    public @ResponseBody Report one(@PathVariable("id") Long id) throws ReportNotFoundException {
+        return service.find(id);
     }
 
     @PutMapping(value = "/{id}")
-    Report updateReport(@RequestBody Report newReport, @PathVariable Long id) throws ReportNotFoundException {
-      Report updatedReport = service.find(id);
-        updatedReport.setAuthor(newReport.getAuthor());
-        updatedReport.setAppointment(newReport.getAppointment());
-        updatedReport.setReportText(newReport.getReportText());
-        updatedReport.setValidated(newReport.isValidated());
-        return updatedReport;
+    public @ResponseBody Report updateReport(@RequestBody Report newReport, @PathVariable Long id) throws ReportNotFoundException {
+        return service.update(id, newReport);
     }
 
     @DeleteMapping("/employees/{id}")
