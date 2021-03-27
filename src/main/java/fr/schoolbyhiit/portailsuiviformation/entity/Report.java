@@ -1,4 +1,4 @@
-package fr.schoolbyhiit.portailsuiviformation.report.entities;
+package fr.schoolbyhiit.portailsuiviformation.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "T_Report")
-public class ReportDAO implements Serializable {
+public class Report implements Serializable {
 
     @Id
     @Column(name = "report_id")

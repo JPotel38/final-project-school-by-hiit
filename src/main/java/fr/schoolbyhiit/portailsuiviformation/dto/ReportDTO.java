@@ -1,4 +1,4 @@
-package fr.schoolbyhiit.portailsuiviformation.report.model;
+package fr.schoolbyhiit.portailsuiviformation.dto;
 
 import java.time.LocalDate;
 
