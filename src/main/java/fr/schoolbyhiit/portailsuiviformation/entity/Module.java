@@ -25,6 +25,6 @@ public class Module {
     @NotBlank
     private String designation;
 
-    @ManyToOne
+    @OneToMany
     private Set<Course> courses = new HashSet<>();
 }

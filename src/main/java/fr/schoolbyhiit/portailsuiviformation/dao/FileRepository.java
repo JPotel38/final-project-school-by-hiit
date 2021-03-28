@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Repository
 public interface FileRepository extends JpaRepository<File,Long> {
 
-    File getFilesByCourse(Course course);
     File getFilesByCreationDate(LocalDate creationDate);
     File getFileByDesignation(String designation);
     File getFileByCreationDate(LocalDate creationDate);
