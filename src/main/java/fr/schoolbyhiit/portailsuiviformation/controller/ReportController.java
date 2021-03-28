@@ -1,7 +1,7 @@
 package fr.schoolbyhiit.portailsuiviformation.controller;
 
 import fr.schoolbyhiit.portailsuiviformation.controller.exception.ReportNotFoundException;
-import fr.schoolbyhiit.portailsuiviformation.entity.Report;
+import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,31 +14,31 @@ import java.util.List;
 public class ReportController {
 
     @Autowired
-    private ReportService service;
+    private ReportService reportService;
 
     @GetMapping
-    public @ResponseBody List<Report> all() {
-        return service.findAll();
+    public List<ReportDTO> getReports() {
+        return reportService.findAll();
     }
 
     @PostMapping("/new")
-    public @ResponseBody Report newReport(@RequestBody Report newReport) throws ReportNotFoundException {
-        return service.create(newReport);
+    public @ResponseBody ReportDTO create(@RequestBody ReportDTO reportDTO) throws ReportNotFoundException {
+        return reportService.create(reportDTO);
     }
 
     @GetMapping(value = "/{id}")
-    public @ResponseBody Report one(@PathVariable("id") Long id) throws ReportNotFoundException {
-        return service.find(id);
+    public @ResponseBody ReportDTO findById(@PathVariable("id") Long id) throws ReportNotFoundException {
+        return reportService.findById(id);
     }
 
     @PutMapping(value = "/{id}")
-    public @ResponseBody Report updateReport(@RequestBody Report newReport, @PathVariable Long id) throws ReportNotFoundException {
-        return service.update(id, newReport);
+    public ReportDTO update(@RequestBody ReportDTO reportDTO, @PathVariable Long id) throws ReportNotFoundException {
+        return reportService.update(id, reportDTO);
     }
 
-    @DeleteMapping("/employees/{id}")
-    void deleteEmployee(@PathVariable Long id) {
-        service.delete(id);
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable long id) {
+        reportService.delete(id);
     }
 
 }

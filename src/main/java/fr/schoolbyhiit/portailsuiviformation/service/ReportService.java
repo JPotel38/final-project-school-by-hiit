@@ -1,20 +1,21 @@
 package fr.schoolbyhiit.portailsuiviformation.service;
 
 import fr.schoolbyhiit.portailsuiviformation.controller.exception.ReportNotFoundException;
+import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.entity.Report;
 
 import java.util.List;
 
 public interface ReportService {
 
-    List<Report> findAll();
+    List<ReportDTO> findAll();
 
-    Report create(Report newReport) throws ReportNotFoundException;
+    ReportDTO create(ReportDTO reportDTO) throws ReportNotFoundException;
 
     void delete(Long id);
 
-    Report find(Long id) throws ReportNotFoundException;
+    ReportDTO findById(Long id) throws ReportNotFoundException;
 
-    Report update(Long id, Report updatedReport) throws ReportNotFoundException;
+    ReportDTO update(Long id, ReportDTO reportDTO) throws ReportNotFoundException;
 
 }

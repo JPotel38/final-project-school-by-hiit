@@ -1,11 +1,22 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
+import fr.schoolbyhiit.portailsuiviformation.entity.model.ReportStatus;
+import fr.schoolbyhiit.portailsuiviformation.entity.model.RoleName;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "T_Report")
+@Table(name = "reports")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Report implements Serializable {
 
     @Id
@@ -13,67 +24,25 @@ public class Report implements Serializable {
     @GeneratedValue( strategy = GenerationType.IDENTITY, generator = "REPORT_SEQUENCE")
     private Long id;
 
-    // Link it to user table
-    @Column(name = "report_author")
+    @Column(name="author")
+    @NotEmpty
     private String author;
 
-    @Column(name = "report_date")
-    private LocalDate appointment;
+    @Column(name = "date")
+    @DateTimeFormat
+    private LocalDate appointmentDate;
 
-    @Column(name = "report_text")
+    @Column(name = "text")
+    @NotEmpty
     private String reportText;
 
-    @Column(name = "report_validated")
-    private boolean validated;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "validated", unique = true)
+    private ReportStatus validated;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    @ManyToOne(optional=false)
+//    @JoinColumn(name="user_id", nullable=false, updatable=false)
+//    private User user;
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public LocalDate getAppointment() {
-        return appointment;
-    }
-
-    public void setAppointment(LocalDate appointment) {
-        this.appointment = appointment;
-    }
-
-    public String getReportText() {
-        return reportText;
-    }
-
-    public void setReportText(String reportText) {
-        this.reportText = reportText;
-    }
-
-    public boolean isValidated() {
-        return validated;
-    }
-
-    public void setValidated(boolean validated) {
-        this.validated = validated;
-    }
-
-    @Override
-    public String toString() {
-        return "Report{" +
-                "id=" + id +
-                ", author='" + author + '\'' +
-                ", appointment=" + appointment +
-                ", reportText='" + reportText + '\'' +
-                ", validated=" + validated +
-                '}';
-    }
 }

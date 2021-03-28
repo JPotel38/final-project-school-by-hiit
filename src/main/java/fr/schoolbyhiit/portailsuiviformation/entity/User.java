@@ -56,6 +56,9 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+//    @OneToMany(mappedBy="user")
+//    private Set<Report> reports = new HashSet<>();
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

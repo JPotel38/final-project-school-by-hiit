@@ -1,40 +1,53 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
 import fr.schoolbyhiit.portailsuiviformation.controller.exception.ReportNotFoundException;
+import fr.schoolbyhiit.portailsuiviformation.dao.ReportRepository;
+import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.entity.Report;
+import fr.schoolbyhiit.portailsuiviformation.mapper.ReportMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ReportServiceImpl implements ReportService {
+
+    private final ReportMapper reportMapper;
+    private final ReportRepository reportRepository;
+
     @Override
-    public List<Report> findAll() {
-        return null;
+    public List<ReportDTO> findAll() {
+        return reportMapper.toReportDtoList(reportRepository.findAll());
     }
 
     @Override
-    public Report create(Report newReport) throws ReportNotFoundException {
-        return null;
+    public ReportDTO create(ReportDTO reportDTO) throws ReportNotFoundException {
+        Report report = reportMapper.toReport(reportDTO);
+        return reportMapper.toReportDto(reportRepository.save(report));
     }
 
     @Override
     public void delete(Long id) {
-
+      reportRepository.deleteById(id);
     }
 
     @Override
-    public Report find(Long id) throws ReportNotFoundException {
-        return null;
+    public ReportDTO findById(Long id) throws ReportNotFoundException {
+        ReportDTO reportDTO = reportMapper.toReportDto(reportRepository.findById(id)
+            .orElseThrow(() -> ReportNotFoundException.INSTANCE));
+            return reportDTO;
     }
 
     @Override
-    public Report update(Long id, Report updateReport) throws ReportNotFoundException {
-        updateReport.setAuthor(updateReport.getAuthor());
-        updateReport.setAppointment(updateReport.getAppointment());
-        updateReport.setReportText(updateReport.getReportText());
-        updateReport.setValidated(updateReport.isValidated());
-        return updateReport;
+    public ReportDTO update(Long id, ReportDTO reportDTO) throws ReportNotFoundException {
+        Report report = reportMapper.toReport(reportDTO);
+        report.setAuthor(reportDTO.getAuthor());
+        report.setValidated(reportDTO.getValidated());
+        report.setAppointmentDate(reportDTO.getAppointmentDate());
+        report.setReportText(reportDTO.getReportText());
+        return reportMapper.toReportDto(reportRepository.save(report));
     }
 }
