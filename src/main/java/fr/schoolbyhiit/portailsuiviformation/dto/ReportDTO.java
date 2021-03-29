@@ -1,5 +1,6 @@
 package fr.schoolbyhiit.portailsuiviformation.dto;
 
+import fr.schoolbyhiit.portailsuiviformation.entity.User;
 import fr.schoolbyhiit.portailsuiviformation.entity.model.ReportStatus;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 public class ReportDTO {
 
     private Long id;
-    private String author;
+    private User user;
     private LocalDate appointmentDate;
     private String reportText;
     private ReportStatus validated;

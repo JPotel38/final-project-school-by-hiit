@@ -21,12 +21,12 @@ public class Report implements Serializable {
 
     @Id
     @Column(name = "report_id")
-    @GeneratedValue( strategy = GenerationType.IDENTITY, generator = "REPORT_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "REPORT_SEQUENCE")
     private Long id;
 
-    @Column(name="author")
-    @NotEmpty
-    private String author;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id",nullable=false,unique=true)
+    private User user;
 
     @Column(name = "date")
     @DateTimeFormat
@@ -39,10 +39,5 @@ public class Report implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "validated", unique = true)
     private ReportStatus validated;
-
-
-//    @ManyToOne(optional=false)
-//    @JoinColumn(name="user_id", nullable=false, updatable=false)
-//    private User user;
 
 }

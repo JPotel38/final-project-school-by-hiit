@@ -6,7 +6,9 @@ import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.entity.Report;
 import fr.schoolbyhiit.portailsuiviformation.mapper.ReportMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,7 +46,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public ReportDTO update(Long id, ReportDTO reportDTO) throws ReportNotFoundException {
         Report report = reportMapper.toReport(reportDTO);
-        report.setAuthor(reportDTO.getAuthor());
+        report.setUser(reportDTO.getUser());
         report.setValidated(reportDTO.getValidated());
         report.setAppointmentDate(reportDTO.getAppointmentDate());
         report.setReportText(reportDTO.getReportText());

@@ -4,6 +4,7 @@ import fr.schoolbyhiit.portailsuiviformation.controller.exception.ReportNotFound
 import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class ReportController {
     }
 
     @PutMapping(value = "/{id}")
+    @Transactional
     public ReportDTO update(@RequestBody ReportDTO reportDTO, @PathVariable Long id) throws ReportNotFoundException {
         return reportService.update(id, reportDTO);
     }
