@@ -31,6 +31,10 @@ public class Course {
     @NotNull
     private LocalDateTime date;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "module_fk")
+    private Module module;
+
     @OneToMany
     private Set<File> files = new HashSet<>();
 

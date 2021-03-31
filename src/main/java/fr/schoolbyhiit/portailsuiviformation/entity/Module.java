@@ -25,6 +25,8 @@ public class Module {
     @NotBlank
     private String designation;
 
-    @OneToMany
+    @OneToMany(mappedBy = "module")
     private Set<Course> courses = new HashSet<>();
+
+    //TODO Ajouter les relations avec les entités User, Project... => new user story
 }

@@ -29,4 +29,10 @@ public class File {
     @NotNull
     private LocalDateTime creationDate;
 
+    @Column(name = "link")
+    @NotBlank
+    private String link;
+
+    //TODO voir si il est utile qu'un Objet de type File contienne un Objet de type Course ? Voir également comment stocker les fichiers...
+
 }
