@@ -1,7 +1,6 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
 import fr.schoolbyhiit.portailsuiviformation.entity.model.ReportStatus;
-import fr.schoolbyhiit.portailsuiviformation.entity.model.RoleName;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 

@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class PortailDeSuiviDeFormationApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void contextLoads() throws Exception {
 	}
 
 }

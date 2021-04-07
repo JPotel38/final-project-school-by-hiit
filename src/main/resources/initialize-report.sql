@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `portail-suivi-formation`.`reports`(
     `user_id` VARCHAR(50) NOT NULL,
     `date` DATE NOT NULL,
     `text` LONGTEXT NOT NULL,
-    `validated` ENUM('VALIDATED', 'NOT VALIDATED'),
+    `validated` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`report_id`)
     )ENGINE = InnoDB;
 

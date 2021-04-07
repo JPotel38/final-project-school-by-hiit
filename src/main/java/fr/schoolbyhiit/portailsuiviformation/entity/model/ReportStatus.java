@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ReportStatus {
 
-    VALIDATED("Validé"),
-    NOT_VALIDATED("Non validé");
+    VALIDATED("Validated"),
+    NOT_VALIDATED("Not validated");
 
 
     @JsonValue
