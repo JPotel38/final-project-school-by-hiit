@@ -13,8 +13,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/report")
-@ResponseStatus(HttpStatus.BAD_REQUEST)
-public class ReportController extends RuntimeException{
+public class ReportController extends ReportNotFoundException{
 
     @Autowired
     private ReportService reportService;
