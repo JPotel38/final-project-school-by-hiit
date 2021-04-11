@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "roles")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Role {
 
