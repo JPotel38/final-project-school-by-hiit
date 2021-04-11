@@ -1,4 +1,3 @@
-DROP SCHEMA `portail-suivi-formation`;
 CREATE SCHEMA IF NOT EXISTS `portail-suivi-formation`;
 USE `portail-suivi-formation`;
 

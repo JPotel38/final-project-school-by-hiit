@@ -1,24 +1,24 @@
 package fr.schoolbyhiit.portailsuiviformation.controller;
 
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.ReportNotFoundException;
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.WrongFormatTypeException;
+import fr.schoolbyhiit.portailsuiviformation.exception.ReportNotFoundException;
+import fr.schoolbyhiit.portailsuiviformation.exception.WrongFormatTypeException;
 import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@RequiredArgsConstructor
 @RequestMapping("/report")
 public class ReportController extends ReportNotFoundException{
 
-    @Autowired
     private ReportService reportService;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.FOUND)
     public List<ReportDTO> getReports() {
         return reportService.findAll();
     }
@@ -30,6 +30,7 @@ public class ReportController extends ReportNotFoundException{
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
+    @ResponseStatus(HttpStatus.FOUND)
     public ReportDTO findById(@PathVariable("id") Long id) throws ReportNotFoundException {
         return reportService.findById(id);
     }

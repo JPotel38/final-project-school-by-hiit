@@ -1,15 +1,14 @@
 package fr.schoolbyhiit.portailsuiviformation.dto;
 
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
-import fr.schoolbyhiit.portailsuiviformation.entity.model.ReportStatus;
+import fr.schoolbyhiit.portailsuiviformation.model.ReportStatus;
 import lombok.*;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class ReportDTO {
 

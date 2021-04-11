@@ -1,6 +1,6 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
-import fr.schoolbyhiit.portailsuiviformation.entity.model.ReportStatus;
+import fr.schoolbyhiit.portailsuiviformation.model.ReportStatus;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,11 +10,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "reports")
-@Getter
-@Setter
-@AllArgsConstructor
+@Table(name="reports")
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Report implements Serializable {
 

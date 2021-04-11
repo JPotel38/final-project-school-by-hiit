@@ -1,7 +1,9 @@
-package fr.schoolbyhiit.portailsuiviformation.entity.model;
+package fr.schoolbyhiit.portailsuiviformation.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
 
+@Getter
 public enum ReportStatus {
 
     VALIDATED("Validated"),

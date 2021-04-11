@@ -1,7 +1,7 @@
 package fr.schoolbyhiit.portailsuiviformation.service;
 
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.ReportNotFoundException;
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.WrongFormatTypeException;
+import fr.schoolbyhiit.portailsuiviformation.exception.ReportNotFoundException;
+import fr.schoolbyhiit.portailsuiviformation.exception.WrongFormatTypeException;
 import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 
 import java.util.List;

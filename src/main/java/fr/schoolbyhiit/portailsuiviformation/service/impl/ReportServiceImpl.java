@@ -1,13 +1,12 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.ReportNotFoundException;
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.UserNotFoundException;
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.WrongFormatTypeException;
+import fr.schoolbyhiit.portailsuiviformation.exception.ReportNotFoundException;
+import fr.schoolbyhiit.portailsuiviformation.exception.WrongFormatTypeException;
 import fr.schoolbyhiit.portailsuiviformation.dao.ReportRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.entity.Report;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
-import fr.schoolbyhiit.portailsuiviformation.entity.model.ReportStatus;
+import fr.schoolbyhiit.portailsuiviformation.model.ReportStatus;
 import fr.schoolbyhiit.portailsuiviformation.mapper.ReportMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
 import org.springframework.stereotype.Service;
