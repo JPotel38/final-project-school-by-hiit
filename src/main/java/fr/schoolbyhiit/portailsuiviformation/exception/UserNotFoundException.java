@@ -1,7 +1,6 @@
-package fr.schoolbyhiit.portailsuiviformation.controller.exception;
+package fr.schoolbyhiit.portailsuiviformation.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 public class UserNotFoundException extends ResponseStatusException {

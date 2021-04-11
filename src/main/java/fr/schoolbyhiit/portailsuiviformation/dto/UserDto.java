@@ -8,10 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Set;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class UserDto {
 
