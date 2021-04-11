@@ -1,4 +1,4 @@
-package fr.schoolbyhiit.portailsuiviformation.controller.exception;
+package fr.schoolbyhiit.portailsuiviformation.exception;
 
 public class EmailExistsException extends RuntimeException {
 
