@@ -1,20 +1,15 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
-import fr.schoolbyhiit.portailsuiviformation.entity.model.RoleName;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import fr.schoolbyhiit.portailsuiviformation.model.RoleName;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Role {
 

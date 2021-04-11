@@ -1,26 +1,27 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.EmailExistsException;
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.UserNotFoundException;
+import fr.schoolbyhiit.portailsuiviformation.exception.EmailExistsException;
+import fr.schoolbyhiit.portailsuiviformation.exception.UserNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.dao.UserRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
 import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+    }
 
     @Override
     public UserDto create(UserDto userDto) {
