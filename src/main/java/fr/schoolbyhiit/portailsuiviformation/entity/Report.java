@@ -22,7 +22,7 @@ public class Report implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "REPORT_SEQUENCE")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name="user_id",nullable=false,unique=true)
     private User user;
 

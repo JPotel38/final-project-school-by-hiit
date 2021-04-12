@@ -1,17 +1,14 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
-import fr.schoolbyhiit.portailsuiviformation.exception.ReportNotFoundException;
-import fr.schoolbyhiit.portailsuiviformation.exception.WrongFormatTypeException;
 import fr.schoolbyhiit.portailsuiviformation.dao.ReportRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.entity.Report;
-import fr.schoolbyhiit.portailsuiviformation.entity.User;
-import fr.schoolbyhiit.portailsuiviformation.model.ReportStatus;
+import fr.schoolbyhiit.portailsuiviformation.exception.BadFormatException;
+import fr.schoolbyhiit.portailsuiviformation.exception.ReportNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.mapper.ReportMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -31,61 +28,36 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public ReportDTO create(ReportDTO reportDTO) throws WrongFormatTypeException {
-        if (reportDTO.getUser() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null
-            || reportDTO.getAppointmentDate() == null) {
-            throw new WrongFormatTypeException("All fields are mandatory");
-        }
-        if(!(reportDTO.getUser() instanceof User)){
-            throw new WrongFormatTypeException("Updated user must be a User Type");
-        }
-        if(!(reportDTO.getValidated() instanceof ReportStatus)){
-            throw new WrongFormatTypeException("Updated report status must be either 'Validated' or 'Not validated'");
-        }
-        if(!(reportDTO.getAppointmentDate() instanceof LocalDate)){
-            throw new WrongFormatTypeException(" Updated appointment date must be a valid Date Format : YYYY-MM-DD");
-        }
-        if(!(reportDTO.getReportText() instanceof String)){
-            throw new WrongFormatTypeException("Updated Report Text must be a String");
+    public ReportDTO create(ReportDTO reportDTO) {
+        if (reportDTO.getUser() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
+            throw new BadFormatException("All fields are mandatory");
         }
         Report report = reportMapper.toReport(reportDTO);
         return reportMapper.toReportDto(reportRepository.save(report));
     }
 
     @Override
-    public void delete(Long id) throws ReportNotFoundException {
-      reportRepository.deleteById(id);
+    public void delete(Long id) {
+        // on contrôle si le rapport existe en base
+        ReportDTO reportDTO = reportMapper.toReportDto(reportRepository.findById(id)
+            .orElseThrow(ReportNotFoundException::new));
+        reportRepository.deleteById(id);
     }
 
     @Override
     public ReportDTO findById(Long id) {
         ReportDTO reportDTO = reportMapper.toReportDto(reportRepository.findById(id)
-            .orElseThrow(() -> new ReportNotFoundException()));
-            return reportDTO;
+            .orElseThrow(ReportNotFoundException::new));
+        return reportDTO;
     }
 
     @Override
-    public ReportDTO update(Long id, ReportDTO reportDTO) throws ReportNotFoundException, WrongFormatTypeException {
-        if (id == null) {
-            throw new ReportNotFoundException();
+    public ReportDTO update(Long id, ReportDTO reportDTO) throws BadFormatException {
+        if (id == null || reportDTO.getUser() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
+            throw new BadFormatException("All fields are mandatory");
         }
-        if (reportDTO.getUser() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null
-            || reportDTO.getAppointmentDate() == null) {
-            throw new WrongFormatTypeException("All fields are mandatory");
-        }
-        if(!(reportDTO.getUser() instanceof User)){
-            throw new WrongFormatTypeException("Updated user must be a User Type");
-        }
-        if(!(reportDTO.getValidated() instanceof ReportStatus)){
-            throw new WrongFormatTypeException("Updated report status must be either 'Validated' or 'Not validated'");
-        }
-        if(!(reportDTO.getAppointmentDate() instanceof LocalDate)){
-            throw new WrongFormatTypeException(" Updated appointment date must be a valid Date Format : YYYY-MM-DD");
-        }
-        if(!(reportDTO.getReportText() instanceof String)){
-            throw new WrongFormatTypeException("Updated Report Text must be a String");
-        }
-        Report report = reportMapper.toReport(reportDTO);
+
+        final Report report = reportRepository.findById(id).orElseThrow(ReportNotFoundException::new);
         report.setUser(reportDTO.getUser());
         report.setValidated(reportDTO.getValidated());
         report.setAppointmentDate(reportDTO.getAppointmentDate());
