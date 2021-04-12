@@ -4,6 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -51,6 +59,9 @@ public class User {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Report> reports = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
