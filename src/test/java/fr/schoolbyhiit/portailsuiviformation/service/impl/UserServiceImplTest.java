@@ -1,27 +1,19 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.EmailExistsException;
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.UserNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.dao.UserRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.Role;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
-import fr.schoolbyhiit.portailsuiviformation.entity.model.RoleName;
-import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapper;
+import fr.schoolbyhiit.portailsuiviformation.exception.EmailExistsException;
+import fr.schoolbyhiit.portailsuiviformation.exception.UserNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapperImpl;
-import javassist.NotFoundException;
-import org.assertj.core.api.Assertions;
+import fr.schoolbyhiit.portailsuiviformation.model.RoleName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import javax.validation.constraints.Email;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -29,14 +21,8 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.anyLong;
-
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {

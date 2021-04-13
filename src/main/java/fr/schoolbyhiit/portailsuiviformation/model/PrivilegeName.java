@@ -1,4 +1,4 @@
-package fr.schoolbyhiit.portailsuiviformation.entity.model;
+package fr.schoolbyhiit.portailsuiviformation.model;
 
 import lombok.Getter;
 

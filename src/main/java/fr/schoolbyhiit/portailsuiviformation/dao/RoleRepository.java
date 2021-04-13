@@ -1,7 +1,7 @@
 package fr.schoolbyhiit.portailsuiviformation.dao;
 
 import fr.schoolbyhiit.portailsuiviformation.entity.Role;
-import fr.schoolbyhiit.portailsuiviformation.entity.model.RoleName;
+import fr.schoolbyhiit.portailsuiviformation.model.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

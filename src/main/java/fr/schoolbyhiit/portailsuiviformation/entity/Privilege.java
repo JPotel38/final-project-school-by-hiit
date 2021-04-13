@@ -1,11 +1,7 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
-import fr.schoolbyhiit.portailsuiviformation.entity.model.PrivilegeName;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import fr.schoolbyhiit.portailsuiviformation.model.PrivilegeName;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="privileges")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
