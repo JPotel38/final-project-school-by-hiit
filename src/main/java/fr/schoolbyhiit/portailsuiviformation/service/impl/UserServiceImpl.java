@@ -1,7 +1,7 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.EmailExistsException;
-import fr.schoolbyhiit.portailsuiviformation.controller.exception.UserNotFoundException;
+import fr.schoolbyhiit.portailsuiviformation.exception.EmailExistsException;
+import fr.schoolbyhiit.portailsuiviformation.exception.UserNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.dao.UserRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;

@@ -1,9 +1,8 @@
-DROP SCHEMA `portail-suivi-formation`;
 CREATE SCHEMA IF NOT EXISTS `portail-suivi-formation`;
 USE `portail-suivi-formation`;
 
 -- table des utilisateurs
-CREATE TABLE IF NOT EXISTS `portail-suivi-formation`.`users` (
+CREATE TABLE IF NOT EXISTS users (
     `user_id` INT NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(50) NOT NULL,
     `last_name` VARCHAR(50) NOT NULL,
@@ -15,8 +14,7 @@ CREATE TABLE IF NOT EXISTS `portail-suivi-formation`.`users` (
     PRIMARY KEY (`user_id`)
 )ENGINE = InnoDB;
 
--- tables des roles
-CREATE TABLE IF NOT EXISTS `portail-suivi-formation`.`roles` (
+CREATE TABLE IF NOT EXISTS roles (
     `role_id` INT NOT NULL AUTO_INCREMENT,
     `name` varchar(45) NOT NULL,
     PRIMARY KEY (`role_id`)
@@ -29,8 +27,7 @@ CREATE TABLE IF NOT EXISTS `portail-suivi-formation`.`privileges` (
     PRIMARY KEY (`privilege_id`)
 );
 
--- table de jointure users - roles
-CREATE TABLE IF NOT EXISTS `portail-suivi-formation`.`users_roles` (
+CREATE TABLE IF NOT EXISTS users_roles (
     `user_id` INT NOT NULL,
     `role_id` INT NOT NULL,
     KEY `user_fk_idx` (`user_id`),
@@ -60,6 +57,7 @@ INSERT INTO `roles` (`name`) VALUES ('STUDENT');
 INSERT INTO `roles` (`name`) VALUES ('TEACHER');
 INSERT INTO `roles` (`name`) VALUES ('TUTOR');
 
+
 -- initialisation des relation roles - privileges
 INSERT INTO `roles_privileges` (`role_id`, `privilege_id`) VALUES (1, 1);
 INSERT INTO `roles_privileges` (`role_id`, `privilege_id`) VALUES (1, 2);
@@ -67,3 +65,6 @@ INSERT INTO `roles_privileges` (`role_id`, `privilege_id`) VALUES (1, 3);
 INSERT INTO `roles_privileges` (`role_id`, `privilege_id`) VALUES (1, 4);
 
 
+INSERT INTO `users` (`first_name`, `last_name`, `creation_date`, `birth_date`, `mail`, `phone_number`)
+VALUES ('patrick', 'patrick', '2021-03-21', '2000-03-03', 'patrick@mail.fr', '00000000');
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (1, 3); -- user patrick has role TEACHER
