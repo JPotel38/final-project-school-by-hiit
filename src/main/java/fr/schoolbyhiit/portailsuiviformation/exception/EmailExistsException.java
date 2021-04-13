@@ -1,12 +1,12 @@
 package fr.schoolbyhiit.portailsuiviformation.exception;
 
-public class EmailExistsException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-    public EmailExistsException() {
-        super();
-    }
+public class EmailExistsException extends ResponseStatusException {
 
-    public EmailExistsException(String message) {
-        super(message);
+    public EmailExistsException(String mail) {
+        super(HttpStatus.CONFLICT,
+                String.format("User with mail : %s already exist !", mail));
     }
 }
