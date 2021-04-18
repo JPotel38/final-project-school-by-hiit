@@ -2,7 +2,7 @@ USE `portail-suivi-formation`;
 
 -- ajout colonne password dans la table des utilisateurs
 ALTER TABLE users
-    ADD COLUMN  `password` VARCHAR(50) NOT NULL AFTER phone_number;
+    ADD COLUMN  `password` VARCHAR(250) NOT NULL AFTER phone_number;
 
 -- tables des privileges
 CREATE TABLE IF NOT EXISTS privileges (
