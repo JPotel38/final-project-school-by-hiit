@@ -6,7 +6,7 @@ import fr.schoolbyhiit.portailsuiviformation.entity.Role;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
 import fr.schoolbyhiit.portailsuiviformation.exception.EmailExistsException;
 import fr.schoolbyhiit.portailsuiviformation.exception.UserNotFoundException;
-import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapperImpl;
+import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapper;
 import fr.schoolbyhiit.portailsuiviformation.model.RoleName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +31,7 @@ class UserServiceImplTest {
     private UserRepository userRepository;
 
     @Mock
-    private UserMapperImpl userMapper;
+    private UserMapper userMapper;
 
     @InjectMocks
     private UserServiceImpl userService;
