@@ -3,8 +3,10 @@ package fr.schoolbyhiit.portailsuiviformation.dto;
 import fr.schoolbyhiit.portailsuiviformation.entity.Role;
 import lombok.*;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -24,14 +26,19 @@ public class UserDto {
 
     private LocalDate creationDate;
 
+    @Past
     private LocalDate birthDate;
 
     @NotBlank
+    @Email
     private String mail;
 
     private String phoneNumber;
 
-    @NotEmpty
+    @NotBlank
+    private String password;
+
+    //@NotEmpty
     private Set<Role> roles;
 
 }

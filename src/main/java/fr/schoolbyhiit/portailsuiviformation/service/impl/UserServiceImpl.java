@@ -25,22 +25,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(UserDto userDto) {
-        if(emailExists(userDto)){
-            throw new EmailExistsException(
-                    "There is an account with that email adress:" + userDto.getMail());
+        if(userRepository.getUserByMail(userDto.getMail()).isPresent()){
+            throw new EmailExistsException(userDto.getMail());
         }
         userDto.setCreationDate(LocalDate.now());
+        userDto.setMail(userDto.getMail().toLowerCase());
 
-        // TODO control inputs
-        User user = userMapper.toUser(userDto);
-        return userMapper.toUserDto(userRepository.save(user));
+        return userMapper.toUserDto(
+                userRepository.save(userMapper.toUser(userDto)));
     }
 
     @Override
-    public UserDto findById(Long id) {
-        UserDto userDto = userMapper.toUserDto(userRepository.findById(id)
-                .orElseThrow(() -> UserNotFoundException.INSTANCE));
-        return userDto;
+    public UserDto findById(Long id)  {
+        return userMapper.toUserDto(userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id)));
     }
 
     @Override
@@ -49,9 +47,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto update(Long id, UserDto userDto){
+    public UserDto update(Long id, UserDto userDto) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> UserNotFoundException.INSTANCE);
+                .orElseThrow(() -> new UserNotFoundException(id));
 
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
@@ -65,12 +63,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> UserNotFoundException.INSTANCE);
+                .orElseThrow(() -> new UserNotFoundException(id));
         userRepository.delete(user);
     }
 
-    private Boolean emailExists(UserDto userDto){
-        User user = userRepository.getUserByMail(userDto.getMail());
-        return user != null;
-    }
 }
+
