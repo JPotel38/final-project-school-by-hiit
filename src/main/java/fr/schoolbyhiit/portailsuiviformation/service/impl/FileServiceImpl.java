@@ -5,18 +5,20 @@ import fr.schoolbyhiit.portailsuiviformation.dto.FileDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.File;
 import fr.schoolbyhiit.portailsuiviformation.mapper.FileMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.FileService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
 
     private final FileRepository fileRepository;
     private final FileMapper fileMapper;
 
+    public FileServiceImpl(FileRepository fileRepository, FileMapper fileMapper) {
+        this.fileRepository = fileRepository;
+        this.fileMapper = fileMapper;
+    }
 
     @Override
     public FileDto findById(Long id) {

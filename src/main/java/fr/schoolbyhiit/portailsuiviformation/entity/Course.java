@@ -1,6 +1,8 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,11 +13,9 @@ import java.util.Set;
 
 @Entity
 @Table(name="courses")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Course {
 
     @Id

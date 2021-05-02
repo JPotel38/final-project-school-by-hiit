@@ -9,11 +9,9 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class CourseDto {
 
     private Long id;

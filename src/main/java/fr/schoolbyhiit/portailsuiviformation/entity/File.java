@@ -1,6 +1,8 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -9,11 +11,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "files")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class File {
 
     @Id
@@ -32,7 +32,5 @@ public class File {
     @Column(name = "link")
     @NotBlank
     private String link;
-
-    //TODO voir si il est utile qu'un Objet de type File contienne un Objet de type Course ? Voir également comment stocker les fichiers...
 
 }
