@@ -20,3 +20,6 @@
     - `docker ps` : pour avoir la liste des containers 
     - `docker exec -it <contener-id> psql -U postgres`
 - create la table users, insert into ...
+
+## analyse sonar :
+mvnw initialize sonar:sonar -Dsonar.login=${SONAR_TOKEN} -Dsonar.host.url=${SONAR_URL}
