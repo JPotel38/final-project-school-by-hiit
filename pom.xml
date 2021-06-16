@@ -16,6 +16,16 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+	<distributionManagement>
+		<repository>
+			<id>GitHub-release</id>
+			<url>https://maven.pkg.github.com/school-by-hiit/portail-suivi-formation</url>
+		</repository>
+		<snapshotRepository>
+			<id>GitHub-snapshot</id>
+			<url>https://maven.pkg.github.com/school-by-hiit/portail-suivi-formation</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,6 +61,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
