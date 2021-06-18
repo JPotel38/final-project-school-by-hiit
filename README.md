@@ -23,3 +23,8 @@
 
 ## analyse sonar :
 mvnw initialize sonar:sonar -Dsonar.login=${SONAR_TOKEN} -Dsonar.host.url=${SONAR_URL}
+
+
+## start mysql in docker 
+
+docker run --name mysql -p 127.0.0.1:3306:3306/tcp -e MYSQL_ROOT_PASSWORD=NEWPASSWORD -e MYSQL_DATABASE=portail-suivi-formation -d mysql
