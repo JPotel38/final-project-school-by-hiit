@@ -7,7 +7,10 @@ import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
 import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.UserService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,6 +30,9 @@ public class UserServiceImpl implements UserService {
     public UserDto create(UserDto userDto) {
         if(userRepository.getUserByMail(userDto.getMail()).isPresent()){
             throw new EmailExistsException(userDto.getMail());
+        }
+        if(StringUtils.isBlank(userDto.getMail())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         userDto.setCreationDate(LocalDate.now());
         userDto.setMail(userDto.getMail().toLowerCase());
