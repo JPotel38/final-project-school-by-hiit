@@ -24,6 +24,7 @@ FullCalendarModule.registerPlugins([
   listPlugin,
 ])
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
