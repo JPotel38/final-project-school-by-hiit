@@ -13,9 +13,9 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {MenuPageModule} from "./menu/menu.module";
 import {DatePipe} from "@angular/common";
 import {LoginInterceptor} from "./shared/interceptors/login.interceptor";
-import {MenuPageModule} from "./menu/menu.module";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -27,11 +27,7 @@ FullCalendarModule.registerPlugins([
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, MenuPageModule, HttpClientModule,
     FullCalendarModule,
     MenuPageModule
   ],
