@@ -1,6 +1,10 @@
 <configuration>
 
-    <appender name="STDOUT" level="debug" class="ch.qos.logback.core.ConsoleAppender"></appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
     <appender name="FILE" level="warn" class="ch.qos.logback.core.FileAppender">
         <file>log/log.txt</file>
@@ -9,7 +13,7 @@
         </encoder>
     </appender>
 
-    <logger name="fr.schoolbyhiit.portailsuiviformation" level="warn">
+    <logger name="fr.schoolbyhiit.portailsuiviformation" level="trace">
         <appender-ref ref="STDOUT"/>
     </logger>
 
