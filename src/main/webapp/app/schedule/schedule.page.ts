@@ -1,16 +1,32 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {CalendarOptions, DateSelectArg, EventApi, EventClickArg, FullCalendarComponent} from "@fullcalendar/angular";
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  CalendarApi,
+  CalendarOptions,
+  DateSelectArg, EventAddArg,
+  EventApi,
+  EventChangeArg,
+  EventClickArg, EventInput, EventRemoveArg,
+  FullCalendarComponent
+} from "@fullcalendar/angular";
 import {createEventId, INITIAL_EVENTS} from "./event-utils";
+import {CourseService} from "./service/course.service";
+import {pipe, Subscription} from "rxjs";
+
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.page.html',
   styleUrls: ['./schedule.page.scss'],
 })
-export class SchedulePage implements OnInit {
+export class SchedulePage implements OnInit, OnDestroy {
 
   @ViewChild('fullCalendar') fullcalendar: FullCalendarComponent;
 
+  courseList$: Subscription;
+
+  courseList: any[];
+
+  events: EventInput[] = [];
 
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
@@ -19,8 +35,9 @@ export class SchedulePage implements OnInit {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    initialView: 'timeGridWeek',
+    //events: [],
+    // initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: true,
     selectable: true,
@@ -28,19 +45,43 @@ export class SchedulePage implements OnInit {
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this)
-    /* you can update a remote database when these fire:
-    eventAdd:
-    eventChange:
-    eventRemove:
-    */
+    eventsSet: this.handleEvents.bind(this),
+    eventAdd: this.handleEventAdd.bind(this),
+    eventChange: this.handleEventChange.bind(this),
+    eventRemove: this.handleEventRemove.bind(this)
   };
   currentEvents: EventApi[] = [];
 
+
+  constructor(private courseService: CourseService) {
+  }
+
   ngOnInit() {
+    this.getCourseList();
+    this.courseListToEvents(this.courseList);
     setTimeout(() => {
-      this.fullcalendar.getApi().render();
+      this.fullcalendar.getApi().render()
     });
+  }
+
+  getCourseList() {
+    this.courseList$ = this.courseService.getCourseList().subscribe(
+      pipe((res: any) => this.courseList = res)
+    );
+  }
+
+  courseListToEvents(courseList) {
+    courseList.forEach(
+      (course) => this.events.push(
+        {
+          id: course.id,
+          title: course.designation,
+          start: course.date + 'T09:00:00',
+          end: course.date + 'T17:00:00',
+        }
+      )
+    );
+    this.calendarOptions.events = this.events;
   }
 
   handleCalendarToggle() {
@@ -48,7 +89,7 @@ export class SchedulePage implements OnInit {
   }
 
   handleWeekendsToggle() {
-    const { calendarOptions } = this;
+    const {calendarOptions} = this;
     calendarOptions.weekends = !calendarOptions.weekends;
   }
 
@@ -77,5 +118,21 @@ export class SchedulePage implements OnInit {
 
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
+  }
+
+  handleEventChange(changeInfo: EventChangeArg) {
+    console.log(`update event ${changeInfo.event.title}`);
+  }
+
+  handleEventAdd(addInfo: EventAddArg) {
+    console.log(`event created : ${addInfo.event.title}`);
+  }
+
+  handleEventRemove(removeInfo: EventRemoveArg) {
+    console.log(`event deleted : ${removeInfo.event.title}`);
+  }
+
+  ngOnDestroy() {
+    this.courseList$.unsubscribe();
   }
 }
