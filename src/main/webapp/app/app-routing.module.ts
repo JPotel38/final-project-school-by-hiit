@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
+    path: 'schedule',
+    loadChildren: () => import('./schedule/schedule.module').then( m => m.SchedulePageModule)
+  },
+  {
     path: 'user-list',
     loadChildren: () => import('./user-list/user-list.module').then( m => m.UserListPageModule)
   },
@@ -31,7 +35,6 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-
 ];
 
 @NgModule({

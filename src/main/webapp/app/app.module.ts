@@ -6,6 +6,20 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import {FullCalendarModule} from "@fullcalendar/angular";
+
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import listPlugin from "@fullcalendar/list";
+
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin,
+  listPlugin,
+])
 import {HttpClientModule} from "@angular/common/http";
 import {DatePipe} from "@angular/common";
 
@@ -17,6 +31,7 @@ import {DatePipe} from "@angular/common";
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    FullCalendarModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
