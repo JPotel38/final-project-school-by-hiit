@@ -16,4 +16,7 @@ export class UserService {
     return this.httpClient.get<User[]>(`/api/users/`);//${this.RESOURCE_URL}
   }
 
+  getUserDetail(userId: number): Observable<User>  {
+    return  this.httpClient.get<User>(`/api/users/${userId}`);//${this.RESOURCE_URL};
+  }
 }
