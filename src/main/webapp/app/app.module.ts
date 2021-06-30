@@ -6,8 +6,9 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {MenuPageModule} from "./menu/menu.module";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { MenuPageModule } from "./menu/menu.module";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
