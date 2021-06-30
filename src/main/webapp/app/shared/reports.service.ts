@@ -10,7 +10,11 @@ export class ReportsService {
 
   constructor(public http: HttpClient) { }
 
-  getReportsFromBack(): Observable<Array<Report>>{
+  getReports(): Observable<Array<Report>>{
    return this.http.get<Array<Report>>('/api/report');
+  }
+
+  getReportsDetails(id: number): Observable<any>{
+    return this.http.get<Report>(`/api/report/${id}`);
   }
 }

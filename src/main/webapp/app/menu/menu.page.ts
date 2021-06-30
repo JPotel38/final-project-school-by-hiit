@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LoginService} from "../login/service/login.service";
 import {Router} from "@angular/router";
 import {MenuPageModule} from "./menu.module";
