@@ -23,10 +23,15 @@ const routes: Routes = [
     loadChildren: () => import('./user-update/user-update.module').then( m => m.UserUpdatePageModule)
   },
   {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
     path: '',
     redirectTo: 'user-list',
     pathMatch: 'full'
   },
+
 
 ];
 
