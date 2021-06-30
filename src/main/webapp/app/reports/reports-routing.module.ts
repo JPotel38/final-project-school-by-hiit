@@ -7,7 +7,15 @@ const routes: Routes = [
   {
     path: '',
     component: ReportsPage
-  }
+  },
+  {
+    path: 'report-detail/:id',
+    loadChildren: () => import('./report-detail/report-detail.module').then( m => m.ReportDetailPageModule)
+  },
+  {
+    path: 'report-creation',
+    loadChildren: () => import('./report-creation/report-creation.module').then( m => m.ReportCreationPageModule)
+  },
 ];
 
 @NgModule({
