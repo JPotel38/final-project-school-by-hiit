@@ -1,11 +1,14 @@
 package fr.schoolbyhiit.portailsuiviformation.dto;
 
 import fr.schoolbyhiit.portailsuiviformation.entity.File;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 
@@ -19,7 +22,14 @@ public class CourseDto {
     @NotBlank
     private String designation;
 
-    private LocalDateTime date;
+    @NotBlank
+    private LocalDate date;
+
+    @NotBlank
+    private LocalTime startTime;
+
+    @NotBlank
+    private LocalTime endTime;
 
     @NotEmpty
     private Set<File> files;

@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS courses
     `course_id`    INT         NOT NULL AUTO_INCREMENT,
     `designation`  VARCHAR(50) NOT NULL,
     `date`         DATE        NOT NULL,
+    `start_time`   TIME        NOT NULL,
+    `end_time`     TIME        NOT NULL,
     `fk_module_id` INT         NOT NULL,
     `fk_file_id`   INT         NOT NULL,
     PRIMARY KEY (`course_id`),

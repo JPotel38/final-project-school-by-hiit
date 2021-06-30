@@ -3,6 +3,7 @@ package fr.schoolbyhiit.portailsuiviformation.service.impl;
 import fr.schoolbyhiit.portailsuiviformation.dao.CourseRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.CourseDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.Course;
+import fr.schoolbyhiit.portailsuiviformation.entity.Module;
 import fr.schoolbyhiit.portailsuiviformation.exception.CourseNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.mapper.CourseMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.CourseService;
@@ -44,6 +45,8 @@ public class CourseServiceImpl implements CourseService {
         Course course = courseRepository.findById(id).orElseThrow(CourseNotFoundException::new);
         course.setDesignation(courseDto.getDesignation());
         course.setDate(courseDto.getDate());
+        course.setStartTime(courseDto.getStartTime());
+        course.setEndTime(courseDto.getEndTime());
         course.setFiles(courseDto.getFiles());
 
         return courseMapper.toCourseDto(courseRepository.save(course));
@@ -54,5 +57,9 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.findById(id).orElseThrow(CourseNotFoundException::new);
         courseRepository.deleteById(id);
 
+    }
+    @Override
+    public List<CourseDto> getCoursesbyModule(Module module){
+        return courseMapper.toCourseDtoList(courseRepository.getCoursesByModule(module));
     }
 }

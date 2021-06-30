@@ -1,6 +1,7 @@
 package fr.schoolbyhiit.portailsuiviformation.service;
 
 import fr.schoolbyhiit.portailsuiviformation.dto.CourseDto;
+import fr.schoolbyhiit.portailsuiviformation.entity.Module;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface CourseService {
     CourseDto update(Long id, CourseDto courseDto);
 
     void delete(Long id);
+
+    List<CourseDto> getCoursesbyModule(Module module);
 }

@@ -20,6 +20,4 @@ public class ModuleDto {
     @NotBlank
     private String designation;
 
-    @NotEmpty
-    private Set<Course> courses = new HashSet<>();
 }

@@ -18,15 +18,13 @@ public class Module {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "module-id", nullable = false,updatable = false)
+    @Column(name = "module_id", nullable = false,updatable = false)
     private Long id;
 
     @Column(name = "designation")
     @NotBlank
     private String designation;
 
-    @OneToMany(mappedBy = "module")
-    private Set<Course> courses = new HashSet<>();
 
     //TODO Ajouter les relations avec les entités User, Project... => new user story
 }
