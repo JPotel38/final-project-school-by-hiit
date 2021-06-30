@@ -1,7 +1,9 @@
+import {User} from "../user/user";
+
 export interface Report {
   id: number;
-  author: string;
+  author: User;
   appointmentDate: Date;
   reportText: string;
-  validated: boolean;
+  validated: string;
 }

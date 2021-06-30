@@ -20,6 +20,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "reports")
@@ -34,9 +37,23 @@ public class Report implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "REPORT_SEQUENCE")
     private Long id;
 
-    @ManyToOne()
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
-    private User user;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name="prof_id", referencedColumnName="user_id"),
+    })
+    private User prof;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name="student_id", referencedColumnName="user_id"),
+    })
+    private User student;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name="tutor_id", referencedColumnName="user_id"),
+    })
+    private User tutor;
 
     @Column(name = "date")
     @DateTimeFormat

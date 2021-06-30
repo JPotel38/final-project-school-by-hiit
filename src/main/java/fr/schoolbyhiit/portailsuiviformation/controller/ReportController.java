@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/report")
 public class ReportController {
 
-    private ReportService reportService;
+    private final ReportService reportService;
 
     public ReportController(ReportService reportService) {
         this.reportService = reportService;

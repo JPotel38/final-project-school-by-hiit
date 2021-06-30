@@ -29,7 +29,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ReportDTO create(ReportDTO reportDTO) {
-        if (reportDTO.getUser() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
+        if (reportDTO.getProf() == null || reportDTO.getTutor() == null || reportDTO.getStudent() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
             throw new BadFormatException("All fields are mandatory");
         }
         Report report = reportMapper.toReport(reportDTO);
@@ -39,7 +39,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void delete(Long id) {
         // on contrôle si le rapport existe en base
-        ReportDTO reportDTO = reportMapper.toReportDto(reportRepository.findById(id)
+        reportMapper.toReportDto(reportRepository.findById(id)
             .orElseThrow(ReportNotFoundException::new));
         reportRepository.deleteById(id);
     }
@@ -52,12 +52,11 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ReportDTO update(Long id, ReportDTO reportDTO) throws BadFormatException {
-        if (id == null || reportDTO.getUser() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
+        if (id == null || reportDTO.getProf() == null || reportDTO.getTutor() == null || reportDTO.getStudent() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
             throw new BadFormatException("All fields are mandatory");
         }
 
         final Report report = reportRepository.findById(id).orElseThrow(ReportNotFoundException::new);
-        report.setUser(reportDTO.getUser());
         report.setValidated(reportDTO.getValidated());
         report.setAppointmentDate(reportDTO.getAppointmentDate());
         report.setReportText(reportDTO.getReportText());

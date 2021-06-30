@@ -13,7 +13,9 @@ import java.time.LocalDate;
 public class ReportDTO {
 
     private Long id;
-    private User user;
+    private User prof;
+    private User student;
+    private User tutor;
     private LocalDate appointmentDate;
     private String reportText;
     private ReportStatus validated;
