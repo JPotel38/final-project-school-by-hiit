@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,15 @@ export class LoginService {
     public readonly httpClient: HttpClient
   ) { }
 
-  isConnected(email: string, password: string) {
-//     return this.httpClient.post('/api/login', {
+  isConnected(email: string, password: string): Observable<any> {
+    return of({token: "TokenALaCon"})
+//     this.httpClient.post('/api/login', {
 //     email: email,
 //     password: password
 //  })
-     console.log('from front',email, password)
+
+ // )
+     console.log('from front',email, password);
   }
 
 }
