@@ -1,6 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UsersService} from "../shared/users.service";
-import {User} from "../shared/interfaces/user/user";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -11,11 +9,13 @@ import {Subscription} from "rxjs";
 export class HomePage implements OnInit, OnDestroy{
   userSubscription: Subscription;
 
-  constructor(public usersService : UsersService) {}
+  constructor(
+//   public usersService : UsersService
+  ) {}
 
   ngOnInit() {
-   this.userSubscription = this.usersService.getUsersFromBack().subscribe((data: User[]) =>
-  console.log(data))
+//    this.userSubscription = this.usersService.getUsersFromBack().subscribe((data: User[]) =>
+//   console.log(data))
   }
 
   ngOnDestroy() {
