@@ -19,10 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "reports")
@@ -39,25 +36,25 @@ public class Report implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumns({
-        @JoinColumn(name="prof_id", referencedColumnName="user_id"),
+        @JoinColumn(name = "prof_id", referencedColumnName = "user_id"),
     })
     private User prof;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumns({
-        @JoinColumn(name="student_id", referencedColumnName="user_id"),
+        @JoinColumn(name = "student_id", referencedColumnName = "user_id"),
     })
     private User student;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumns({
-        @JoinColumn(name="tutor_id", referencedColumnName="user_id"),
+        @JoinColumn(name = "tutor_id", referencedColumnName = "user_id"),
     })
     private User tutor;
 
     @Column(name = "date")
     @DateTimeFormat
-    private LocalDate appointmentDate;
+    private ZonedDateTime appointmentDate;
 
     @Column(name = "text")
     @NotEmpty

@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {ReportsService} from "../shared/reports.service";
+import {ReportsService} from "../shared/services/reports.service";
 import {Report} from "../shared/interfaces/report/report";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.page.html',
-  styleUrls: ['./reports.page.scss'],
+  styleUrls: ['./reports.page.scss']
 })
 export class ReportsPage implements OnInit {
-  reports: Array<Report> = [];
+  reports$: Observable<Array<Report>>;
 
   constructor(public reportsService: ReportsService,
               public readonly router: Router,
@@ -18,17 +19,14 @@ export class ReportsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.reportsService.getReports().subscribe(report =>
-      this.reports = report
-    )
+    this.reports$ = this.reportsService.getReports();
   }
 
-  async details(id: number) {
+  async goToReportDetails(id: number) {
     await this.router.navigate(['./report-detail', id],  {relativeTo: this.route})
   }
 
   async goToReportCreation() {
     await this.router.navigate(['./report-creation'],  {relativeTo: this.route})
-
   }
 }

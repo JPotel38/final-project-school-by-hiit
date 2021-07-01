@@ -36,3 +36,9 @@ INSERT INTO `roles` (`name`) VALUES ('TUTOR');
 INSERT INTO `users` (`first_name`, `last_name`, `creation_date`, `birth_date`, `mail`, `phone_number`)
 VALUES ('admin', 'admin', '2021-03-21', '2000-03-03', 'admin@admin', '00000000');
 INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (1, 1); -- user patrick has role ADMIN
+INSERT INTO `users` (`first_name`, `last_name`, `creation_date`, `birth_date`, `mail`, `phone_number`)
+VALUES ('Jon', 'Snow', '2021-02-18', '1978-08-05', 'snow@mail.fr', '00000001');
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (2, 2);
+INSERT INTO `users` (`first_name`, `last_name`, `creation_date`, `birth_date`, `mail`, `phone_number`)
+VALUES ('Iron', 'Man', '2001-03-19', '1999-01-04', 'iron@mail.fr', '00000002');
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (3, 4);

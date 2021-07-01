@@ -1,11 +1,7 @@
-import {User} from "../user/user";
-
 export interface Report {
-  id: number;
-  prof: User;
-  tutor: User;
-  student: User;
+  teacher: number;
+  tutor: number;
+  student: number;
   appointmentDate: Date;
   reportText: string;
-  validated: string;
 }

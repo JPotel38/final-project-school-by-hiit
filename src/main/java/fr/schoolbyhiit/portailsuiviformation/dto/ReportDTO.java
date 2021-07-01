@@ -1,10 +1,12 @@
 package fr.schoolbyhiit.portailsuiviformation.dto;
 
-import fr.schoolbyhiit.portailsuiviformation.entity.User;
 import fr.schoolbyhiit.portailsuiviformation.model.ReportStatus;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 @Data
 @NoArgsConstructor
@@ -13,10 +15,10 @@ import java.time.LocalDate;
 public class ReportDTO {
 
     private Long id;
-    private User prof;
-    private User student;
-    private User tutor;
-    private LocalDate appointmentDate;
+    private Long teacherId;
+    private Long studentId;
+    private Long tutorId;
+    private ZonedDateTime appointmentDate;
     private String reportText;
     private ReportStatus validated;
 
