@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ReportsService} from "../../shared/reports.service";
+import {ReportsService} from "../../shared/services/reports.service";
 import {Report} from "../../shared/interfaces/report/report";
+import {Observable} from "rxjs";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-report-detail',
@@ -10,7 +12,7 @@ import {Report} from "../../shared/interfaces/report/report";
 })
 export class ReportDetailPage implements OnInit {
    reportId: number;
-   report: Report;
+   report$: Observable<Report>;
 
   constructor(public readonly activatedRoute: ActivatedRoute,
               public service: ReportsService
@@ -18,9 +20,7 @@ export class ReportDetailPage implements OnInit {
 
   ngOnInit() {
     this.reportId = this.activatedRoute.snapshot.params.id;
-    this.service.getReportsDetails(this.reportId).subscribe(response =>
-    this.report = response
-    )
+    this.report$ = this.service.getReportsDetails(this.reportId);
 
   }
 

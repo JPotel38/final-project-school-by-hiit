@@ -29,7 +29,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ReportDTO create(ReportDTO reportDTO) {
-        if (reportDTO.getProf() == null || reportDTO.getTutor() == null || reportDTO.getStudent() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
+        if (reportDTO.getTeacherId() == null || reportDTO.getTutorId() == null || reportDTO.getStudentId() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
             throw new BadFormatException("All fields are mandatory");
         }
         Report report = reportMapper.toReport(reportDTO);
@@ -52,7 +52,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ReportDTO update(Long id, ReportDTO reportDTO) throws BadFormatException {
-        if (id == null || reportDTO.getProf() == null || reportDTO.getTutor() == null || reportDTO.getStudent() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
+        if (id == null || reportDTO.getTeacherId() == null || reportDTO.getTutorId() == null || reportDTO.getStudentId() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
             throw new BadFormatException("All fields are mandatory");
         }
 
