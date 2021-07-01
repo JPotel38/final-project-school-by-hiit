@@ -40,12 +40,9 @@ public class Course {
     @NotNull
     private LocalTime endTime;
 
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "module_fk")
+    @JoinColumn(name = "fk_module_id")
+    @NotNull
     private Module module;
-
-    @OneToMany
-    private Set<File> files = new HashSet<>();
 
 }

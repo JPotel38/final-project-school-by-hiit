@@ -11,10 +11,6 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    Course getCourseByDesignation(String designation);
-
-    Course getCourseByDesignationAndDate(String designation, LocalDate date);
-
     List<Course> getCoursesByModule(Module module);
 
 }

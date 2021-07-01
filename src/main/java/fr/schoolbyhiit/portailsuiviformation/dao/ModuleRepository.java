@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ModuleRepository extends JpaRepository<Module,Long> {
 
-    Module getModuleByDesignation(String designation);
 }

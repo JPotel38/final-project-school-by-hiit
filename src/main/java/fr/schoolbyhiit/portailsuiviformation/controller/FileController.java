@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/api/files/")
 public class FileController {
 
     private final FileService fileService;
@@ -18,7 +18,7 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public FileDto findById(@PathVariable Long id) {
         return fileService.findById(id);
@@ -36,13 +36,13 @@ public class FileController {
         return fileService.create(fileDto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public FileDto update(@PathVariable Long id, @RequestBody @Valid FileDto fileDto){
         return fileService.update(id,fileDto);
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id){
         fileService.delete(id);
