@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
     private User user;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> collect = new ArrayList<>();
@@ -22,7 +23,7 @@ public class CustomUserDetails implements UserDetails {
             for (Privilege privilege : role.getPrivileges()) {
                 collect.add(new SimpleGrantedAuthority(privilege.getName().getPrivilege()));
             }
-                   }
+        }
         authorities.addAll(collect);
         return authorities;
     }
@@ -64,5 +65,4 @@ public class CustomUserDetails implements UserDetails {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

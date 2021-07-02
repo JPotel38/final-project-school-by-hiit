@@ -15,15 +15,17 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-        CustomUserDetails userDetails =new CustomUserDetails();
+        CustomUserDetails userDetails = new CustomUserDetails();
         User user = userRepository.getUserByMail(mail).orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s not found", mail)));
-            userDetails.setUser(user);
+        userDetails.setUser(user);
         return userDetails;
     }
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
 }
