@@ -1,6 +1,7 @@
 package fr.schoolbyhiit.portailsuiviformation.service;
 
 import fr.schoolbyhiit.portailsuiviformation.dto.FileDto;
+import fr.schoolbyhiit.portailsuiviformation.entity.Course;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface FileService {
     FileDto update(Long id, FileDto fileDto);
 
     void delete(Long id);
+
+    List<FileDto> getFilesByCourse(Course course);
 }
