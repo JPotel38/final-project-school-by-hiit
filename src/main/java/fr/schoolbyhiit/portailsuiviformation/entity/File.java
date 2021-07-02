@@ -33,4 +33,9 @@ public class File {
     @NotBlank
     private String link;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="fk_course_id")
+    @NotNull
+    private Course course;
+
 }

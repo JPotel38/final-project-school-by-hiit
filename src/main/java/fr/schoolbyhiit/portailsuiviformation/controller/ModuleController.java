@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/modules")
+@RequestMapping("/api/modules/")
 public class ModuleController {
 
     private final ModuleService moduleService;
@@ -18,7 +18,7 @@ public class ModuleController {
         this.moduleService = moduleService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public ModuleDto findById(@PathVariable Long id){
         return moduleService.findById(id);
@@ -36,13 +36,13 @@ public class ModuleController {
         return moduleService.create(moduleDto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public ModuleDto update(@PathVariable Long id, @RequestBody @Valid ModuleDto moduleDto){
         return moduleService.update(id,moduleDto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id){moduleService.delete(id);}
 }

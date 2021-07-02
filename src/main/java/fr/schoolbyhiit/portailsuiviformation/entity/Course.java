@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,13 +30,19 @@ public class Course {
 
     @Column(name = "date")
     @NotNull
-    private LocalDateTime date;
+    private LocalDate date;
+
+    @Column(name = "start_time")
+    @NotNull
+    private LocalTime startTime;
+
+    @Column(name = "end_time")
+    @NotNull
+    private LocalTime endTime;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "module_fk")
+    @JoinColumn(name = "fk_module_id")
+    @NotNull
     private Module module;
-
-    @OneToMany
-    private Set<File> files = new HashSet<>();
 
 }

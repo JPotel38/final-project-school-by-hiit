@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/api/courses/")
 public class CourseController {
 
     private  final CourseService courseService;
@@ -18,7 +18,7 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public CourseDto findById(@PathVariable Long id){
         return courseService.findById(id);
@@ -36,13 +36,13 @@ public class CourseController {
         return courseService.create(courseDto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public CourseDto update(@PathVariable Long id, @RequestBody @Valid CourseDto courseDto){
         return courseService.update(id,courseDto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id){
         courseService.delete(id);
