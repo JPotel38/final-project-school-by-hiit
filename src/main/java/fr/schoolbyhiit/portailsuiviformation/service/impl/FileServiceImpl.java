@@ -66,10 +66,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public void delete(Long id) {
         fileRepository.deleteById(id);
-//        File file = fileRepository.findById(id)
-//            .orElseThrow(()->new FileNotFoundException(id));
-//        fileRepository.delete(file);
-
     }
 
     @Override
