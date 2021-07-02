@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./schedule/schedule.module').then( m => m.SchedulePageModule)
   },
   {
+    path: 'schedule-view',
+    loadChildren: () => import('./schedule-view/schedule-view.module').then( m => m.ScheduleViewPageModule)
+  },
+  {
     path: 'user-list',
     loadChildren: () => import('./user-list/user-list.module').then( m => m.UserListPageModule)
   },

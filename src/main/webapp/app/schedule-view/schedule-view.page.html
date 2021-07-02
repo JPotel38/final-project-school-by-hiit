@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Emplois du Temps</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class='demo-app'>
+    <div class='demo-app-main'>
+      <full-calendar
+        #fullCalendar
+        *ngIf='calendarVisible'
+        [options]='calendarOptions'
+      ></full-calendar>
+    </div>
+  </div>
+  <!--  <full-calendar [options]="calendarOptions"></full-calendar>-->
+</ion-content>

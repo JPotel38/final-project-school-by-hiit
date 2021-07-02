@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,19 +28,17 @@ public class ScheduleEvent {
     private String title;
 
     @Column(name = "start")
-    @NotBlank
+    @NotNull
     private LocalDateTime start;
 
     @Column(name = "end")
-    @NotBlank
     private LocalDateTime end;
 
     @Column(name = "all_day")
-    @NotBlank
+    @NotNull
     private Boolean allDay;
 
     @Column(name = "course_id")
-    @NotBlank
     private Long courseId;
 
 }

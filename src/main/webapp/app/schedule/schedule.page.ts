@@ -1,16 +1,18 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
-  CalendarApi,
   CalendarOptions,
-  DateSelectArg, EventAddArg,
+  DateSelectArg,
   EventApi,
   EventChangeArg,
-  EventClickArg, EventInput, EventRemoveArg,
+  EventInput,
   FullCalendarComponent
 } from "@fullcalendar/angular";
-import {createEventId, INITIAL_EVENTS} from "./event-utils";
-import {CourseService} from "./service/course.service";
-import {pipe, Subscription} from "rxjs";
+import {EventService} from "./service/event.service";
+import {Subscription} from "rxjs";
+import {ScheduleEvent} from "./model/event.interface";
+import {PopoverController} from "@ionic/angular";
+import {PopoverComponent} from "./popover/popover.component";
+import {CreatePopoverComponent} from "./create-popover/create-popover.component";
 
 
 @Component({
@@ -22,98 +24,122 @@ export class SchedulePage implements OnInit, OnDestroy {
 
   @ViewChild('fullCalendar') fullcalendar: FullCalendarComponent;
 
-  courseList$: Subscription;
+  private eventList$: Subscription;
 
-  courseList: any[];
+  private deleteSubscription: Subscription;
 
-  events: EventInput[] = [];
+  private eventList: ScheduleEvent[];
+
+  private events: EventInput[] = [];
+
+  private event: EventInput;
+
+  courses = [
+    {
+      id: 1,
+      designation: 'Devops'
+    },
+    {
+      id: 2,
+      designation: 'FrontEnd'
+    }
+  ];
 
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
+      left: '',
+      center: 'prev today next',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
+    timeZone: 'UTC',
+    slotLabelFormat: {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    },
+    eventTimeFormat: {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    },
     initialView: 'timeGridWeek',
-    //events: [],
-    // initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: true,
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
+    firstDay: 1,
+    nowIndicator: false,
     select: this.handleDateSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this),
+    eventClick: this.showPopover.bind(this),
     eventsSet: this.handleEvents.bind(this),
-    eventAdd: this.handleEventAdd.bind(this),
-    eventChange: this.handleEventChange.bind(this),
-    eventRemove: this.handleEventRemove.bind(this)
+    eventChange: this.handleEventChange.bind(this)
   };
   currentEvents: EventApi[] = [];
 
 
-  constructor(private courseService: CourseService) {
+  constructor(private eventService: EventService,
+              public popoverController: PopoverController) {
   }
 
   ngOnInit() {
     this.getCourseList();
-    this.courseListToEvents(this.courseList);
     setTimeout(() => {
       this.fullcalendar.getApi().render()
     });
   }
 
   getCourseList() {
-    this.courseList$ = this.courseService.getCourseList().subscribe(
-      pipe((res: any) => this.courseList = res)
-    );
+    this.eventList$ = this.eventService.getEventList().subscribe(
+      (res: any) => {
+        this.eventList = res;
+        this.courseListToEvents(this.eventList);
+      });
   }
 
-  courseListToEvents(courseList) {
-    courseList.forEach(
-      (course) => this.events.push(
-        {
-          id: course.id,
-          title: course.designation,
-          start: course.date + 'T09:00:00',
-          end: course.date + 'T17:00:00',
-        }
-      )
+  courseListToEvents(eventList) {
+    eventList.forEach(
+      (event) => this.events.push(event)
     );
     this.calendarOptions.events = this.events;
   }
 
-  handleCalendarToggle() {
-    this.calendarVisible = !this.calendarVisible;
-  }
-
-  handleWeekendsToggle() {
-    const {calendarOptions} = this;
-    calendarOptions.weekends = !calendarOptions.weekends;
-  }
-
-  handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
+  async handleDateSelect(selectInfo: any) {
+    //const title = prompt('Please enter a new title for your event');
     const calendarApi = selectInfo.view.calendar;
-
     calendarApi.unselect(); // clear date selection
 
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      });
-    }
-  }
+    const popover = await this.popoverController.create({
+      event: selectInfo,
+      component: CreatePopoverComponent,
+      componentProps: {
+        courseList: this.courses,
+      },
+    });
+    await popover.present();
 
-  handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
+    return popover.onDidDismiss().then(
+      (data: any) => {
+        console.log(data.data.title)
+        this.eventService.createEvent({
+          title: data.data.title,
+          start: selectInfo.start,
+          end: selectInfo.end,
+          allDay: selectInfo.allDay,
+          courseId: data.data.courseId,
+        }).subscribe(
+          (event: ScheduleEvent) => {
+            calendarApi.addEvent({
+                id: `${event.id}`,
+                title: event.title,
+                start: event.start,
+                end: event.end,
+                allDay: event.allDay
+              }
+            )
+          })
+      });
   }
 
   handleEvents(events: EventApi[]) {
@@ -121,18 +147,53 @@ export class SchedulePage implements OnInit, OnDestroy {
   }
 
   handleEventChange(changeInfo: EventChangeArg) {
-    console.log(`update event ${changeInfo.event.title}`);
+    this.eventService.updateEvent(+changeInfo.event.id, {
+      title: changeInfo.event.title,
+      start: changeInfo.event.start,
+      end: changeInfo.event.end,
+      allDay: changeInfo.event.allDay,
+      courseId: 0,
+    }).subscribe()
   }
 
-  handleEventAdd(addInfo: EventAddArg) {
-    console.log(`event created : ${addInfo.event.title}`);
-  }
+  async showPopover(ev: any) {
+    this.event = {
+      id: ev.event.id,
+      title: ev.event.title,
+      start: ev.event.start,
+      end: ev.event.end,
+      allDay: ev.event.allDay
+    }
+    const popover = await this.popoverController.create({
+      event: ev,
+      component: PopoverComponent,
+      componentProps: {
+        event: this.event,
+        courseList: this.courses
+      },
+    });
+    await popover.present();
 
-  handleEventRemove(removeInfo: EventRemoveArg) {
-    console.log(`event deleted : ${removeInfo.event.title}`);
+    return popover.onDidDismiss().then(
+      (data: any) => {
+        let operation = data.data.operation;
+        let event: ScheduleEvent = data.data.event;
+        if (operation == "DELETE") {
+          console.log('deletion')
+          this.deleteSubscription = this.eventService.deleteEvent(+event.id).subscribe(
+            () => ev.event.remove()
+          );
+        } else if (operation == 'UPDATE') {
+          event.courseId = data.data.courseId;
+          this.eventService.updateEvent(+event.id, event).subscribe(
+            () => window.location.reload()
+          )
+        }
+      });
   }
 
   ngOnDestroy() {
-    this.courseList$.unsubscribe();
+    this.eventList$.unsubscribe();
+    this.deleteSubscription.unsubscribe();
   }
 }
