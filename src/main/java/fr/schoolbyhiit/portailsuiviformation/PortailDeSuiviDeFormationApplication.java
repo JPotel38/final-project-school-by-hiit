@@ -11,6 +11,5 @@ public class PortailDeSuiviDeFormationApplication {
 
     public static void main(String[] args) {
             SpringApplication.run(PortailDeSuiviDeFormationApplication.class, args);
-
     }
 }
