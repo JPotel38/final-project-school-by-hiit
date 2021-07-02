@@ -12,6 +12,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
+import {HttpClientModule} from "@angular/common/http";
 
 
 FullCalendarModule.registerPlugins([
@@ -28,7 +29,8 @@ FullCalendarModule.registerPlugins([
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    HttpClientModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

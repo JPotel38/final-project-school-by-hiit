@@ -1,0 +1,9 @@
+
+<ion-input type="text" [(ngModel)]="event.title"></ion-input>
+<ion-select [(ngModel)]="courseId">
+  <ion-select-option *ngFor="let course of courseList" [value]="course.id">{{course.designation}}</ion-select-option>
+</ion-select>
+<ion-buttons>
+  <ion-button (click)="update()" >Modifier</ion-button>
+  <ion-button (click)="delete()">Supprimer</ion-button>
+</ion-buttons>

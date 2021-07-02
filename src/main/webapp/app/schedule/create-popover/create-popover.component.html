@@ -1,0 +1,8 @@
+<ion-input type="text" [(ngModel)]="eventTitle"></ion-input>
+<ion-select [(ngModel)]="courseId">
+  <ion-select-option *ngFor="let course of courseList" [value]="course.id">{{course.designation}}</ion-select-option>
+</ion-select>
+<ion-buttons>
+  <ion-button (click)="create()" >Créer</ion-button>
+  <ion-button (click)="close()">Annuler</ion-button>
+</ion-buttons>
