@@ -17,4 +17,24 @@ export class ModuleService {
   getModuleDetail(moduleId: number): Observable<ModuleInterface>{
     return this.httpClient.get<ModuleInterface>(`/api/modules/${moduleId}`);
   }
+
+  createModule(designation: string){
+    return this.httpClient.post(`/api/modules/`,
+      {
+      designation: designation
+    },
+      {observe: "response"});
+  }
+
+  updateModule(moduleId: number, designation: string){
+    return this.httpClient.put(`/api/modules/${moduleId}`,
+      {
+        designation: designation
+      },
+      {observe: "response"});
+  }
+
+  deleteModule(moduleId: number): Observable<any>{
+    return this.httpClient.delete(`/api/modules/${moduleId}`,{observe: "response"});
+  }
 }
