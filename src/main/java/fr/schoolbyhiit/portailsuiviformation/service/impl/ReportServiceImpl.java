@@ -1,5 +1,6 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import fr.schoolbyhiit.portailsuiviformation.dao.ReportRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.entity.Report;
@@ -32,8 +33,9 @@ public class ReportServiceImpl implements ReportService {
         if (reportDTO.getTeacherId() == null || reportDTO.getTutorId() == null || reportDTO.getStudentId() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
             throw new BadFormatException("All fields are mandatory");
         }
-        Report report = reportMapper.toReport(reportDTO);
-        return reportMapper.toReportDto(reportRepository.save(report));
+        System.out.println(reportDTO);
+       return reportMapper.toReportDto(
+            reportRepository.save(reportMapper.toReport(reportDTO)));
     }
 
     @Override
