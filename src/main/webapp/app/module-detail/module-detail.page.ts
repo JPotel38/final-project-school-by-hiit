@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {ModuleInterface} from "../../module-list/service/Module.interface";
-import {ModuleService} from "../../module-list/service/module.service";
+import {ModuleInterface} from "../module-list/service/Module.interface";
+import {ModuleService} from "../module-list/service/module.service";
+
 
 @Component({
   selector: 'app-module-detail',

@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Observable, Subscription} from "rxjs";
 import {ModuleInterface} from "./service/Module.interface";
 import {ModuleService} from "./service/module.service";
 import {Router} from "@angular/router";
+import {AlertController} from "@ionic/angular";
+import {async} from "@angular/core/testing";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-module-list',
@@ -12,8 +15,11 @@ import {Router} from "@angular/router";
 export class ModuleListPage implements OnInit {
 
   public moduleList$ : Observable<ModuleInterface[]>;
+  public deleteModuleSubscription$: Subscription;
 
-  constructor(public readonly moduleService:ModuleService, public readonly router: Router) { }
+  constructor(public moduleService:ModuleService,
+              public readonly router: Router,
+              public readonly alertCtrl : AlertController) { }
 
   ngOnInit() {
     this.getModuleList();
@@ -22,5 +28,26 @@ export class ModuleListPage implements OnInit {
   getModuleList(){
     this.moduleList$ = this.moduleService.getModuleList();
   }
+
+  deleteModule(moduleId: number){
+    this.deleteModuleSubscription$ = this.moduleService.deleteModule(moduleId).subscribe(
+      async(response: HttpResponse<any>)=>{
+        if(response.status === 204 && response.statusText === 'OK'){
+          const alert = await this.alertCtrl.create({
+            header: 'Alert',
+            message: `Le module ${moduleId} a bien été supprimé`,
+            buttons: [`OK`],
+            backdropDismiss: true
+          });
+          await alert.present();
+        }
+      }
+    )
+  }
+
+  ngOnDestroy() {
+    this.deleteModuleSubscription$?.unsubscribe();
+  }
+
 
 }
