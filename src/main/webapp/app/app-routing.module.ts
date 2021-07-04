@@ -10,7 +10,19 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'module-detail',
+    loadChildren: () => import('./module-detail/module-detail/module-detail.module').then( m => m.ModuleDetailPageModule)
   },
+  {
+    path: 'module-list',
+    loadChildren: () => import('./module-list/module-list/module-list.module').then( m => m.ModuleListPageModule)
+  },
+  {
+    path: 'module-list',
+    loadChildren: () => import('./module-list/module-list/module-list.module').then( m => m.ModuleListPageModule)
+  },
+
 ];
 
 @NgModule({
