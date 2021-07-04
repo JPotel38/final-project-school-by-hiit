@@ -90,7 +90,6 @@ export class CreateUserPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.isCreated$.unsubscribe();
   }
-
 }
 
 
