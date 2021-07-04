@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="icon-only">
+      <ion-back-button color="secondary">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Création D'un Nouveau Module</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <form [formGroup]="createFormGroup">
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Nom</ion-label>
+          <ion-input name="designation"
+                     type="text"
+                     formControlName="designation"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+    <ion-button color="secondary"
+                [disabled]="!createFormGroup.valid"
+                (click)="createModule()"> Enregistrer
+      <ion-icon slot="end"
+                name="save-outline"></ion-icon>
+    </ion-button>
+  </ion-card>
+
+</ion-content>

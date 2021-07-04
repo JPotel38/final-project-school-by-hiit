@@ -12,7 +12,7 @@ import {HttpResponse} from "@angular/common/http";
   templateUrl: './module-list.page.html',
   styleUrls: ['./module-list.page.scss'],
 })
-export class ModuleListPage implements OnInit {
+export class ModuleListPage implements OnInit, OnDestroy {
 
   public moduleList$ : Observable<ModuleInterface[]>;
   public deleteModuleSubscription$: Subscription;
