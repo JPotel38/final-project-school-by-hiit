@@ -37,6 +37,18 @@ const routes: Routes = [
     path: 'course-creation',
     loadChildren: () => import('./course-creation/course-creation.module').then( m => m.CourseCreationPageModule)
   },
+  {
+    path: 'file-list',
+    loadChildren: () => import('./file-list/file-list.module').then( m => m.FileListPageModule)
+  },
+  {
+    path: 'file-detail',
+    loadChildren: () => import('./file-detail/file-detail.module').then( m => m.FileDetailPageModule)
+  },
+  {
+    path: 'file-creation',
+    loadChildren: () => import('./file-creation/file-creation.module').then( m => m.FileCreationPageModule)
+  },
 
 
 ];

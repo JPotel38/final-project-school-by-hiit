@@ -12,7 +12,7 @@ import {CourseService} from "../shared/course-service/course.service";
 export class CourseDetailPage implements OnInit {
 
   courseId: number;
-  courseDetail$: Observable<CourseInterface>
+  courseDetail$: Observable<CourseInterface>;
 
   constructor(public readonly activatedRoute: ActivatedRoute,
               public readonly courseService: CourseService) { }

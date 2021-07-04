@@ -41,7 +41,7 @@ export class CourseCreationPage implements OnInit, OnDestroy {
         if(response.status === 201 && response.statusText === 'OK'){
           const alert = await this.alertCtrl.create({
             header: 'Success',
-            message: `Le Cours ${response.body.id}a été créé avec succès`,
+            message: `Le cours ${response.body.id}a été créé avec succès`,
             buttons: ['OK'],
             backdropDismiss: true
           });
