@@ -1,8 +1,7 @@
-body {
-  background-color: red;
+ion-app {
+  --ion-background-color: #fefff2;
 }
 
-ion-content{
-
-    --ion-background-color:#111D12;
+@font-face {
+  font-family: 'Roboto', sans-serif, arial;
 }
