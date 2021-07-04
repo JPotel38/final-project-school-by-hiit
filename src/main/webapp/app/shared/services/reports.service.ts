@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Report} from "../interfaces/report/report";
+import {tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ReportsService {
     return this.http.get<Report>(`/api/report/${id}`);
   }
 
-  createReport(report: Report) {
-    return this.http.post<Report>('/api/report', report)
+  createReport(report: Report): Observable<Report> {
+    return this.http.post<Report>('/api/report/', {report});
   }
 }

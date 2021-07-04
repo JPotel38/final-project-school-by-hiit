@@ -36,9 +36,9 @@ public class Report implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumns({
-        @JoinColumn(name = "prof_id", referencedColumnName = "user_id"),
+        @JoinColumn(name = "teacher_id", referencedColumnName = "user_id"),
     })
-    private User prof;
+    private User teacher;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumns({
@@ -52,11 +52,11 @@ public class Report implements Serializable {
     })
     private User tutor;
 
-    @Column(name = "date")
+    @Column(name = "appointment_date")
     @DateTimeFormat
     private ZonedDateTime appointmentDate;
 
-    @Column(name = "text")
+    @Column(name = "report_text")
     @NotEmpty
     private String reportText;
 

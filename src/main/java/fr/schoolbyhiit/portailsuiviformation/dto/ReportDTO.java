@@ -13,7 +13,6 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @Builder
 public class ReportDTO {
-
     private Long id;
     private Long teacherId;
     private Long studentId;
