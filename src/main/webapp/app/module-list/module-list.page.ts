@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {ModuleInterface} from "./service/Module.interface";
-import {ModuleService} from "./service/module.service";
 import {Router} from "@angular/router";
 import {AlertController} from "@ionic/angular";
-import {async} from "@angular/core/testing";
 import {HttpResponse} from "@angular/common/http";
+import {ModuleInterface} from "../shared/module-service/Module.interface";
+import {ModuleService} from "../shared/module-service/module.service";
 
 @Component({
   selector: 'app-module-list',
@@ -14,12 +13,12 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class ModuleListPage implements OnInit, OnDestroy {
 
-  public moduleList$ : Observable<ModuleInterface[]>;
+  public moduleList$: Observable<ModuleInterface[]>;
   public deleteModuleSubscription$: Subscription;
 
-  constructor(public moduleService:ModuleService,
+  constructor(public readonly moduleService:ModuleService,
               public readonly router: Router,
-              public readonly alertCtrl : AlertController) { }
+              public readonly alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.getModuleList();
@@ -30,7 +29,7 @@ export class ModuleListPage implements OnInit, OnDestroy {
   }
 
   deleteModule(moduleId: number){
-    this.deleteModuleSubscription$ = this.moduleService.deleteModule(moduleId).subscribe(
+    this.deleteModuleSubscription$= this.moduleService.deleteModule(moduleId).subscribe(
       async(response: HttpResponse<any>)=>{
         if(response.status === 204 && response.statusText === 'OK'){
           const alert = await this.alertCtrl.create({

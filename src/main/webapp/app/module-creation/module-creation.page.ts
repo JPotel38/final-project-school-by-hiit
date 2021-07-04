@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
-import {ModuleService} from "../module-list/service/module.service";
 import {Router} from "@angular/router";
 import {AlertController} from "@ionic/angular";
 import {HttpResponse} from "@angular/common/http";
+import {ModuleService} from "../shared/module-service/module.service";
 
 @Component({
   selector: 'app-module-creation',
@@ -27,7 +27,7 @@ export class ModuleCreationPage implements OnInit, OnDestroy {
   }
 
   createModule(){
-    const createFormValue = this.createFormGroup.value as createFormValue;
+    const createFormValue = this.createFormGroup.value as CreateFormValue;
 
     this.createModuleSubscription$ = this.moduleService.createModule(createFormValue.designation)
       .subscribe(async (response: HttpResponse<any>) =>{
@@ -49,4 +49,4 @@ export class ModuleCreationPage implements OnInit, OnDestroy {
   }
 }
 
-  interface createFormValue {designation: string}
+  interface CreateFormValue {designation: string}

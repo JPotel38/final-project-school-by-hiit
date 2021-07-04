@@ -1,26 +1,25 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {ModuleInterface} from "../../shared/module-service/Module.interface";
-
+import {CourseInterface} from "../../shared/course-service/Course.interface";
 
 @Component({
-  selector: 'module-list',
+  selector: 'course-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
 
   @Input()
-  public moduleList: ModuleInterface[];
+  public courseList: CourseInterface[];
 
   @Output()
-  deleteModuleEmitter= new EventEmitter<number>();
+  deleteCourseEmitter= new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {}
 
-  deleteModule(moduleId: number){
-    this.deleteModuleEmitter.emit(moduleId);
+  deleteCourse(courseId: number){
+    this.deleteCourseEmitter.emit(courseId);
   }
 
 }
