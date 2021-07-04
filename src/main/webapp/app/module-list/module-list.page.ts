@@ -49,5 +49,9 @@ export class ModuleListPage implements OnInit, OnDestroy {
     this.deleteModuleSubscription$?.unsubscribe();
   }
 
+   async moduleCreation() {
+    await this.router.navigate(['module-creation']);
+   }
+
 
 }
