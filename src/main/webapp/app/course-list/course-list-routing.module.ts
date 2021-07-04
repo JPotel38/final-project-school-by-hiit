@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CourseListPage } from './course-list.page';
+import {ListComponent} from "./list/list.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule, ListComponent],
+  declarations: [
+    ListComponent
+  ]
 })
 export class CourseListPageRoutingModule {}

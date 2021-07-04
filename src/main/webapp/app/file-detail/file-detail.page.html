@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Détails du fichier</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="fileDetail$ | async as fileDetail">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ fileDetail.designation}} - {{fileDetail.creationDate}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+</ion-content>
