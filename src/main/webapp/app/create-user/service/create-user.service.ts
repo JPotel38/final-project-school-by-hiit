@@ -17,8 +17,8 @@ export class CreateUserService {
     return this.httpClient.post(
 //     'api/users/', user
  'api/users/', {
-        firstName: "eva",
-        lastName: "d",
+        firstName: "Eva",
+        lastName: "Delp",
         birthDate: "2000-03-03",
         mail: "eva9@mail.fr",
         phoneNumber: "1234567890",
