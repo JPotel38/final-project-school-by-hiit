@@ -6,8 +6,10 @@ import fr.schoolbyhiit.portailsuiviformation.service.ProjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/project")
+@RequestMapping("api/project")
 public class ProjectController {
 
     private ProjectService projectService;
@@ -16,6 +18,10 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
+    @GetMapping("")
+    public List<ProjectDto> getAll() {
+            return projectService.findAll();
+    }
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public ProjectDto create(@RequestBody ProjectDto projectDto) {

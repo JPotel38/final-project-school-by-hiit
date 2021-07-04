@@ -27,7 +27,7 @@ public class JwtConfig {
     }
 
     public void setTokenPrefix(String tokenPrefix) {
-        this.tokenPrefix = tokenPrefix;
+        this.tokenPrefix = tokenPrefix+" ";
     }
 
     public Integer getTokenExpirationAfterDays() {

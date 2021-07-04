@@ -4,7 +4,6 @@ package fr.schoolbyhiit.portailsuiviformation.controller;
 import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
 import fr.schoolbyhiit.portailsuiviformation.exception.UserNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,19 +13,19 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/users")
 public class UserController {
 
     private final UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
-    @PreAuthorize("hasAnyRole('ADMIN','TEACHER','TUTOR')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<UserDto> getUsers() {

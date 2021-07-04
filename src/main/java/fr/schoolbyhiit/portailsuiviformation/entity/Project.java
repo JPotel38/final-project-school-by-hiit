@@ -30,7 +30,7 @@ public class Project implements Serializable {
 
     @Column(name="name_project")
     private String nameProjects;
-
+    @Column(name = "status_project")
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
 
