@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {ModuleInterface} from "../module-list/service/Module.interface";
-import {ModuleService} from "../module-list/service/module.service";
+import {ModuleInterface} from "../shared/module-service/Module.interface";
+import {ModuleService} from "../shared/module-service/module.service";
 
 
 @Component({
@@ -15,7 +15,8 @@ export class ModuleDetailPage implements OnInit {
   moduleId: number;
   moduleDetail$: Observable<ModuleInterface>
 
-  constructor(public readonly activatedRoute: ActivatedRoute, public readonly moduleService: ModuleService) { }
+  constructor(public readonly activatedRoute: ActivatedRoute,
+              public readonly moduleService: ModuleService) { }
 
   ngOnInit() {
     this.moduleId = this.activatedRoute.snapshot.params.id;

@@ -25,6 +25,18 @@ const routes: Routes = [
     path: 'module-creation',
     loadChildren: () => import('./module-creation/module-creation.module').then( m => m.ModuleCreationPageModule)
   },
+  {
+    path: 'course-list',
+    loadChildren: () => import('./course-list/course-list.module').then( m => m.CourseListPageModule)
+  },
+  {
+    path: 'course-detail',
+    loadChildren: () => import('./course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
+  },
+  {
+    path: 'course-creation',
+    loadChildren: () => import('./course-creation/course-creation.module').then( m => m.CourseCreationPageModule)
+  },
 
 
 ];

@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Détails du cours</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="courseDetail$ | async as courseDetail">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ courseDetail.designation}} - {{courseDetail.date}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Créneau Horaire : {{courseDetail.startTime}} - {{courseDetail.endTime}}
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

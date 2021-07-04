@@ -18,7 +18,7 @@ export class ModuleService {
     return this.httpClient.get<ModuleInterface>(`/api/modules/${moduleId}`);
   }
 
-  createModule(designation: string){
+  createModule(designation: string): Observable<any>{
     return this.httpClient.post(`/api/modules/`,
       {
       designation: designation
@@ -26,7 +26,7 @@ export class ModuleService {
       {observe: "response"});
   }
 
-  updateModule(moduleId: number, designation: string){
+  updateModule(moduleId: number, designation: string): Observable<any>{
     return this.httpClient.put(`/api/modules/${moduleId}`,
       {
         designation: designation
