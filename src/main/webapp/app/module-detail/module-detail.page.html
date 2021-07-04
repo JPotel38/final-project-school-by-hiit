@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Détails du module</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="moduleDetail$ | async as moduleDetail">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ moduleDetail.designation}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+</ion-content>
+
