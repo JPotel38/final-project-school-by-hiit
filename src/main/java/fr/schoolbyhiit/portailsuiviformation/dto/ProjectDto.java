@@ -3,12 +3,15 @@ package fr.schoolbyhiit.portailsuiviformation.dto;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
 import fr.schoolbyhiit.portailsuiviformation.model.ProjectStatus;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ProjectDto {
 
     private long idProjects;
