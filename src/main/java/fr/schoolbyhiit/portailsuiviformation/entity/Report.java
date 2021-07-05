@@ -1,16 +1,28 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
 import fr.schoolbyhiit.portailsuiviformation.model.ReportStatus;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="reports")
+@Table(name = "reports")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +35,7 @@ public class Report implements Serializable {
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name="user_id",nullable=false,unique=true)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
     @Column(name = "date")
@@ -37,5 +49,4 @@ public class Report implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "validated", unique = true)
     private ReportStatus validated;
-
 }
