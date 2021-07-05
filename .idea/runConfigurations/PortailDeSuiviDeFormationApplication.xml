@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="PortailDeSuiviDeFormationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="portail-suivi-formation" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="fr.schoolbyhiit.portailsuiviformation.PortailDeSuiviDeFormationApplication" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

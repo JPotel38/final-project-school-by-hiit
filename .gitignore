@@ -57,14 +57,11 @@ local.properties
 ######################
 # IntelliJ
 ######################
-.idea/
+.idea/*
+!.idea/runConfigurations
+!.idea/codeStyles
+!.idea/inspectionProfiles
 *.iml
-*.iws
-*.ipr
-*.ids
-*.orig
-classes/
-out/
 
 ######################
 # Visual Studio Code
