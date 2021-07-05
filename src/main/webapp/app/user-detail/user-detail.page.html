@@ -1,6 +1,5 @@
 <ion-content>
   <ng-container *ngIf="userDetail$ | async as userDetail">
-
       <ion-grid class="ion-justify-content-start ion-align-items-center">
         <h4> Détails de l'utilisateur : {{ userDetail.firstName }}</h4>
         <ion-row>
@@ -48,7 +47,5 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
-
   </ng-container>
 </ion-content>
