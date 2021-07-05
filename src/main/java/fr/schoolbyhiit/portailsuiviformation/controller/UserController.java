@@ -54,7 +54,7 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('user:delete')")
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public Boolean delete(@PathVariable Long id) throws UserNotFoundException {
         return userService.delete(id);
     }
