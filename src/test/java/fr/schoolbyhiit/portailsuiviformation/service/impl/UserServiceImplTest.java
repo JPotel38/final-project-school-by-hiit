@@ -6,7 +6,7 @@ import fr.schoolbyhiit.portailsuiviformation.entity.Role;
 import fr.schoolbyhiit.portailsuiviformation.entity.User;
 import fr.schoolbyhiit.portailsuiviformation.exception.EmailExistsException;
 import fr.schoolbyhiit.portailsuiviformation.exception.UserNotFoundException;
-import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapper;
+import fr.schoolbyhiit.portailsuiviformation.mapper.UserMapperImpl;
 import fr.schoolbyhiit.portailsuiviformation.model.RoleName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,8 +21,13 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -31,7 +36,7 @@ class UserServiceImplTest {
     private UserRepository userRepository;
 
     @Mock
-    private UserMapper userMapper;
+    private UserMapperImpl userMapper;
 
     @InjectMocks
     private UserServiceImpl userService;
