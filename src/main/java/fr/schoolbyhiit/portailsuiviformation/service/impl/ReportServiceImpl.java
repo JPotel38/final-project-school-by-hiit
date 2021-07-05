@@ -34,8 +34,8 @@ public class ReportServiceImpl implements ReportService {
             throw new BadFormatException("All fields are mandatory");
         }
         System.out.println(reportDTO);
-       return reportMapper.toReportDto(
-            reportRepository.save(reportMapper.toReport(reportDTO)));
+        Report report = reportMapper.toReport(reportDTO);
+        return reportMapper.toReportDto(reportRepository.save(report));
     }
 
     @Override
@@ -59,6 +59,9 @@ public class ReportServiceImpl implements ReportService {
         }
 
         final Report report = reportRepository.findById(id).orElseThrow(ReportNotFoundException::new);
+        report.setTeacherId(reportDTO.getTeacherId());
+        report.setStudentId(reportDTO.getStudentId());
+        report.setTutorId(reportDTO.getTutorId());
         report.setValidated(reportDTO.getValidated());
         report.setAppointmentDate(reportDTO.getAppointmentDate());
         report.setReportText(reportDTO.getReportText());

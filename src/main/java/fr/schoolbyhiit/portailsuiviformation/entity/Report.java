@@ -7,18 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -27,30 +17,21 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Report implements Serializable {
+public class Report {
 
     @Id
     @Column(name = "report_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "REPORT_SEQUENCE")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name = "teacher_id", referencedColumnName = "user_id"),
-    })
-    private User teacher;
+    @Column(name = "teacher_id")
+    private Long teacherId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name = "student_id", referencedColumnName = "user_id"),
-    })
-    private User student;
+    @Column(name = "tutor_id")
+    private Long tutorId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name = "tutor_id", referencedColumnName = "user_id"),
-    })
-    private User tutor;
+    @Column(name = "student_id")
+    private Long studentId;
 
     @Column(name = "appointment_date")
     @DateTimeFormat
