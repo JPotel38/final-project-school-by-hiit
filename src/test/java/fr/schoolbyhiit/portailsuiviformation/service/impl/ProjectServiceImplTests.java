@@ -69,7 +69,6 @@ public class ProjectServiceImplTests {
         project.setProjectStatus(DELIVERED);
 
         // When
-        //ProjectDto projectDto = ProjectDto.builder().idProjects(1L).projectStatus(CORRECTED).build();
         Mockito.when(projectRepository.findById(anyLong())).thenReturn(Optional.of(project));
         Mockito.when(projectRepository.save(any(Project.class))).thenReturn(project);
         Mockito.when(projectMapper.toProjectDto(any(Project.class))).thenReturn(ProjectDto.builder().idProjects(1L).projectStatus(CORRECTED).build());
