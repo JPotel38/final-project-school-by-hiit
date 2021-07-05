@@ -4,7 +4,6 @@ import {Subscription} from "rxjs";
 import {FileService} from "../shared/file-service/file.service";
 import {Router} from "@angular/router";
 import {AlertController, IonDatetime} from "@ionic/angular";
-import {Time} from "@angular/common";
 import {HttpResponse} from "@angular/common/http";
 
 @Component({

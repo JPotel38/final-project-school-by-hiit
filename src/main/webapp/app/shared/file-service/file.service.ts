@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {FileInterface} from "./File.interface";
-import {ModuleInterface} from "../module-service/Module.interface";
 import {IonDatetime} from "@ionic/angular";
 
 @Injectable({
@@ -16,8 +15,8 @@ export class FileService {
     return this.httpClient.get<FileInterface[]>(`/api/files/`);
   }
 
-  getFileDetail(fileId: number): Observable<ModuleInterface>{
-    return this.httpClient.get<ModuleInterface>(`/api/files/${fileId}`);
+  getFileDetail(fileId: number): Observable<FileInterface>{
+    return this.httpClient.get<FileInterface>(`/api/files/${fileId}`);
   }
 
   createFile(designation: string, creationDate: IonDatetime, link: string): Observable<any>{

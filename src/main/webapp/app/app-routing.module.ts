@@ -10,18 +10,20 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'module-detail',
-    loadChildren: () => import('./module-detail/module-detail/module-detail.module').then( m => m.ModuleDetailPageModule)
+    loadChildren: () => import('./module-detail/module-detail.module').then( m => m.ModuleDetailPageModule)
   },
   {
     path: 'module-list',
-    loadChildren: () => import('./module-list/module-list/module-list.module').then( m => m.ModuleListPageModule)
+    loadChildren: () => import('./module-list/module-list.module').then( m => m.ModuleListPageModule)
   },
   {
     path: 'module-list',
-    loadChildren: () => import('./module-list/module-list/module-list.module').then( m => m.ModuleListPageModule)
-  },  {
+    loadChildren: () => import('./module-list/module-list.module').then( m => m.ModuleListPageModule)
+  },
+  {
     path: 'module-creation',
     loadChildren: () => import('./module-creation/module-creation.module').then( m => m.ModuleCreationPageModule)
   },
@@ -48,7 +50,7 @@ const routes: Routes = [
   {
     path: 'file-creation',
     loadChildren: () => import('./file-creation/file-creation.module').then( m => m.FileCreationPageModule)
-  },
+  }
 
 
 ];
