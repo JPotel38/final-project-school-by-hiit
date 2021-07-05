@@ -43,7 +43,7 @@ class UserControllerTest {
     @Test
     void whenFindById_thenReturns200() throws Exception {
         //GIVEN
-        MockHttpServletRequestBuilder request = get("/users").contentType(MediaType.APPLICATION_JSON);
+        MockHttpServletRequestBuilder request = get("/api/users").contentType(MediaType.APPLICATION_JSON);
         //WHEN
         final ResultActions result = mockMvc.perform(request);
         //THEN
