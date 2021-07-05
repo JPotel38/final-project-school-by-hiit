@@ -2,7 +2,7 @@ package fr.schoolbyhiit.portailsuiviformation.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,39 +11,30 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 
+@RequiredArgsConstructor
 public class JwtUsernameAndPasswordAuthentication extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
-    public JwtUsernameAndPasswordAuthentication(AuthenticationManager authenticationManager,
-                                                JwtConfig jwtConfig,
-                                                SecretKey secretKey) {
-        this.authenticationManager = authenticationManager;
-        this.jwtConfig = jwtConfig;
-        this.secretKey = secretKey;
-    }
-
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
-        try{
-            UsernameAndPasswordAuthentication authenticationRequest=
-                new ObjectMapper().readValue(request.getInputStream(),UsernameAndPasswordAuthentication.class);
-            Authentication authentication= new UsernamePasswordAuthenticationToken(
+        try {
+            UsernameAndPasswordAuthentication authenticationRequest =
+                new ObjectMapper().readValue(request.getInputStream(), UsernameAndPasswordAuthentication.class);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUsername(),
                 authenticationRequest.getPassword()
             );
-            Authentication authenticate = authenticationManager.authenticate(authentication);
-            return authenticate;
-        }catch (IOException e){
+            return authenticationManager.authenticate(authentication);
+        } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -52,7 +43,7 @@ public class JwtUsernameAndPasswordAuthentication extends UsernamePasswordAuthen
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
                                             FilterChain chain,
-                                            Authentication authResult) throws IOException, ServletException {
+                                            Authentication authResult) {
         String token = Jwts.builder()
             .setSubject(authResult.getName())
             .claim("authorities", authResult.getAuthorities())
@@ -60,6 +51,6 @@ public class JwtUsernameAndPasswordAuthentication extends UsernamePasswordAuthen
             .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
             .signWith(secretKey)
             .compact();
-        response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix()+token);
+        response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + token);
     }
 }
