@@ -20,7 +20,6 @@ public class ReportController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public List<ReportDTO> getReports() {
         return reportService.findAll();
     }
@@ -32,13 +31,11 @@ public class ReportController {
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
     public ReportDTO findById(@PathVariable("id") Long id)  {
         return reportService.findById(id);
     }
 
     @PutMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public ReportDTO update(@RequestBody ReportDTO reportDTO, @PathVariable Long id)
         throws ReportNotFoundException, BadFormatException {
         return reportService.update(id, reportDTO);

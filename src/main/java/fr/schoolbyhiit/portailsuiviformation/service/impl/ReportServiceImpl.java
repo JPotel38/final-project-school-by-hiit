@@ -46,9 +46,8 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ReportDTO findById(Long id) {
-        ReportDTO reportDTO = reportMapper.toReportDto(reportRepository.findById(id)
+        return reportMapper.toReportDto(reportRepository.findById(id)
             .orElseThrow(ReportNotFoundException::new));
-        return reportDTO;
     }
 
     @Override

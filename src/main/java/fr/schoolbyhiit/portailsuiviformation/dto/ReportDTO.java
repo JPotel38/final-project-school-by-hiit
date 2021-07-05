@@ -17,4 +17,5 @@ public class ReportDTO {
     private LocalDate appointmentDate;
     private String reportText;
     private ReportStatus validated;
+
 }
