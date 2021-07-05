@@ -9,6 +9,8 @@ import fr.schoolbyhiit.portailsuiviformation.mapper.ProjectMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.ProjectService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -18,6 +20,11 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectServiceImpl(ProjectMapper projectMapper, ProjectRepository projectRepository) {
         this.projectMapper = projectMapper;
         this.projectRepository = projectRepository;
+    }
+
+    @Override
+    public List<ProjectDto> findAll() {
+        return projectMapper.toProjectDtoToList(projectRepository.findAll());
     }
 
     @Override
