@@ -1,7 +1,10 @@
 package fr.schoolbyhiit.portailsuiviformation.entity;
 
 import fr.schoolbyhiit.portailsuiviformation.model.PrivilegeName;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="privileges")
+@Table(name = "privileges")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,5 +31,4 @@ public class Privilege {
     @Enumerated(EnumType.STRING)
     @Column(name = "name", unique = true)
     private PrivilegeName name;
-
 }
