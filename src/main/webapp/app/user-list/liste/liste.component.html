@@ -4,6 +4,7 @@
       <ion-col size="6" offset="1">
 
         <ion-item *ngFor="let user of liste, let i=index" (click)="selectUser(user.id)" lines="none">
+
           <ion-avatar slot="start">
             <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
           </ion-avatar>
@@ -17,6 +18,7 @@
             Supprimer
             <ion-icon name="trash-bin-outline" id="white-icon"></ion-icon>
           </ion-button>
+
         </ion-item>
 
       </ion-col>
