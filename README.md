@@ -23,5 +23,5 @@
 
 ## start mysql in docker
 ```bash
-docker run --name mysql -p 127.0.0.1:3306:3306/tcp -e MYSQL_ROOT_PASSWORD=NEWPASSWORD -e MYSQL_DATABASE=portail-suivi-formation -d mysql
+docker run --name mysql -p 127.0.0.1:3306:3306/tcp -e MYSQL_ROOT_PASSWORD=yoursecretpassword -e MYSQL_DATABASE=portail-suivi-formation -d mysql
 ```
