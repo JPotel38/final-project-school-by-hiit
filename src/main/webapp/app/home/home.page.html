@@ -1,12 +1,28 @@
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<app-menu></app-menu>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content [fullscreen]="true">
+  <h2> Quoi de neuf chez School By Hi!t ?</h2>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4">
+        <ion-card>
+          <ion-img src="../../assets/news7.jpg"></ion-img>
+          <ion-card-title> Annonce de la rentrée : M-3 avant la rentrée de la formation fullstack !</ion-card-title>
+          <ion-card-content> Le 6 septembre est la date à retenir pour commencer une nouvelle aventure et devenir développeur fullstack Java / JS. </ion-card-content>
+          <ion-card-subtitle> <ion-icon name="calendar"> </ion-icon> 6 septembre 2021  </ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="4" class="ion-align-self-center">
+        <ion-card>
+          <ion-img src="../../assets/campus.jpg"></ion-img>
+          <ion-card-title> C'est au futur Campus Région du numérique de Charbonnière qu'auront lieu les cours 1 semaine par mois de notre promotion développeur fullstack Java/JS. </ion-card-title>
+          <ion-card-content> Leur but est de créer un pôle compétitif pouvant allier écologie et digital. Les plans ont par exemple été conçus de manière à ne pas bouleverser la biodiversité du site. Alors, envie de se mettre au vert ?  </ion-card-content>
+          <ion-subtitle> <ion-icon name="calendar"> </ion-icon> 01 janvier 2021 </ion-subtitle>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
