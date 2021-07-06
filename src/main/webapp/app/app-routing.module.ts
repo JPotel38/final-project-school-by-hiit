@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('./module-creation/module-creation.module').then( m => m.ModuleCreationPageModule)
   },
   {
+    path: 'module-update/:id',
+    loadChildren: () => import('./module-update/module-update.module').then( m => m.ModuleUpdatePageModule)
+  },
+  {
     path: 'course-list',
     loadChildren: () => import('./course-list/course-list.module').then( m => m.CourseListPageModule)
   },
@@ -36,6 +40,10 @@ const routes: Routes = [
     loadChildren: () => import('./course-creation/course-creation.module').then( m => m.CourseCreationPageModule)
   },
   {
+    path: 'course-update/:id',
+    loadChildren: () => import('./course-update/course-update.module').then( m => m.CourseUpdatePageModule)
+  },
+  {
     path: 'file-list',
     loadChildren: () => import('./file-list/file-list.module').then( m => m.FileListPageModule)
   },
@@ -46,7 +54,12 @@ const routes: Routes = [
   {
     path: 'file-creation',
     loadChildren: () => import('./file-creation/file-creation.module').then( m => m.FileCreationPageModule)
+  },
+  {
+    path: 'file-update/:id',
+    loadChildren: () => import('./file-update/file-update.module').then( m => m.FileUpdatePageModule)
   }
+
 
 
 ];

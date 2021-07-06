@@ -31,7 +31,7 @@ export class FileListPage implements OnInit, OnDestroy {
   deleteFile(fileId: number){
     this.deleteFileSubscription$= this.fileService.deleteFile(fileId).subscribe(
       async (response: HttpResponse<any>)=>{
-        if (response.status === 204 && response.statusText === 'OK'){
+        if (response.status === 204){
           const alert= await this.alertCtrl.create({
             header: 'Alert',
             message: `Le fichier ${fileId} a bien été supprimé`,
@@ -50,6 +50,9 @@ export class FileListPage implements OnInit, OnDestroy {
 
   async fileCreation(){
     await this.router.navigate(['file-creation']);
+  }
+  async goToFileDetail(id: number) {
+    await this.router.navigate(['file-detail', id]);
   }
 
 }

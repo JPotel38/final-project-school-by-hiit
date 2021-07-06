@@ -25,8 +25,7 @@ export class ModuleDetailPage implements OnInit {
 
   }
 
-  async goToCourseList(){
-    await this.router.navigate(['course-list']);
+  async goToModuleUpdate(id: number){
+    await this.router.navigate(['module-update', id]);
   }
-
 }

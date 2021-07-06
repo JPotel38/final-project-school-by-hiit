@@ -7,7 +7,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <file-list [fileList]="(fileList$ | async)">
-  </file-list>
+<ion-content *ngFor="let file of (fileList$ | async)">
+  <ion-card-content>
+    {{file.designation}} - {{file.creationDate}}
+    <ion-buttons>
+      <ion-button slot="start" (click)="goToFileDetail(file.id)">
+        <ion-icon slot="icon-only" name="search-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button slot="start" (click)="deleteFile(file.id)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-card-content>
 </ion-content>

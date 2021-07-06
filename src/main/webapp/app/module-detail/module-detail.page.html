@@ -10,10 +10,14 @@
     <ion-card-header>
       <ion-card-title>{{ moduleDetail.designation}}</ion-card-title>
     </ion-card-header>
+    <ion-card-content>
+      <ion-button slot="start"
+                  (click)="goToModuleUpdate(moduleDetail.id)">
+        <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+      </ion-button>
+    </ion-card-content>
   </ion-card>
-  <ion-button slot="start" (click)="goToCourseList()">
-    voir la liste des cours de ce module
-  </ion-button>
+
 
 </ion-content>
 

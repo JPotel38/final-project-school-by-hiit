@@ -38,21 +38,22 @@ export class CourseCreationPage implements OnInit, OnDestroy {
   }
 
   createCourse(){
-    this.createCourseSubscription$ = this.courseService.createCourse({
+    this.createCourseSubscription$ = this.courseService
+      .createCourse({
       designation:  this.createFormGroup.value.designation,
       date: this.createFormGroup.value.date,
       endTime: this.createFormGroup.value.endTime,
       startTime: this.createFormGroup.value.startTime,
       module: {
-       id: this.createFormGroup.value.module
+            id: this.createFormGroup.value.module
+             }
       }
-    }
-  )
+    )
       .subscribe(async (response: HttpResponse<any>)=>{
-        if(response.status === 201 && response.statusText === 'OK'){
+        if(response.status === 201){
           const alert = await this.alertCtrl.create({
             header: 'Success',
-            message: `Le cours ${response.body.id}a été créé avec succès`,
+            message: `Le cours ${response.body.id} a été créé avec succès`,
             buttons: ['OK'],
             backdropDismiss: true
           });

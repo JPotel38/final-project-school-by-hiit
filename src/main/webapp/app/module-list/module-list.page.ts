@@ -57,6 +57,10 @@ export class ModuleListPage implements OnInit, OnDestroy {
     await this.router.navigate(['module-detail', id]);
   }
 
+  async goToCourseList(){
+    await this.router.navigate(['course-list']);
+  }
+
 
 
 
