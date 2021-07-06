@@ -1,6 +1,5 @@
 package fr.schoolbyhiit.portailsuiviformation.controller;
 
-
 import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
 import fr.schoolbyhiit.portailsuiviformation.exception.UserNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.service.UserService;

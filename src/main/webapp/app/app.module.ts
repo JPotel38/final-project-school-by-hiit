@@ -13,7 +13,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import {HttpClientModule} from "@angular/common/http";
-
+import {DatePipe} from "@angular/common";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -21,7 +21,6 @@ FullCalendarModule.registerPlugins([
   timeGridPlugin,
   listPlugin,
 ])
-import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [AppComponent],
