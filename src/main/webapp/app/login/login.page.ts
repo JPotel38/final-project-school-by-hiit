@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   )
   {
   this.loginFormGroup = new FormGroup({
-        email: new FormControl('', Validators.required),
+        mail: new FormControl('', Validators.required),
         password: new FormControl('', Validators.required)
       });
   }
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
   seConnecter() {
     const loginFormValue = this.loginFormGroup.value;
 
-    const isConnected = this.loginService.isConnected(loginFormValue.email, loginFormValue.password)
+    const isConnected = this.loginService.isConnected(loginFormValue.mail, loginFormValue.password)
 
     this.isConnected$ = isConnected.subscribe(
       async isConnected => {
@@ -50,11 +50,10 @@ export class LoginPage implements OnInit {
       }
 
     );
-
   }
 
    ngOnDestroy(): void {
       this.isConnected$?.unsubscribe();
     }
-
 }
+

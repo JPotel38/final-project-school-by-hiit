@@ -12,13 +12,28 @@ export class LoginService {
     public readonly httpClient: HttpClient
   ) { }
 
-  isConnected(email: string, password: string): Observable<any> {
-    return this.httpClient.post<any>('http://localhost:8081/login', {
-      username: email,
+  isConnected(mail: string, password: string): Observable<boolean> {
+    return this.httpClient.post<any>('/api/login', {
+      username: mail,
       password: password
-      }).pipe(
-      tap(response => {
-                  console.log(response);
-         }))
+      }, {observe: 'response'}
+    ).pipe(
+    tap((resp) => localStorage.setItem('token', resp.headers.get('Authorization'))),
+    map((resp) => {
+      let existToken: boolean;
+      if(resp && resp.headers.get('Authorization')) {
+        existToken = true;
+      } else {
+      existToken = false
+      }
+    return existToken;
+
+    }),
+    catchError(() => of(false))
+    );
   }
 }
+
+// map((resp) => ({
+//               token: Number.parseInt(resp.headers.get('Authorization'),
+//             })),
