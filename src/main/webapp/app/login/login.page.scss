@@ -1,9 +1,16 @@
-:root {
-  --ion-background-color: #F1F1F1;
-}
-
 h2 {
   color: #97136b;
   font-weight: bold;
 }
 
+ion-card {
+  --ion-background-color: #f7f7f7;
+  border: solid 1px #d71b98;
+}
+
+.logoSbh {
+  width: 350px;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
