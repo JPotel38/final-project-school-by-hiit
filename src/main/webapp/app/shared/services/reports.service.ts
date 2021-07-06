@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Report} from "../interfaces/report/report";
-import {tap} from "rxjs/operators";
+import {Report} from "../interfaces/report/Report";
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +16,14 @@ export class ReportsService {
   }
 
   getReportsDetails(id: number): Observable<Report> {
-    return this.http.get<Report>(`/api/report/${id}`);
+    return this.http.get<Report>(`/api/report/${id}`)
   }
 
-  createReport(report: Report): Observable<Report> {
-    return this.http.post<Report>('/api/report/', {report});
+  createReport(report: Report): Observable<string> {
+    return this.http.post('/api/report/post', report, {responseType: 'text'});
+  }
+
+  updateReport(id: number, report: Report): Observable<any> {
+    return this.http.put(`/api/report/put/${id}`, report);
   }
 }

@@ -43,7 +43,8 @@ export class ReportCreationPage implements OnInit {
       tutor: formValue.tutorId,
       student: formValue.studentId,
       appointmentDate: formValue.appointmentDate,
-      reportText: formValue.reportText
+      reportText: formValue.reportText,
+      validated: 'Not validated'
     }
     this.reportsService.createReport(newReport);
   }

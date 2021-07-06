@@ -1,16 +1,16 @@
 package fr.schoolbyhiit.portailsuiviformation.controller;
 
-import fr.schoolbyhiit.portailsuiviformation.exception.ReportNotFoundException;
-import fr.schoolbyhiit.portailsuiviformation.exception.BadFormatException;
 import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
+import fr.schoolbyhiit.portailsuiviformation.exception.BadFormatException;
 import fr.schoolbyhiit.portailsuiviformation.service.ReportService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/report")
+@RequestMapping("api/report")
 public class ReportController {
 
     private final ReportService reportService;
@@ -20,25 +20,30 @@ public class ReportController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<ReportDTO> getReports() {
         return reportService.findAll();
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ReportDTO create(@RequestBody ReportDTO reportDTO) throws BadFormatException {
-        return reportService.create(reportDTO);
+    @PostMapping("/post")
+    public @ResponseBody
+    ResponseEntity<String> post(@RequestBody ReportDTO reportDTO) throws BadFormatException {
+        reportService.create(reportDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ReportDTO findById(@PathVariable("id") Long id)  {
+    @ResponseStatus(HttpStatus.OK)
+    public ReportDTO findById(@PathVariable("id") Long id) {
         return reportService.findById(id);
     }
 
-    @PutMapping(value = "/{id}")
-    public ReportDTO update(@RequestBody ReportDTO reportDTO, @PathVariable Long id)
-        throws ReportNotFoundException, BadFormatException {
-        return reportService.update(id, reportDTO);
+    @PutMapping(value = "/put/{id}")
+    public @ResponseBody
+    ResponseEntity<String> put(@PathVariable Long id, @RequestBody ReportDTO reportDTO) {
+        System.out.println("id: " + id + "report: " + reportDTO);
+        reportService.update(id, reportDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
