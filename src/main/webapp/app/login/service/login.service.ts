@@ -13,15 +13,12 @@ export class LoginService {
   ) { }
 
   isConnected(email: string, password: string): Observable<any> {
-    return of({token: "TokenALaCon"})
-//     this.httpClient.post('/api/login', {
-//     email: email,
-//     password: password
-//  })
-
- // )
-     console.log('from front',email, password);
+    return this.httpClient.post<any>('http://localhost:8081/login', {
+      username: email,
+      password: password
+      }).pipe(
+      tap(response => {
+                  console.log(response);
+         }))
   }
-
 }
-
