@@ -1,12 +1,11 @@
 package fr.schoolbyhiit.portailsuiviformation.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class ReportNotFoundException extends RuntimeException {
-    public ReportNotFoundException(){
-        super();
+public class ReportNotFoundException extends ResponseStatusException {
+    public ReportNotFoundException(Long id){
+        super(HttpStatus.NOT_FOUND, "Report not found !" + id);
     }
 
 }

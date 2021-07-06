@@ -3,7 +3,7 @@ import {Location} from '@angular/common';
 import {ReportsService} from "../../shared/services/reports.service";
 import {Report} from "../../shared/interfaces/report/Report";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {User} from "../../shared/interfaces/user/User.interface";
 import {UserService} from "../../shared/services/user.service";
@@ -14,7 +14,6 @@ import {UserService} from "../../shared/services/user.service";
   styleUrls: ['./report-detail.page.scss'],
 })
 export class ReportDetailPage implements OnInit {
-  reportId: number;
   report: Report;
   validatedForm: FormGroup;
   teacher$: Observable<User>;
@@ -24,6 +23,7 @@ export class ReportDetailPage implements OnInit {
   constructor(public reportsService: ReportsService,
               public usersService: UserService,
               private _location: Location,
+              public readonly router: Router,
               private route: ActivatedRoute,
               fb: FormBuilder
   ) {
@@ -39,21 +39,23 @@ export class ReportDetailPage implements OnInit {
     this.student$ = this.usersService.getUserDetail(this.report.studentId);
   }
 
-  goBack() {
-    this._location.back();
-  }
+  async goBack() {
+      await this.router.navigate(['./reports'])
+    }
 
   isValidated(event) {
     if (event.detail.checked === true) {
-      this.validatedForm.get('isValidated').setValue('VALIDATED')
+      this.validatedForm.get('isValidated').setValue('Validated')
     } else {
-      this.validatedForm.get('isValidated').setValue('NOT_VALIDATED')
+      this.validatedForm.get('isValidated').setValue('Not validated')
     }
   }
 
   Validate() {
-    this.reportsService.updateReport(this.reportId, this.validatedForm.value).subscribe(response =>
-      console.log(response)
-    )
+    const validatedReport: Report = {
+      ...this.report,
+      validated: this.validatedForm.value.isValidated
+    }
+    this.reportsService.updateReport(this.report.id, validatedReport);
   }
 }

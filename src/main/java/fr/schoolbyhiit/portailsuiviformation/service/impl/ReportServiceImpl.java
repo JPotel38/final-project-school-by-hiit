@@ -1,6 +1,5 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import fr.schoolbyhiit.portailsuiviformation.dao.ReportRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.ReportDTO;
 import fr.schoolbyhiit.portailsuiviformation.entity.Report;
@@ -42,14 +41,14 @@ public class ReportServiceImpl implements ReportService {
     public void delete(Long id) {
         // on contrôle si le rapport existe en base
         reportMapper.toReportDto(reportRepository.findById(id)
-            .orElseThrow(ReportNotFoundException::new));
+            .orElseThrow(() -> new ReportNotFoundException(id)));
         reportRepository.deleteById(id);
     }
 
     @Override
     public ReportDTO findById(Long id) {
         return reportMapper.toReportDto(reportRepository.findById(id)
-            .orElseThrow(ReportNotFoundException::new));
+            .orElseThrow(() -> new ReportNotFoundException(id)));
     }
 
     @Override
@@ -57,8 +56,8 @@ public class ReportServiceImpl implements ReportService {
         if (id == null || reportDTO.getTeacherId() == null || reportDTO.getTutorId() == null || reportDTO.getStudentId() == null || reportDTO.getReportText() == null || reportDTO.getAppointmentDate() == null) {
             throw new BadFormatException("All fields are mandatory");
         }
-
-        final Report report = reportRepository.findById(id).orElseThrow(ReportNotFoundException::new);
+        System.out.println(reportDTO);
+        final Report report = reportRepository.findById(id).orElseThrow(() -> new ReportNotFoundException(id));
         report.setTeacherId(reportDTO.getTeacherId());
         report.setStudentId(reportDTO.getStudentId());
         report.setTutorId(reportDTO.getTutorId());
