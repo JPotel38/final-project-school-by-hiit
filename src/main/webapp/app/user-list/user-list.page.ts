@@ -20,8 +20,7 @@ export class UserListPage implements OnInit, OnDestroy {
   constructor(
     public readonly userService: UserService,
     public readonly router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.getUserList();
