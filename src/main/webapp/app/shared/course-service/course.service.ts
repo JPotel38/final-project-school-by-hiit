@@ -9,21 +9,22 @@ import {Time} from "@angular/common";
 })
 export class CourseService {
 
-  constructor(public readonly httpClient: HttpClient) { }
+  constructor(public readonly httpClient: HttpClient) {
+  }
 
-  getCourseList(): Observable<CourseInterface[]>{
+  getCourseList(): Observable<CourseInterface[]> {
     return this.httpClient.get<CourseInterface[]>(`/api/courses/`);
   }
 
-  getCourseDetail(courseId: number): Observable<CourseInterface>{
+  getCourseDetail(courseId: number): Observable<CourseInterface> {
     return this.httpClient.get<CourseInterface>(`/api/courses/${courseId}`)
   }
 
-  createCourse(course: { date: any; module: { id: any }; startTime: any; designation: any; endTime: any }){
+  createCourse(course: { date: any; module: { id: any }; startTime: any; designation: any; endTime: any }) {
     return this.httpClient.post(`/api/courses/`, course, {observe: "response"});
   }
 
-  updateCourse(courseId: number, designation: string, date: Date, startTime: Time, endTime: Time){
+  updateCourse(courseId: number, designation: string, date: Date, startTime: Time, endTime: Time) {
     return this.httpClient.put(`/api/courses/${courseId}`,
       {
         designation: designation,
@@ -34,7 +35,7 @@ export class CourseService {
       {observe: "response"});
   }
 
-  deleteCourse(courseId: number): Observable<any>{
-    return this.httpClient.delete(`/api/courses/${courseId}`,{observe: "response"})
+  deleteCourse(courseId: number): Observable<any> {
+    return this.httpClient.delete(`/api/courses/${courseId}`, {observe: "response"});
   }
 }

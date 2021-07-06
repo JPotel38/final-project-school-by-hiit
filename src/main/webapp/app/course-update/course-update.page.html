@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mise à jour D'un Cours</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+
+    <form [formGroup]="updateFormGroup">
+      <ion-list>
+
+        <ion-item>
+          <ion-label position="floating">Désignation</ion-label>
+          <ion-input name="designation"
+                     type="text"
+                     formControlName="designation"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Date</ion-label>
+          <ion-input name="date"
+                     type="date"
+                     formControlName="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Heure de début</ion-label>
+          <ion-input name="startTime"
+                     type="time"
+                     formControlName="startTime"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Heure de fin</ion-label>
+          <ion-input name="endTime"
+                     type="time"
+                     formControlName="endTime"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <select formControlName="module">
+            <option *ngFor="let module of moduleList | async" [value]="module.id">
+              {{ module.designation}}
+            </option>
+          </select>
+        </ion-item>
+
+      </ion-list>
+    </form>
+
+    <ion-button color="secondary"
+                [disabled]="!updateFormGroup.valid"
+                (click)="updateCourse()"> Mettre à jour
+      <ion-icon slot="end"
+                name="save-outline"></ion-icon>
+    </ion-button>
+
+
+  </ion-card>
+</ion-content>

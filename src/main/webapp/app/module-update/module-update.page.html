@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mise à jour D'un Module</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="updateFormGroup">
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-item>
+          <ion-label position="floating">Désignation</ion-label>
+          <ion-input name="designation"
+                     type="text"
+                     formControlName="designation"></ion-input>
+        </ion-item>
+        <ion-button color="secondary"
+                    (click)="updateModule()"> Mettre à jour
+          <ion-icon slot="end"
+                    name="save-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

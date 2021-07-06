@@ -60,4 +60,8 @@ export class CourseListPage implements OnInit, OnDestroy {
     await this.router.navigate(['course-list']);
   }
 
+  async goToFileList(){
+    await this.router.navigate(['file-list']);
+  }
+
 }
