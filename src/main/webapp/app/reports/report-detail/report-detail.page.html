@@ -20,7 +20,7 @@
       <ion-col>
         <ion-item>
           <ion-label>
-            Professeur:
+            Professeur: {{ (teacher$ | async)?.firstName}} {{ (teacher$ | async)?.lastName}}
           </ion-label>
         </ion-item>
       </ion-col>
@@ -29,7 +29,7 @@
       <ion-col>
         <ion-item>
           <ion-label>
-            Tuteur:
+            Tuteur: {{ (tutor$ | async)?.firstName}} {{ (tutor$ | async)?.lastName}}
           </ion-label>
         </ion-item>
       </ion-col>
@@ -38,7 +38,7 @@
       <ion-col>
         <ion-item>
           <ion-label>
-            Etudiant:
+            Etudiant: {{ (student$ | async)?.firstName}} {{ (student$ | async)?.lastName}}
           </ion-label>
         </ion-item>
       </ion-col>
