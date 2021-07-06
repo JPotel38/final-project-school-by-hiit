@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.Set;
@@ -39,6 +38,6 @@ public class UserDto {
     private String password;
 
     //@NotEmpty
-    private Set<Role> roles;
+    private Set<RoleDto> roles;
 
 }

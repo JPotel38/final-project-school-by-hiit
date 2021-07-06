@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 public enum RoleName {
 
-    ADMIN("Administrateur"),
-    STUDENT("Etudiant"),
-    TEACHER("Professeur"),
-    TUTOR("Tuteur");
+    ADMIN("Admin"),
+    STUDENT("Student"),
+    TEACHER("Teacher"),
+    TUTOR("Tutor");
 
     @JsonValue
     private final String value;

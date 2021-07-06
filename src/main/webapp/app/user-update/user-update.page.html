@@ -1,0 +1,59 @@
+<ion-content *ngIf="user">
+  <ion-grid class="ion-justify-content-start ion-align-items-center">
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-card>
+          <ion-card-header>
+            Modification de {{user?.firstName}} {{user?.lastName | uppercase}}
+          </ion-card-header>
+
+          <ion-card-content>
+            <form [formGroup]="userForm" (ngSubmit)="updateUser()">
+
+              <ion-item>
+                <ion-label position="floating">Nouvel Email</ion-label>
+                <ion-input name="email" type="email" formControlName="mail"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Nouveau Téléphone</ion-label>
+                <ion-input name="phone" type="tel" formControlName="phoneNumber"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Nouveau Mot de passe</ion-label>
+                <ion-input name="password" type="password" formControlName="password"></ion-input>
+              </ion-item>
+
+
+              <p>
+                <ion-chip *ngFor="let role of roleList" (click)="addRole(role)">
+                  <ion-icon name="add"></ion-icon>
+                  <ion-label>{{role.name}}</ion-label>
+                </ion-chip>
+              </p>
+
+              <p>
+                <ion-chip color="primary" *ngFor="let role of userRoles, let i = index" (click)="removeRole(i)">
+                  <ion-label>{{role.name}}</ion-label>
+                </ion-chip>
+              </p>
+
+
+
+              <ion-button [disabled]="!userForm.valid" color="tertiary" expand="block" type="submit">
+                <ion-icon slot="end" name="log-in-outline"></ion-icon>
+                Sauvegarder
+              </ion-button>
+
+              <ion-button (click)="cancelChange()" color="danger" expand="block">
+                <ion-icon slot="end" name="log-in-outline"></ion-icon>
+                Annuler
+              </ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

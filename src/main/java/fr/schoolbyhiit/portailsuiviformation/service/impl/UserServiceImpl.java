@@ -1,6 +1,7 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
 import fr.schoolbyhiit.portailsuiviformation.dao.RoleRepository;
+import fr.schoolbyhiit.portailsuiviformation.dto.RoleDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.Role;
 import fr.schoolbyhiit.portailsuiviformation.exception.EmailExistsException;
 import fr.schoolbyhiit.portailsuiviformation.exception.InvalidRoleException;
@@ -56,26 +57,25 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
 
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setBirthDate(userDto.getBirthDate());
         user.setMail(userDto.getMail());
         user.setPhoneNumber(userDto.getPhoneNumber());
+        user.setPassword(userDto.getPassword());
         user.setRoles(retrieveUserRoles(userDto));
         return userMapper.toUserDto(userRepository.save(user));
     }
 
     @Override
-    public void delete(Long id) {
+    public Boolean delete(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
         userRepository.delete(user);
+        return true;
     }
 
     private Set<Role> retrieveUserRoles(UserDto userDto){
         return userDto.getRoles()
             .stream()
-            .map(Role::getName)
+            .map(RoleDto::getName)
             .map(roleName -> roleRepository.findByName(roleName)
                 .orElseThrow(() -> InvalidRoleException.INSTANCE))
             .collect(Collectors.toSet());

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
 @SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class})
 public class PortailDeSuiviDeFormationApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PortailDeSuiviDeFormationApplication.class, args);
-	}
+    public static void main(String[] args) {
+            SpringApplication.run(PortailDeSuiviDeFormationApplication.class, args);
+    }
 }

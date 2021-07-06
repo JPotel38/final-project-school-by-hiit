@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Liste des Utilisateurs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <app-liste [liste]="userList"
+               (selectedUser)="gotToUserDetail($event)"
+               (deletedUser)="deleteUser($event)">
+    </app-liste>
+
+</ion-content>

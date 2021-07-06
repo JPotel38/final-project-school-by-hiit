@@ -103,12 +103,12 @@
             "assets": [
               {
                 "glob": "favicon.ico",
-                "input": "src/",
+                "input": "src/main/webapp/",
                 "output": "/"
               },
               {
                 "glob": "**/*",
-                "input": "src/assets",
+                "input": "src/main/webapp/assets",
                 "output": "/assets"
               }
             ]
@@ -124,8 +124,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
+              "src/main/webapp/**/*.ts",
+              "src/main/webapp/**/*.html"
             ]
           }
         },

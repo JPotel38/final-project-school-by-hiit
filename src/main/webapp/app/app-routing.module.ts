@@ -4,13 +4,30 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  },
+  {
+    path: 'user-list',
+    loadChildren: () => import('./user-list/user-list.module').then( m => m.UserListPageModule)
+  },
+  {
+    path: 'user-detail/:id',
+    loadChildren: () => import('./user-detail/user-detail.module').then( m => m.UserDetailPageModule)
+  },
+  {
+    path: 'create-user',
+    loadChildren: () => import('./create-user/create-user.module').then( m => m.CreateUserPageModule)
+  },
+  {
+    path: 'user-update/:id',
+    loadChildren: () => import('./user-update/user-update.module').then( m => m.UserUpdatePageModule)
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'user-list',
     pathMatch: 'full'
   },
+
 ];
 
 @NgModule({
