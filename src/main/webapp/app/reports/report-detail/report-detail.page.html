@@ -4,17 +4,50 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="(report$ | async) as report">
-{{report?.reportText }}
+<ion-content>
+  <ion-row>
+    <ion-col class="ion-margin-vertical">
+      <ion-text>
+        {{report.reportText }}
+      </ion-text>
+    </ion-col>
+  </ion-row>
   <ion-list>
-    <ion-item>
-      <ion-label>Prof : {{report?.teacherId.lastName}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Tuteur : {{report?.tutorId.lastName}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Eleve : {{report?.studentId.lastName}}</ion-label>
-    </ion-item>
+    <ion-list-header>
+      <ion-label>Personnes présentes au rendez-vous :</ion-label>
+    </ion-list-header>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            Professeur:
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            Tuteur:
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            Etudiant:
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
   </ion-list>
+  <ion-row *ngIf="report.validated === 'Not validated'" [formGroup]="validatedForm">
+    <ion-label>Valider le rapport de RDV ?</ion-label>
+    <ion-toggle (ionChange)="isValidated($event)" color="success"></ion-toggle>
+    <ion-button (click)="Validate()">Valider</ion-button>
+  </ion-row>
+  <ion-button (click)="goBack()">Retour</ion-button>
 </ion-content>
