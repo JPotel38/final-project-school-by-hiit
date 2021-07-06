@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output,EventEmitter} from '@angular/core';
 import {FileInterface} from "../../shared/file-service/File.interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'file-list',
@@ -12,14 +13,25 @@ export class ListComponent implements OnInit {
   public fileList: FileInterface[];
 
   @Output()
-  deleteFileEmitter= new EventEmitter<number>();
+  selectedFile= new EventEmitter<number>();
 
-  constructor() { }
+  @Output()
+  deletedFile= new EventEmitter<number>();
+
+  constructor(public readonly router: Router) { }
 
   ngOnInit() {}
 
   deleteFile(fileId: number){
-    this.deleteFileEmitter.emit(fileId);
+    this.deletedFile.emit(fileId);
+  }
+
+  getFileDetail(fileId: number){
+    this.selectedFile.emit(fileId);
+  }
+
+  async fileCreation(){
+    await this.router.navigate(['file-creation'])
   }
 
 }

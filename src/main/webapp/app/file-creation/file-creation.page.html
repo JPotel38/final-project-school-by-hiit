@@ -1,29 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button color="secondary">
-        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-      </ion-back-button>
-    </ion-buttons>
-    <ion-title>Création D'un Nouveau fichier</ion-title>
+    <ion-title>Création D'un Nouveau Fichier</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
+
+
     <form [formGroup]="createFormGroup">
       <ion-list>
+
+
         <ion-item>
           <ion-label position="floating">Désignation</ion-label>
           <ion-input name="designation"
                      type="text"
                      formControlName="designation"></ion-input>
         </ion-item>
+
         <ion-item>
           <ion-label position="floating">Date de création</ion-label>
           <ion-input name="date"
                      type="datetime"
-                     formControlName="date"></ion-input>
+                     formControlName="creationDate"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">lien de téléchargement</ion-label>
@@ -31,13 +31,27 @@
                      type="text"
                      formControlName="link"></ion-input>
         </ion-item>
+
+        <ion-item>
+          <select formControlName="course">
+            <option *ngFor="let course of courseList | async" [value]="course.id">
+              {{ course.designation}}
+            </option>
+          </select>
+        </ion-item>
+
       </ion-list>
     </form>
-    <ion-button color="secondary"
+
+    <ion-button color="primary"
                 [disabled]="!createFormGroup.valid"
-                (click)="createFile()"> Enregistrer
+                (click)="createFile()">
+      Enregistrer
       <ion-icon slot="end"
                 name="save-outline"></ion-icon>
     </ion-button>
+
+
+
   </ion-card>
 </ion-content>

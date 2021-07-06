@@ -19,17 +19,11 @@ export class FileService {
     return this.httpClient.get<FileInterface>(`/api/files/${fileId}`);
   }
 
-  createFile(designation: string, creationDate: IonDatetime, link: string): Observable<any>{
-    return this.httpClient.post(`/api/files/`,
-      {
-        designation: designation,
-        creationDate: creationDate,
-        link: link
-      },
-      {observe: "response"});
+  createFile(file: {designation: any; creationDate: any; link: string; course:{ id: any}}){
+    return this.httpClient.post(`/api/files/`, file, {observe: "response"});
   }
 
-  updateFile(fileId: number, designation: string, creationDate: IonDatetime, link: string): Observable<any>{
+  updateFile(fileId: number, designation: string, creationDate: IonDatetime, link: string){
     return this.httpClient.put(`/api/files/${fileId}`,
       {
         designation: designation,

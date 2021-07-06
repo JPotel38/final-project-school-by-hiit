@@ -1,11 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {CourseService} from "../shared/course-service/course.service";
 import {Router} from "@angular/router";
 import {AlertController} from "@ionic/angular";
-import {Time} from "@angular/common";
 import {HttpResponse} from "@angular/common/http";
+import {ModuleService} from "../shared/module-service/module.service";
+import {ModuleInterface} from "../shared/module-service/Module.interface";
+import {CourseInterface} from "../shared/course-service/Course.interface";
 
 @Component({
   selector: 'app-course-creation',
@@ -16,27 +18,36 @@ export class CourseCreationPage implements OnInit, OnDestroy {
 
   public createFormGroup: FormGroup;
   public createCourseSubscription$: Subscription;
+  public moduleList: Observable<ModuleInterface[]>;
+  public course: CourseInterface;
 
   constructor(public readonly courseService: CourseService,
               public readonly router: Router,
-              public readonly alertCtrl: AlertController) { }
+              public readonly alertCtrl: AlertController,
+              public readonly moduleService: ModuleService) { }
 
   ngOnInit() {
+    this.moduleList = this.moduleService.getModuleList();
     this.createFormGroup = new FormGroup({
       designation: new FormControl('',[Validators.required]),
       date: new FormControl('', [Validators.required]),
       startTime: new FormControl('', [Validators.required]),
-      endTime: new FormControl('', [Validators.required])
+      endTime: new FormControl('', [Validators.required]),
+      module: new FormControl('')
     });
   }
 
   createCourse(){
-    const  createFormValue =  this.createFormGroup.value as CreateFormValue;
-
-    this.createCourseSubscription$ = this.courseService.createCourse(createFormValue.designation,
-      createFormValue.date,
-      createFormValue.startTime,
-      createFormValue.endTime)
+    this.createCourseSubscription$ = this.courseService.createCourse({
+      designation:  this.createFormGroup.value.designation,
+      date: this.createFormGroup.value.date,
+      endTime: this.createFormGroup.value.endTime,
+      startTime: this.createFormGroup.value.startTime,
+      module: {
+       id: this.createFormGroup.value.module
+      }
+    }
+  )
       .subscribe(async (response: HttpResponse<any>)=>{
         if(response.status === 201 && response.statusText === 'OK'){
           const alert = await this.alertCtrl.create({
@@ -50,15 +61,8 @@ export class CourseCreationPage implements OnInit, OnDestroy {
       }
     )
   }
-
   ngOnDestroy() {
     this.createCourseSubscription$?.unsubscribe();
   }
 }
 
-interface CreateFormValue {
-  designation: string,
-  date: Date,
-  startTime: Time,
-  endTime: Time
-}

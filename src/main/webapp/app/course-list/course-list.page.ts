@@ -13,7 +13,7 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class CourseListPage implements OnInit, OnDestroy {
 
-  public courseList$: Observable<CourseInterface>;
+  public courseList$: Observable<CourseInterface[]>;
   public deleteCourseSubscription$: Subscription;
 
   constructor(public readonly courseService: CourseService,
@@ -21,7 +21,7 @@ export class CourseListPage implements OnInit, OnDestroy {
               public readonly alertCtrl: AlertController) { }
 
   ngOnInit() {
-
+    this.getCourseList();
   }
 
   getCourseList(){
@@ -31,7 +31,7 @@ export class CourseListPage implements OnInit, OnDestroy {
   deleteCourse(courseId: number){
     this.deleteCourseSubscription$= this.courseService.deleteCourse(courseId).subscribe(
       async (response: HttpResponse<any>)=>{
-        if (response.status === 204 && response.statusText === 'OK'){
+        if (response.status === 204){
           const alert= await this.alertCtrl.create({
             header: 'Alert',
             message: `Le cours ${courseId} a bien été supprimé`,
@@ -50,6 +50,14 @@ export class CourseListPage implements OnInit, OnDestroy {
 
   async courseCreation(){
     await this.router.navigate(['course-creation']);
+  }
+
+  async goToCourseDetail(id: number) {
+    await this.router.navigate(['course-detail', id]);
+  }
+
+  async goToCourseList() {
+    await this.router.navigate(['course-list']);
   }
 
 }
