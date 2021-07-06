@@ -1,14 +1,25 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Liste des modules</ion-title>
-    <ion-button slot="end" (click)="moduleCreation()">
+    <ion-button slot="start" (click)="moduleCreation()">
       <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <module-list [moduleList]="(moduleList$ | async)">
 
-  </module-list>
-</ion-content>
+
+  <ion-content *ngFor="let module of (moduleList$ | async)">
+
+      {{module.designation}}
+      <ion-buttons>
+        <ion-button slot="start" (click)="goToModuleDetail(module.id)">
+          <ion-icon slot="icon-only" name="search-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button slot="start" (click)="deleteModule(module.id)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+  </ion-content>
+

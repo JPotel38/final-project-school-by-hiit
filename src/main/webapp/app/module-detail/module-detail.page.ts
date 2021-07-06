@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModuleInterface} from "../shared/module-service/Module.interface";
 import {ModuleService} from "../shared/module-service/module.service";
 
@@ -12,16 +12,21 @@ import {ModuleService} from "../shared/module-service/module.service";
 })
 export class ModuleDetailPage implements OnInit {
 
-  moduleId: number;
-  moduleDetail$: Observable<ModuleInterface>
+  public moduleId: number;
+  public moduleDetail$: Observable<ModuleInterface>
 
   constructor(public readonly activatedRoute: ActivatedRoute,
-              public readonly moduleService: ModuleService) { }
+              public readonly moduleService: ModuleService,
+              public readonly router: Router) { }
 
   ngOnInit() {
     this.moduleId = this.activatedRoute.snapshot.params.id;
     this.moduleDetail$ = this.moduleService.getModuleDetail(this.moduleId);
 
+  }
+
+  async goToCourseList(){
+    await this.router.navigate(['course-list']);
   }
 
 }

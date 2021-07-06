@@ -16,6 +16,7 @@ import {ListComponent} from "./list/list.component";
     IonicModule,
     ModuleListPageRoutingModule
   ],
-  declarations: [ModuleListPage,ListComponent]
+  declarations: [ModuleListPage,ListComponent],
+
 })
 export class ModuleListPageModule {}

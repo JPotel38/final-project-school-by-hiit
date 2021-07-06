@@ -15,8 +15,7 @@ import {CourseListPageRoutingModule} from "../course-list/course-list-routing.mo
     CommonModule,
     FormsModule,
     IonicModule,
-    FileListPageRoutingModule,
-    CourseListPageRoutingModule
+    FileListPageRoutingModule
   ],
   declarations: [FileListPage,ListComponent]
 })

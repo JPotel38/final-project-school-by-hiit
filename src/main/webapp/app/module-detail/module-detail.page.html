@@ -5,11 +5,15 @@
 </ion-header>
 
 <ion-content *ngIf="moduleDetail$ | async as moduleDetail">
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>{{ moduleDetail.designation}}</ion-card-title>
     </ion-card-header>
   </ion-card>
+  <ion-button slot="start" (click)="goToCourseList()">
+    voir la liste des cours de ce module
+  </ion-button>
 
 </ion-content>
 

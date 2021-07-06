@@ -1,14 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Liste des cours</ion-title>
-    <ion-button slot="end" (click)="courseCreation()">
+    <ion-button slot="start" (click)="courseCreation()">
       <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <course-list [courseList]="(courseList$ | async)">
-
-  </course-list>
+<ion-content *ngFor="let course of (courseList$ | async)">
+  <ion-card-content>
+    {{course.designation}} - {{course.date}}
+    <ion-buttons>
+      <ion-button slot="start" (click)="goToCourseDetail(course.id)">
+        <ion-icon slot="icon-only" name="search-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button slot="start" (click)="deleteCourse(course.id)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-card-content>
 </ion-content>

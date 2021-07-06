@@ -41,16 +41,23 @@ export class ModuleListPage implements OnInit, OnDestroy {
           await alert.present();
         }
       }
-    )
+    );
+    this.getModuleList();
   }
 
   ngOnDestroy() {
     this.deleteModuleSubscription$?.unsubscribe();
   }
 
-   async moduleCreation() {
+  async moduleCreation(){
     await this.router.navigate(['module-creation']);
-   }
+  }
+
+  async goToModuleDetail(id: number) {
+    await this.router.navigate(['module-detail', id]);
+  }
+
+
 
 
 }

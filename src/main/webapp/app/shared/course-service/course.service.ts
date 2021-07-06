@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CourseInterface} from "./Course.interface";
@@ -11,27 +11,19 @@ export class CourseService {
 
   constructor(public readonly httpClient: HttpClient) { }
 
-  getCourseList(): Observable<CourseInterface>{
-    return this.httpClient.get<CourseInterface>(`/api/courses/`);
+  getCourseList(): Observable<CourseInterface[]>{
+    return this.httpClient.get<CourseInterface[]>(`/api/courses/`);
   }
 
   getCourseDetail(courseId: number): Observable<CourseInterface>{
     return this.httpClient.get<CourseInterface>(`/api/courses/${courseId}`)
   }
 
-  createCourse(designation: string, date: Date, startTime: Time, endTime: Time): Observable<any>{
-    return this.httpClient.post(`/api/courses/`,
-      {
-        designation: designation,
-        date: date,
-        startTime: startTime,
-        endTime: endTime
-      },
-      {observe: "response"});
-
+  createCourse(course: { date: any; module: { id: any }; startTime: any; designation: any; endTime: any }){
+    return this.httpClient.post(`/api/courses/`, course, {observe: "response"});
   }
 
-  updateCourse(courseId: number, designation: string, date: Date, startTime: Time, endTime: Time): Observable<any>{
+  updateCourse(courseId: number, designation: string, date: Date, startTime: Time, endTime: Time){
     return this.httpClient.put(`/api/courses/${courseId}`,
       {
         designation: designation,

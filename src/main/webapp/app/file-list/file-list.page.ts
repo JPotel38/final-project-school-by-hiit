@@ -4,6 +4,7 @@ import {FileInterface} from "../shared/file-service/File.interface";
 import {Router} from "@angular/router";
 import {AlertController} from "@ionic/angular";
 import {HttpResponse} from "@angular/common/http";
+import {FileService} from "../shared/file-service/file.service";
 
 @Component({
   selector: 'app-file-list',
@@ -12,14 +13,15 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class FileListPage implements OnInit, OnDestroy {
 
-  public fileList$: Observable<FileInterface>;
+  public fileList$: Observable<FileInterface[]>;
   public deleteFileSubscription$: Subscription;
 
-  constructor(public readonly fileService,
+  constructor(public readonly fileService: FileService,
               public readonly router: Router,
               public readonly alertCtrl: AlertController) { }
 
   ngOnInit() {
+    this.getFileList();
   }
 
   getFileList(){

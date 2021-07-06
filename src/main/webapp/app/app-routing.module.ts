@@ -75,12 +75,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'module-detail',
+    path: 'module-detail/:id',
     loadChildren: () => import('./module-detail/module-detail.module').then( m => m.ModuleDetailPageModule)
-  },
-  {
-    path: 'module-list',
-    loadChildren: () => import('./module-list/module-list.module').then( m => m.ModuleListPageModule)
   },
   {
     path: 'module-list',
@@ -95,7 +91,7 @@ const routes: Routes = [
     loadChildren: () => import('./course-list/course-list.module').then( m => m.CourseListPageModule)
   },
   {
-    path: 'course-detail',
+    path: 'course-detail/:id',
     loadChildren: () => import('./course-detail/course-detail.module').then( m => m.CourseDetailPageModule)
   },
   {
@@ -107,7 +103,7 @@ const routes: Routes = [
     loadChildren: () => import('./file-list/file-list.module').then( m => m.FileListPageModule)
   },
   {
-    path: 'file-detail',
+    path: 'file-detail/:id',
     loadChildren: () => import('./file-detail/file-detail.module').then( m => m.FileDetailPageModule)
   },
   {

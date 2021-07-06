@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { ModuleDetailPageRoutingModule } from './module-detail-routing.module';
+import {ModuleDetailPageRoutingModule} from './module-detail-routing.module';
 
-import { ModuleDetailPage } from './module-detail.page';
-import {ListComponent} from "../course-list/list/list.component";
+import {ModuleDetailPage} from './module-detail.page';
 
 @NgModule({
   imports: [
@@ -16,6 +15,6 @@ import {ListComponent} from "../course-list/list/list.component";
     IonicModule,
     ModuleDetailPageRoutingModule
   ],
-  declarations: [ModuleDetailPage,ListComponent]
+  declarations: [ModuleDetailPage]
 })
 export class ModuleDetailPageModule {}

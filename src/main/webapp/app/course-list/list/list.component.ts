@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {CourseInterface} from "../../shared/course-service/Course.interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'course-list',
@@ -12,14 +13,26 @@ export class ListComponent implements OnInit {
   public courseList: CourseInterface[];
 
   @Output()
-  deleteCourseEmitter= new EventEmitter<number>();
+  selectedCourse= new EventEmitter<number>();
 
-  constructor() { }
+  @Output()
+  deletedCourse= new EventEmitter<number>();
+
+
+  constructor(public readonly router: Router) { }
 
   ngOnInit() {}
 
   deleteCourse(courseId: number){
-    this.deleteCourseEmitter.emit(courseId);
+    this.deletedCourse.emit(courseId);
+  }
+
+  getCourseDetail(courseId: number){
+    this.selectedCourse.emit(courseId);
+  }
+
+  async courseCreation(){
+    await this.router.navigate(['course-creation']);
   }
 
 }

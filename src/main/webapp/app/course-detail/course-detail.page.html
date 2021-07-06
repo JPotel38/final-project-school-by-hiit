@@ -12,6 +12,14 @@
     <ion-card-content>
       Créneau Horaire : {{courseDetail.startTime}} - {{courseDetail.endTime}}
     </ion-card-content>
+    <ion-button slot="start"
+                (click)="goToCourseUpdate(courseDetail.id)">
+      <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+    </ion-button>
   </ion-card>
+
+  <ion-button slot="start" (click)="goToFileList()">
+    voir la liste des fichiers de ce module
+  </ion-button>
 
 </ion-content>
