@@ -34,6 +34,11 @@ public class CourseController {
         return courseService.findAll();
     }
 
+    @GetMapping("module/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CourseDto> getCoursesByModuleId(@PathVariable Long id){
+        return courseService.getCoursesByModuleId(id); }
+
     @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

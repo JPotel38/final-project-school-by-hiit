@@ -17,5 +17,7 @@ public interface FileService {
 
     void delete(Long id);
 
+    List<FileDto>getFilesByCourseId(Long id);
+
     List<FileDto> getFilesByCourse(Course course);
 }
