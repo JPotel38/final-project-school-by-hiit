@@ -39,12 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-//            .addFilter(new JwtUsernameAndPasswordAuthentication(authenticationManager(), jwtConfig, secretKey))
-//            .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthentication.class)
+            .addFilter(new JwtUsernameAndPasswordAuthentication(authenticationManager(), jwtConfig, secretKey))
+            .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthentication.class)
             .authorizeRequests()
-            .antMatchers("/", "index", "image/*", "js/*").permitAll();
-//            .anyRequest()
-//            .authenticated();
+            .antMatchers("/", "index", "image/*", "js/*").permitAll()
+            .anyRequest()
+            .authenticated();
     }
 
     @Bean
