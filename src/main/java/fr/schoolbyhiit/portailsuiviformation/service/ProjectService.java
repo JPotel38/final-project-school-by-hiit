@@ -1,8 +1,6 @@
 package fr.schoolbyhiit.portailsuiviformation.service;
 
 import fr.schoolbyhiit.portailsuiviformation.dto.ProjectDto;
-import fr.schoolbyhiit.portailsuiviformation.dto.UserDto;
-import fr.schoolbyhiit.portailsuiviformation.model.ProjectStatus;
 
 import java.util.List;
 
@@ -11,9 +9,9 @@ public interface ProjectService {
 
     ProjectDto create(ProjectDto projectDto);
 
-    ProjectDto updateStatus(Long id, ProjectStatus projectStatus);
+    ProjectDto updateProject(Long id,ProjectDto projectDto);
 
-    ProjectDto addScore(Long id, int score);
+    ProjectDto getProject(Long id);
 
     void delete(Long id);
 }
