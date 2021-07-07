@@ -23,7 +23,7 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAuthority('user:read')")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<UserDto> getUsers() {

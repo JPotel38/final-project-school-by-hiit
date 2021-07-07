@@ -10,6 +10,14 @@ export class StudentPipe implements PipeTransform {
     if (!users) {
       return users;
     }
-    return users.filter(user => user.roles[0].name === 'Etudiant');
+    return users.filter(
+      user => {
+        let roleNames= [];
+        user.roles.forEach(
+          role => roleNames.push(role.name)
+        )
+        return roleNames.includes('Student')
+      }
+  );
   }
 }

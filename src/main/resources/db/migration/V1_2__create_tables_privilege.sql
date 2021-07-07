@@ -1,9 +1,5 @@
 USE `portail-suivi-formation`;
 
--- ajout colonne password dans la table des utilisateurs
-ALTER TABLE users
-    ADD COLUMN  `password` VARCHAR(50) NOT NULL AFTER phone_number;
-
 -- tables des privileges
 CREATE TABLE IF NOT EXISTS privileges (
     `privilege_id` INT NOT NULL AUTO_INCREMENT,
@@ -31,3 +27,4 @@ INSERT INTO `roles_privileges` (`role_id`, `privilege_id`) VALUES (1, 1);
 INSERT INTO `roles_privileges` (`role_id`, `privilege_id`) VALUES (1, 2);
 INSERT INTO `roles_privileges` (`role_id`, `privilege_id`) VALUES (1, 3);
 INSERT INTO `roles_privileges` (`role_id`, `privilege_id`) VALUES (1, 4);
+INSERT INTO `roles_privileges` (`role_id`, `privilege_id`) VALUES (2, 1);

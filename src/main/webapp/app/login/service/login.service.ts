@@ -58,4 +58,18 @@ export class LoginService {
     return authorityList.includes("ROLE_ADMIN")
   }
 
+  isTeacher() {
+    let token = localStorage.getItem('token');
+    let authorityList = [];
+    if (!!token) {
+      let decoded = jwtDecode(token);
+      let authoritiesObj = decoded['authorities'];
+
+      authoritiesObj.forEach(
+        authority => authorityList.push(authority.authority)
+      )
+    }
+    return authorityList.includes("ROLE_TEACHER")
+  }
+
 }

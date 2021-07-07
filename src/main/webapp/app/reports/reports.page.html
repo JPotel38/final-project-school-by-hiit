@@ -20,7 +20,7 @@
     </ion-row>
   </ion-grid>
   <ion-button (click)="goBack()">Retour</ion-button>
-  <ion-button (click)="goToReportCreation()">
+  <ion-button *ngIf="isAdminOrTeacher" (click)="goToReportCreation()">
     <ion-icon name="pencil-outline"></ion-icon>
     <ion-label>Rédiger un rapport</ion-label>
   </ion-button>

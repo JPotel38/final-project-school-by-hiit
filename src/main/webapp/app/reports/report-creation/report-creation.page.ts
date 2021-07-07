@@ -34,6 +34,9 @@ export class ReportCreationPage implements OnInit {
 
   ngOnInit() {
     this.users$ = this.userService.getUserList();
+    (this.users$.subscribe(
+      (res) => console.log(res)
+    ))
   }
 
   validateReport() {
