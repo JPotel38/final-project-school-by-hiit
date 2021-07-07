@@ -1,12 +1,14 @@
 package fr.schoolbyhiit.portailsuiviformation.service.impl;
 
 import fr.schoolbyhiit.portailsuiviformation.dao.CourseRepository;
+import fr.schoolbyhiit.portailsuiviformation.dao.ModuleRepository;
 import fr.schoolbyhiit.portailsuiviformation.dto.CourseDto;
 import fr.schoolbyhiit.portailsuiviformation.dto.FileDto;
 import fr.schoolbyhiit.portailsuiviformation.entity.Course;
 import fr.schoolbyhiit.portailsuiviformation.entity.Module;
 import fr.schoolbyhiit.portailsuiviformation.exception.BadFormatException;
 import fr.schoolbyhiit.portailsuiviformation.exception.CourseNotFoundException;
+import fr.schoolbyhiit.portailsuiviformation.exception.ModuleNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.mapper.CourseMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.CourseService;
 import fr.schoolbyhiit.portailsuiviformation.service.FileService;
@@ -23,11 +25,13 @@ public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
     private final FileService fileService;
+    private final ModuleRepository moduleRepository;
 
-    public CourseServiceImpl(CourseRepository courseRepository, CourseMapper courseMapper, FileService fileService) {
+    public CourseServiceImpl(CourseRepository courseRepository, CourseMapper courseMapper, FileService fileService, ModuleRepository moduleRepository) {
         this.courseRepository = courseRepository;
         this.courseMapper = courseMapper;
         this.fileService = fileService;
+        this.moduleRepository = moduleRepository;
     }
 
     @Override
@@ -68,6 +72,12 @@ public class CourseServiceImpl implements CourseService {
         Course course = courseRepository.findById(id).orElseThrow(()->new CourseNotFoundException(id));
         deleteFileByCourseId(id);
         courseRepository.delete(course);
+    }
+
+    @Override
+    public List<CourseDto> getCoursesByModuleId(Long id) {
+        Module module = moduleRepository.findById(id).orElseThrow(() -> new ModuleNotFoundException(id));
+        return courseMapper.toCourseDtoList(courseRepository.getCoursesByModule(module));
     }
 
 

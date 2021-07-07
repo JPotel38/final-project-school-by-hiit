@@ -30,6 +30,11 @@ public class CourseController {
         return courseService.findAll();
     }
 
+    @GetMapping("module/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CourseDto> getCoursesByModuleId(@PathVariable Long id){
+        return courseService.getCoursesByModuleId(id); }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CourseDto create(@RequestBody @Valid CourseDto courseDto){

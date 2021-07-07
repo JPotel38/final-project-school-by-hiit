@@ -30,6 +30,12 @@ public class FileController {
         return fileService.findAll();
     }
 
+    @GetMapping("course/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<FileDto> getFilesByCourseId(@PathVariable Long id) {
+        return fileService.getFilesByCourseId(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public FileDto create(@RequestBody @Valid FileDto fileDto){

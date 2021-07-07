@@ -17,5 +17,7 @@ public interface CourseService {
 
     void delete(Long id);
 
+    List<CourseDto> getCoursesByModuleId(Long id);
+
     List<CourseDto> getCoursesByModule(Module module);
 }
