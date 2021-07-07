@@ -19,34 +19,34 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @PreAuthorize("hasAuthority('user:read')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')")
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
     public List<ProjectDto> getAll() {
             return projectService.findAll();
     }
 
-    @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ProjectDto create(@RequestBody ProjectDto projectDto) {
             return projectService.create(projectDto);
     }
 
-    @PreAuthorize("hasAuthority('user:read')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER', 'STUDENT')")
     @GetMapping("/{id}")
     public ProjectDto getProject(@PathVariable Long id) {
             return projectService.getProject(id);
     }
 
 
-    @PreAuthorize("hasAuthority('user:update')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
     @PutMapping(value="/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProjectDto updateProject(@PathVariable Long id, @RequestBody ProjectDto projectDto) {
         return projectService.updateProject(id, projectDto);
     }
 
-    @PreAuthorize("hasAuthority('user:delete')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable long id) {
