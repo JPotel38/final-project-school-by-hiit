@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/api/project")
+@RequestMapping("api/project")
 public class ProjectController {
 
     private ProjectService projectService;
@@ -19,33 +19,31 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @PreAuthorize("hasAnyRole('TEACHER')")
+    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
     @GetMapping("")
     public List<ProjectDto> getAll() {
             return projectService.findAll();
     }
-    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
+
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public ProjectDto create(@RequestBody ProjectDto projectDto) {
             return projectService.create(projectDto);
     }
+    @GetMapping("/{id}")
+    public ProjectDto getProject(@PathVariable Long id) {
+            return projectService.getProject(id);
+    }
 
-    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
+
+    @PreAuthorize("hasAuthority('user:update')")
     @PutMapping(value="/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ProjectDto updateStatus(@PathVariable Long id, @RequestBody ProjectStatus projectStatus) {
-        return projectService.updateStatus(id, projectStatus);
+    public ProjectDto updateProject(@PathVariable Long id, @RequestBody ProjectDto projectDto) {
+        return projectService.updateProject(id, projectDto);
     }
 
-    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
-    @PostMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ProjectDto addScore(@PathVariable Long id, @RequestBody int score) {
-        return projectService.addScore(id, score);
-    }
-
-    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
+    @PreAuthorize("hasAuthority('user:delete')")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable long id) {
