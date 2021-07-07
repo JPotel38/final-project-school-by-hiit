@@ -1,6 +1,17 @@
 <ion-tabs>
   <ion-tab-bar slot="top">
-    <ion-tab-button tab="schedule" (click)="eventFunction()">
+
+    <ion-tab-button tab="home" (click)="eventFunction()">
+      <ion-icon name="home" ></ion-icon>
+      <ion-label>Accueil</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button *ngIf="isAdmin" tab="user-list" (click)="eventFunction()">
+      <ion-icon name="people" ></ion-icon>
+      <ion-label>Utilisateurs</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="schedule-view" (click)="eventFunction()">
       <ion-icon name="calendar" ></ion-icon>
       <ion-label>Emploi du temps</ion-label>
     </ion-tab-button>
@@ -20,9 +31,14 @@
       <ion-label>Modules</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="Logout">
+    <ion-tab-button (click)="logout()" tab="logout" *ngIf="isLogged">
       <ion-icon name="log-out"></ion-icon>
       <ion-label>Déconnexion</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="login()" tab="login" *ngIf="!isLogged">
+      <ion-icon name="log-in"></ion-icon>
+      <ion-label>Connexion</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

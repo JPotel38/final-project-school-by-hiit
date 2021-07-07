@@ -37,7 +37,9 @@ export class LoginPage implements OnInit {
     this.isConnected$ = isConnected.subscribe(
       async isConnected => {
          if(isConnected) {
-            await this.router.navigate(['home']);
+           this.router.navigate(['home']).then(
+              () => window.location.reload()
+            );
           } else {
             const alert = await this.alertCtrl.create({
             header: 'Erreur',
