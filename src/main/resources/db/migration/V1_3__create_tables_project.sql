@@ -14,8 +14,3 @@ CREATE TABLE users_projects (
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
-INSERT INTO projects (`name_project`,`status_project`,`score_project`)  VALUES ('TP-1', 'IN_PROGRESS', 15);
-INSERT INTO projects (`name_project`,`status_project`,`score_project`)  VALUES ('TP-2', 'DELIVERED', 10);
-INSERT INTO projects (`name_project`,`status_project`,`score_project`)  VALUES ('TP-3', 'IN_PROGRESS', 6);
-
-INSERT INTO users_projects (`user_id`, `project_id`) VALUES (1,1);
