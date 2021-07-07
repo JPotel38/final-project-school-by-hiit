@@ -32,4 +32,8 @@ export class LoginService {
     catchError(() => of(false))
     );
   }
+
+  getAuthorizationToken() {
+    return localStorage.getItem('token')
+  }
 }

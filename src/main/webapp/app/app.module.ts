@@ -12,8 +12,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {DatePipe} from "@angular/common";
+import {LoginInterceptor} from "./shared/interceptors/login.interceptor";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -34,6 +35,7 @@ FullCalendarModule.registerPlugins([
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true },
     DatePipe
   ],
   bootstrap: [AppComponent],
