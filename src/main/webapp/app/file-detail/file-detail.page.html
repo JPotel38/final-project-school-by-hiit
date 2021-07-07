@@ -9,10 +9,11 @@
     <ion-card-header>
       <ion-card-title>{{ fileDetail.designation}} - {{fileDetail.creationDate}}</ion-card-title>
     </ion-card-header>
-    <ion-button slot="start"
-                (click)="goToFileUpdate(fileDetail.id)">
-      <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
-    </ion-button>
+    <ion-card-content>
+      <ion-button slot="start"
+                  (click)="goToFileUpdate(fileDetail.id)">
+        <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+      </ion-button>
+    </ion-card-content>
   </ion-card>
-
 </ion-content>

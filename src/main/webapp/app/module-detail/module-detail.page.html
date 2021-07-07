@@ -15,6 +15,17 @@
                   (click)="goToModuleUpdate(moduleDetail.id)">
         <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
       </ion-button>
+      <ion-button slot="end" (click)="getCoursesByModule(moduleDetail.id)">
+        voir la liste des cours de ce module
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content *ngFor="let course of (courseList$ | async)">
+        {{course.designation}}  {{course.date}}  {{course.startTime}}-{{course.endTime}}
+      <ion-button slot="start" (click)="goToCourseDetail(course.id)">
+        <ion-icon slot="icon-only" name="search-circle-outline"></ion-icon>
+      </ion-button>
     </ion-card-content>
   </ion-card>
 

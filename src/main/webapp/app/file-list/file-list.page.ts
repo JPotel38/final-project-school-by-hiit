@@ -41,7 +41,8 @@ export class FileListPage implements OnInit, OnDestroy {
           await alert.present();
         }
       }
-    )
+    );
+    this.getFileList();
   }
 
   ngOnDestroy(){

@@ -15,6 +15,10 @@ export class FileService {
     return this.httpClient.get<FileInterface[]>(`/api/files/`);
   }
 
+  getFileListByCourse(courseId : number): Observable<FileInterface[]>{
+    return this.httpClient.get<FileInterface[]>(`/api/files/course/${courseId}`);
+  }
+
   getFileDetail(fileId: number): Observable<FileInterface>{
     return this.httpClient.get<FileInterface>(`/api/files/${fileId}`);
   }
@@ -23,12 +27,13 @@ export class FileService {
     return this.httpClient.post(`/api/files/`, file, {observe: "response"});
   }
 
-  updateFile(fileId: number, designation: string, creationDate: IonDatetime, link: string){
+  updateFile(fileId: number, designation: string, creationDate: IonDatetime, link: string, course: { id: any}){
     return this.httpClient.put(`/api/files/${fileId}`,
       {
         designation: designation,
         creationDate: creationDate,
-        link: link
+        link: link,
+        course: course
       },
       {observe: "response"});
   }

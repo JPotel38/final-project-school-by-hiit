@@ -9,12 +9,12 @@ import {ModuleDetailPageRoutingModule} from './module-detail-routing.module';
 import {ModuleDetailPage} from './module-detail.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ModuleDetailPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ModuleDetailPageRoutingModule
+    ],
   declarations: [ModuleDetailPage]
 })
 export class ModuleDetailPageModule {}

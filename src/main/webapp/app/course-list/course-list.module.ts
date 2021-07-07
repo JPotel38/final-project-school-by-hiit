@@ -11,12 +11,15 @@ import {ListComponent} from "./list/list.component";
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    CourseListPageRoutingModule
-  ],
-  declarations: [CourseListPage,ListComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        CourseListPageRoutingModule
+    ],
+    exports: [
+        ListComponent
+    ],
+    declarations: [CourseListPage, ListComponent]
 })
 export class CourseListPageModule {}
