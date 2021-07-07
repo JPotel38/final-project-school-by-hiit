@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
     this.isConnected$ = isConnected.subscribe(
       async isConnected => {
          if(isConnected) {
-            this.router.navigate(['home']);
+            await this.router.navigate(['home']);
           } else {
             const alert = await this.alertCtrl.create({
             header: 'Erreur',
@@ -48,7 +48,6 @@ export class LoginPage implements OnInit {
             await alert.present();
           }
       }
-
     );
   }
 

@@ -33,7 +33,3 @@ export class LoginService {
     );
   }
 }
-
-// map((resp) => ({
-//               token: Number.parseInt(resp.headers.get('Authorization'),
-//             })),

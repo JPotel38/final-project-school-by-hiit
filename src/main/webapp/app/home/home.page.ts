@@ -1,24 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy{
-  userSubscription: Subscription;
+export class HomePage {
 
-  constructor(
-//   public usersService : UsersService
-  ) {}
+  constructor() {}
 
-  ngOnInit() {
-//    this.userSubscription = this.usersService.getUsersFromBack().subscribe((data: User[]) =>
-//   console.log(data))
-  }
-
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe();
-  }
 }
