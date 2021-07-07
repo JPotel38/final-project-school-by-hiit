@@ -10,7 +10,6 @@
       <ion-card *ngFor="let project of listProject|async;let id=index" (click)="goToDetailPage(id+1)">
         <ion-item>
           <ion-icon name="close-outline" color="danger" slot="end" (click)="$event.stopPropagation();deleteProject(id+1)"></ion-icon>
-          <ion-icon name="pencil-outline" color="secondary" slot="end" (click)="$event.stopPropagation();goToUpdatePage(id+1)"></ion-icon>
         </ion-item>
         <ion-card-content>Nom : {{project.nameProjects}}</ion-card-content>
       </ion-card>

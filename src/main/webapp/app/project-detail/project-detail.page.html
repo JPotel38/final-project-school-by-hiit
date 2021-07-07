@@ -10,8 +10,7 @@
       <ion-card *ngIf="project$ |async as project">
         <ion-item>
           <ion-icon name="arrow-back-outline" color="primary" (click)="goToBackPage()"></ion-icon>
-          <ion-icon name="close-outline" color="danger" slot="end"></ion-icon>
-          <ion-icon name="pencil-outline" color="secondary" slot="end"></ion-icon>
+          <ion-icon name="pencil-outline" color="secondary" slot="end" (click)="goToUpdatePage(projectId)"></ion-icon>
         </ion-item>
         <ion-item align="center">Detail project {{projectId}}</ion-item>
         <ion-card-content>Nom : {{project.nameProjects}}</ion-card-content>

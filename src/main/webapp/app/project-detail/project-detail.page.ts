@@ -22,4 +22,8 @@ export class ProjectDetailPage implements OnInit {
   async goToBackPage() {
     await this.route.navigateByUrl("projects");
   }
+
+  goToUpdatePage(idProject: number) {
+   this.route.navigate(["project-update",idProject])
+  }
 }
