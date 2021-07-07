@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {ReportsService} from "../../shared/services/reports.service";
-import {Report} from "../../shared/interfaces/report/Report";
+import {ReportsService} from "../../shared/service/reports.service";
+import {Report} from "../../shared/interface/report";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {User} from "../../shared/interfaces/user/User.interface";
-import {UserService} from "../../shared/services/user.service";
+import {User} from "../../shared/interface/User.interface";
+import {UserService} from "../../shared/service/user.service";
 
 @Component({
   selector: 'app-report-detail',

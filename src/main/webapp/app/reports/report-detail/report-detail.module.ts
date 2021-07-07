@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +13,10 @@ import { ReportDetailPage } from './report-detail.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ReportDetailPageRoutingModule
+    ReportDetailPageRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [ReportDetailPage]
+  declarations: [ReportDetailPage],
+  providers: [FormBuilder]
 })
 export class ReportDetailPageModule {}
