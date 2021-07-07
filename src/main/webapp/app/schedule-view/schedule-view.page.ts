@@ -3,6 +3,7 @@ import {CalendarOptions, EventApi, EventInput, FullCalendarComponent} from "@ful
 import {EventService} from "../schedule/service/event.service";
 import {Subscription} from "rxjs";
 import {ScheduleEvent} from "../schedule/model/event.interface";
+import {LoginService} from "../login/service/login.service";
 
 @Component({
   selector: 'app-schedule-view',
@@ -18,7 +19,9 @@ export class ScheduleViewPage implements OnInit {
   private eventList: ScheduleEvent[];
 
   private events: EventInput[] = [];
-  
+
+  public isAdmin: boolean;
+
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     headerToolbar: {
@@ -37,15 +40,20 @@ export class ScheduleViewPage implements OnInit {
       minute: '2-digit',
       hour12: false
     },
+    eventTextColor: 'white',
+    eventColor: '#97136b',
     initialView: 'timeGridWeek',
     weekends: true,
     firstDay: 1,
   };
   currentEvents: EventApi[] = [];
 
-  constructor(private eventService: EventService) { }
+
+  constructor(private eventService: EventService,
+              private readonly loginService: LoginService) { }
 
   ngOnInit() {
+    this.isAdmin = this.loginService.isAdmin();
     this.getCourseList();
     setTimeout(() => {
       this.fullcalendar.getApi().render()

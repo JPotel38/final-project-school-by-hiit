@@ -2,34 +2,36 @@
   <ion-tab-bar slot="top">
 
     <ion-tab-button tab="home" (click)="eventFunction()">
-      <ion-icon name="home" ></ion-icon>
+      <ion-icon name="home"></ion-icon>
       <ion-label>Accueil</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button *ngIf="isAdmin" tab="user-list" (click)="eventFunction()">
-      <ion-icon name="people" ></ion-icon>
-      <ion-label>Utilisateurs</ion-label>
-    </ion-tab-button>
+    <ng-container *ngIf="isLogged">
+      <ion-tab-button *ngIf="isAdmin" tab="user-list" (click)="eventFunction()">
+        <ion-icon name="people"></ion-icon>
+        <ion-label>Utilisateurs</ion-label>
+      </ion-tab-button>
 
-    <ion-tab-button tab="schedule-view" (click)="eventFunction()">
-      <ion-icon name="calendar" ></ion-icon>
-      <ion-label>Emploi du temps</ion-label>
-    </ion-tab-button>
+      <ion-tab-button tab="schedule-view" (click)="eventFunction()">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>Emploi du temps</ion-label>
+      </ion-tab-button>
 
-    <ion-tab-button tab="projects">
-      <ion-icon name="folder-open"></ion-icon>
-      <ion-label>Projets</ion-label>
-    </ion-tab-button>
+      <ion-tab-button tab="projects">
+        <ion-icon name="folder-open"></ion-icon>
+        <ion-label>Projets</ion-label>
+      </ion-tab-button>
 
-    <ion-tab-button tab="reports">
-      <ion-icon name="ribbon"></ion-icon>
-      <ion-label>Rapports de RDV</ion-label>
-    </ion-tab-button>
+      <ion-tab-button tab="reports">
+        <ion-icon name="ribbon"></ion-icon>
+        <ion-label>Rapports de RDV</ion-label>
+      </ion-tab-button>
 
-    <ion-tab-button tab="modules">
-      <ion-icon name="school"></ion-icon>
-      <ion-label>Modules</ion-label>
-    </ion-tab-button>
+      <ion-tab-button tab="modules">
+        <ion-icon name="school"></ion-icon>
+        <ion-label>Modules</ion-label>
+      </ion-tab-button>
+    </ng-container>
 
     <ion-tab-button (click)="logout()" tab="logout" *ngIf="isLogged">
       <ion-icon name="log-out"></ion-icon>
@@ -40,5 +42,6 @@
       <ion-icon name="log-in"></ion-icon>
       <ion-label>Connexion</ion-label>
     </ion-tab-button>
+
   </ion-tab-bar>
 </ion-tabs>

@@ -32,7 +32,7 @@ export class MenuPage implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
     this.router.navigate(['home']).then(
       () => window.location.reload()
     );

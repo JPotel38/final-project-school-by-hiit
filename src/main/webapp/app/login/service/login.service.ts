@@ -44,13 +44,17 @@ export class LoginService {
     return localStorage.getItem('token')
   }
 
-  isAdmin(){
-    let decoded = jwtDecode(localStorage.getItem('token'));
-    let authoritiesObj = decoded['authorities'];
+  isAdmin() {
+    let token = localStorage.getItem('token');
     let authorityList = [];
-    authoritiesObj.forEach(
-      authority => authorityList.push(authority.authority)
-    )
+    if (!!token) {
+      let decoded = jwtDecode(token);
+      let authoritiesObj = decoded['authorities'];
+
+      authoritiesObj.forEach(
+        authority => authorityList.push(authority.authority)
+      )
+    }
     return authorityList.includes("ROLE_ADMIN")
   }
 

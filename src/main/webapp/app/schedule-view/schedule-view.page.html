@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Emplois du Temps</ion-title>
+    <ion-button *ngIf="isAdmin" [routerLink]="'/schedule'" slot="end" color="violet">Modifier</ion-button>
   </ion-toolbar>
 </ion-header>
 
