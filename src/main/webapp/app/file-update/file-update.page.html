@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mise à jour D'un Fichier</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <form [formGroup]="updateFormGroup">
+      <ion-list>
+
+        <ion-item>
+          <ion-label position="floating">Désignation</ion-label>
+          <ion-input name="designation"
+                     type="text"
+                     formControlName="designation"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Date de création</ion-label>
+          <ion-input name="creationDate"
+                     type="datetime"
+                     formControlName="creationDate"></ion-input>
+        </ion-item>
+
+        <ion-item>
+        <ion-label position="floating">Lien vers ce fichier</ion-label>
+        <ion-input name="link"
+                   type="text"
+                   formControlName="link"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-select formControlName="course">
+            <ion-select-option *ngFor="let course of courseList$ | async" [value]="course.id">
+              {{ course.designation}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-list>
+    </form>
+      <ion-buttons>
+        <ion-button color="secondary"
+                    [disabled]="!updateFormGroup.valid"
+                    (click)="updateFile()"> Mettre à jour
+          <ion-icon slot="end"
+                    name="save-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="danger"
+                    (click)="goToFileList()"> Annuler
+        </ion-button>
+      </ion-buttons>
+
+
+  </ion-card>
+</ion-content>

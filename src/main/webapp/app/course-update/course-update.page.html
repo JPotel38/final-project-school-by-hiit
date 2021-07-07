@@ -40,22 +40,27 @@
         </ion-item>
 
         <ion-item>
-          <select formControlName="module">
-            <option *ngFor="let module of moduleList | async" [value]="module.id">
+          <ion-select formControlName="module">
+            <ion-select-option *ngFor="let module of moduleList$ | async" [value]="module.id">
               {{ module.designation}}
-            </option>
-          </select>
+            </ion-select-option>
+          </ion-select>
         </ion-item>
 
       </ion-list>
     </form>
+    <ion-buttons>
+      <ion-button color="secondary"
+                  [disabled]="!updateFormGroup.valid"
+                  (click)="updateCourse()"> Mettre à jour
+        <ion-icon slot="end"
+                  name="save-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="danger"
+                  (click)="goToCourseList()"> Annuler
+      </ion-button>
+    </ion-buttons>
 
-    <ion-button color="secondary"
-                [disabled]="!updateFormGroup.valid"
-                (click)="updateCourse()"> Mettre à jour
-      <ion-icon slot="end"
-                name="save-outline"></ion-icon>
-    </ion-button>
 
 
   </ion-card>

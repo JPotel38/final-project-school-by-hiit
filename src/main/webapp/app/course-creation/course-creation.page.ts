@@ -33,7 +33,7 @@ export class CourseCreationPage implements OnInit, OnDestroy {
       date: new FormControl('', [Validators.required]),
       startTime: new FormControl('', [Validators.required]),
       endTime: new FormControl('', [Validators.required]),
-      module: new FormControl('')
+      module: new FormControl('',[Validators.required])
     });
   }
 
