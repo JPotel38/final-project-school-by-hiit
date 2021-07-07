@@ -19,7 +19,7 @@ export class ProjectDetailPage implements OnInit {
    this.project$=this.projectService.getProject(this.projectId);
   }
 
-  goToBackPage() {
-    this.route.navigateByUrl("project");
+  async goToBackPage() {
+    await this.route.navigateByUrl("projects");
   }
 }

@@ -43,26 +43,33 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
+    path: 'project-detail/:id',
+    loadChildren: () => import('./project-detail/project-detail.module').then( m => m.ProjectDetailPageModule),
+    canActivate: [IsSignedInGuard]
+
+  },
+  {
+    path: 'projects',
+    loadChildren: () => import('./project/project.module').then( m => m.ProjectPageModule),
+    //canActivate: [IsSignedInGuard]
+  },
+  {
+    path: 'project-update/:id',
+    loadChildren: () => import('./project-update/project-update.module').then( m => m.ProjectUpdatePageModule),
+    canActivate: [IsAdminGuard]
+
+  },
+  {
+    path: 'project-add',
+    loadChildren: () => import('./project-add/project-add.module').then( m => m.ProjectAddPageModule),
+    canActivate: [IsAdminGuard]
+
+  },
+  {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  {
-    path: 'project-detail/:id',
-    loadChildren: () => import('./project-detail/project-detail.module').then( m => m.ProjectDetailPageModule)
-  },
-  {
-    path: 'project',
-    loadChildren: () => import('./project/project.module').then( m => m.ProjectPageModule)
-  },
-  {
-    path: 'project-update/:id',
-    loadChildren: () => import('./project-update/project-update.module').then( m => m.ProjectUpdatePageModule)
-  },
-  {
-    path: 'project-add',
-    loadChildren: () => import('./project-add/project-add.module').then( m => m.ProjectAddPageModule)
-  }
 ];
 
 @NgModule({

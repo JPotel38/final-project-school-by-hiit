@@ -9,15 +9,19 @@ import {Project} from "../interface/project";
 export class ProjectService {
 
   constructor(public readonly http:HttpClient) { }
+
   getAllProject():Observable<Project[]>{
-    return this.http.get<Project[]>("/api/project");
+    return this.http.get<Project[]>(`/api/project/`);
   }
+
   getProject(id:number):Observable<Project>{
     return this.http.get<Project>(`/api/project/${id}`);
   }
+
   delete(id:number){
     return this.http.delete(`/api/project/${id}`,{observe:"response"})
   }
+
   update(id:number,project:Project){
     return this.http.put(`/api/project/${id}`,project,{observe:"response"})
   }

@@ -13,7 +13,8 @@ import {AlertController} from "@ionic/angular";
 export class ProjectPage implements OnInit {
 
   listProject:Observable<Project[]>
-  constructor(public readonly projectService:ProjectService,public readonly route:Router,
+  constructor(public readonly projectService:ProjectService,
+              public readonly route:Router,
               public readonly alertCtrl: AlertController) { }
 
   ngOnInit() {

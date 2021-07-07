@@ -1,7 +1,6 @@
 package fr.schoolbyhiit.portailsuiviformation.controller;
 
 import fr.schoolbyhiit.portailsuiviformation.dto.ProjectDto;
-import fr.schoolbyhiit.portailsuiviformation.model.ProjectStatus;
 import fr.schoolbyhiit.portailsuiviformation.service.ProjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,17 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/project")
+@RequestMapping("/api/project")
+@CrossOrigin("*")
 public class ProjectController {
 
-    private ProjectService projectService;
+    private final ProjectService projectService;
 
     public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
     }
 
-    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
-    @GetMapping("")
+    @PreAuthorize("hasAuthority('user:read')")
+    @GetMapping("/")
+    @ResponseStatus(HttpStatus.OK)
     public List<ProjectDto> getAll() {
             return projectService.findAll();
     }
@@ -30,6 +31,8 @@ public class ProjectController {
     public ProjectDto create(@RequestBody ProjectDto projectDto) {
             return projectService.create(projectDto);
     }
+
+    @PreAuthorize("hasAuthority('user:read')")
     @GetMapping("/{id}")
     public ProjectDto getProject(@PathVariable Long id) {
             return projectService.getProject(id);

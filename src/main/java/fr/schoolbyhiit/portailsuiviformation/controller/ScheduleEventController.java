@@ -4,7 +4,7 @@ import fr.schoolbyhiit.portailsuiviformation.dto.ScheduleEventDto;
 import fr.schoolbyhiit.portailsuiviformation.service.ScheduleEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.parameters.P;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +18,7 @@ public class ScheduleEventController {
 
     private final ScheduleEventService scheduleEventService;
 
+    @PreAuthorize("hasAuthority('user:read')")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ScheduleEventDto> getEvents() {

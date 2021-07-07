@@ -65,10 +65,10 @@ export class ProjectUpdatePage implements OnInit {
          await alert.present();
        }
      })
-    this.route.navigateByUrl("project");
+    this.route.navigateByUrl("projects");
   }
 
   goBack() {
-    this.route.navigateByUrl("project")
+    this.route.navigateByUrl("projects")
   }
 }

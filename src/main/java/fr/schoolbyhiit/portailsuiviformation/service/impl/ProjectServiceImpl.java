@@ -23,7 +23,7 @@ public class ProjectServiceImpl implements ProjectService {
         this.projectRepository = projectRepository;
     }
 
-    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
+
     @Override
     public List<ProjectDto> findAll() {
         return projectMapper.toProjectDtoToList(projectRepository.findAll());
@@ -41,7 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
 
-    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
+
     @Override
     public ProjectDto updateProject(Long id,ProjectDto projectDto) {
         Project project = projectRepository.findById(id).orElseThrow(() -> ProjectNotFoundException.INSTANCE);
@@ -50,7 +50,7 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.toProjectDto(projectRepository.save(project));
     }
 
-    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
+
     @Override
     public ProjectDto getProject(Long id) {
         return projectMapper.toProjectDto(projectRepository.getOne(id));
