@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detail project</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+      <ion-card *ngIf="project$ |async as project">
+        <ion-item>
+          <ion-icon name="arrow-back-outline" color="primary" (click)="goToBackPage()"></ion-icon>
+          <ion-icon name="close-outline" color="danger" slot="end"></ion-icon>
+          <ion-icon name="pencil-outline" color="secondary" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item align="center">Detail project {{projectId}}</ion-item>
+        <ion-card-content>Nom : {{project.nameProjects}}</ion-card-content>
+        <ion-card-content>Score : {{project.scoreProject}}</ion-card-content>
+        <ion-card-content>Status : {{project.projectStatus}}</ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
