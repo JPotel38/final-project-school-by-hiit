@@ -7,6 +7,7 @@ import fr.schoolbyhiit.portailsuiviformation.exception.ProjectNotFoundException;
 import fr.schoolbyhiit.portailsuiviformation.model.ProjectStatus;
 import fr.schoolbyhiit.portailsuiviformation.mapper.ProjectMapper;
 import fr.schoolbyhiit.portailsuiviformation.service.ProjectService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class ProjectServiceImpl implements ProjectService {
         this.projectRepository = projectRepository;
     }
 
+    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
     @Override
     public List<ProjectDto> findAll() {
         return projectMapper.toProjectDtoToList(projectRepository.findAll());
@@ -38,24 +40,23 @@ public class ProjectServiceImpl implements ProjectService {
         return  projectMapper.toProjectDto(projectRepository.save(project));
     }
 
+
+    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
     @Override
-    public ProjectDto updateStatus(Long id, ProjectStatus projectStatus) {
-
-        Project project = projectRepository.findById(id)
-                .orElseThrow(()-> ProjectNotFoundException.INSTANCE);
-
-        project.setProjectStatus(projectStatus);
+    public ProjectDto updateProject(Long id,ProjectDto projectDto) {
+        Project project = projectRepository.findById(id).orElseThrow(() -> ProjectNotFoundException.INSTANCE);
+        project.setProjectStatus(projectDto.getProjectStatus());
+        project.setScoreProject(projectDto.getScoreProject());
         return projectMapper.toProjectDto(projectRepository.save(project));
     }
 
+    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
     @Override
-    public ProjectDto addScore(Long id, int score) {
-        Project project = projectRepository.findById(id)
-                .orElseThrow(()-> ProjectNotFoundException.INSTANCE);
-        project.setScoreProject(score);
-
-        return projectMapper.toProjectDto(projectRepository.save(project));
+    public ProjectDto getProject(Long id) {
+        return projectMapper.toProjectDto(projectRepository.getOne(id));
     }
+
+
 
     @Override
     public void delete(Long id) {
@@ -63,5 +64,6 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(()-> ProjectNotFoundException.INSTANCE);
         projectRepository.delete(project);
     }
+
 
 }
