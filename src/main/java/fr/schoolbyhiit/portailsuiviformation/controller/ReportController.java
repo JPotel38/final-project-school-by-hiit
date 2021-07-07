@@ -41,7 +41,6 @@ public class ReportController {
     @PutMapping(value = "/put/{id}")
     public @ResponseBody
     ResponseEntity<String> put(@PathVariable Long id, @RequestBody ReportDTO reportDTO) {
-        System.out.println("id: " + id + "report: " + reportDTO);
         reportService.update(id, reportDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

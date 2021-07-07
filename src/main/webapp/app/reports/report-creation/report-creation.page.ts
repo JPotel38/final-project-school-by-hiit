@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UsersService} from "../../shared/services/users.service";
-import {User} from "../../shared/interfaces/user/user";
 import {Observable} from "rxjs";
-import {ReportsService} from "../../shared/services/reports.service";
-import {Report} from "../../shared/interfaces/report/report";
+import {ReportsService} from "../../shared/service/reports.service";
+import {Report} from "../../shared/interface/report";
+import {UserService} from "../../shared/service/user.service";
+import {User} from "../../shared/interface/User.interface";
 
 @Component({
   selector: 'app-report-creation',
@@ -20,7 +20,7 @@ export class ReportCreationPage implements OnInit {
 
   constructor(
     fb: FormBuilder,
-    public userService: UsersService,
+    public userService: UserService,
     public reportsService: ReportsService
   ) {
     this.reportForm = fb.group({
@@ -33,15 +33,15 @@ export class ReportCreationPage implements OnInit {
   }
 
   ngOnInit() {
-    this.users$ = this.userService.getAllUsers();
+    this.users$ = this.userService.getUserList();
   }
 
   validateReport() {
     const formValue = this.reportForm.value;
     const newReport: Report = {
-      teacher: formValue.teacherId,
-      tutor: formValue.tutorId,
-      student: formValue.studentId,
+      teacherId: formValue.teacherId,
+      tutorId: formValue.tutorId,
+      studentId: formValue.studentId,
       appointmentDate: formValue.appointmentDate,
       reportText: formValue.reportText,
       validated: 'Not validated'

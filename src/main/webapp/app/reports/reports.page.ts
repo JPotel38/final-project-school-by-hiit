@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ReportsService} from "../shared/services/reports.service";
-import {Report} from "../shared/interfaces/report/Report";
+import {ReportsService} from "../shared/service/reports.service";
+import {Report} from "../shared/interface/report";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {Location} from "@angular/common";
